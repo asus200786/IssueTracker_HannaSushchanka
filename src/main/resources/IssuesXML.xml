@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:issues xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tns="http://www.example.org/results" xsi:schemaLocation="http://www.example.org/results results.xsd">
+	<issue>
+		<id>0</id>
+		<modifyDate></modifyDate>
+		<modifiedBy></modifiedBy>
+		<summary></summary>
+		<description></description>
+		<status></status>
+		<resolution></resolution>
+		<type></type>
+		<priority></priority>
+		<project></project>
+		<buildFound></buildFound>
+	</issue>
+	<issue>
+		<id>1</id>
+		<modifyDate></modifyDate>
+		<modifiedy></modifiedy>
+		<summary></summary>
+		<description></description>
+		<status></status>
+		<type></type>
+		<priority></priority>
+		<project></project>
+		<buildFound></buildFound>
+	</issue>
+</tns:issues>

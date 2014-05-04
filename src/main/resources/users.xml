@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tns="http://www.example.org/users" xsi:schemaLocation="http://www.example.org/users users.xsd">
+	<users>
+		<user>
+			<login>Asus200786@gmail.com</login>
+			<address password="password" role="ADMINISTRATOR" firstname="Hanna"
+				lastname="Sushchanka" emailAddress="Asus200786@gmail.com" />
+		</user>
+		<user>
+			<login>Dushiv@tut.by</login>
+			<address password="dushik" role="USER" firstname="Ivan"
+				lastname="Dushkevich" emailAddress="Dushiv@tut.by" />
+		</user>
+		<user>
+			<login>Jorjick@rambler.ru</login>
+			<address password="gorick" role="USER" firstname="Georgij"
+				lastname="Vajvichenskij" emailAddress="Jorjick@rambler.ru" />
+		</user>
+	</users>
+</tns:users>
