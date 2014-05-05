@@ -1,9 +1,16 @@
 package by.epam.epamlab.model.impls;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import by.epam.epamlab.exceptions.ExceptionDAO;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
+
+import by.epam.epamlab.analyzer.sax.UserHandler;
+import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.interfaces.IUserDAO;
 import by.epam.epamlab.model.beans.User;
 
@@ -12,20 +19,36 @@ public class UserImplXML implements IUserDAO {
 	private static Map<String, User> users;
 	private static UserImplXML instance;
 
-	public synchronized UserImplXML getImplXML() throws ExceptionDAO {
-		
+	private UserImplXML() {
+
+	}
+
+	public synchronized static UserImplXML getImplXML() {
 		if (instance == null) {
-			instance = new UserImplXML(users);
+			instance = new UserImplXML();
 		}
 		return instance;
 	}
 
-	public UserImplXML(Map<String, User> users) {
-		this.users = users;
+	public HashMap<String, User> readingUserXML() {
+		try {
+			XMLReader xmlReader = XMLReaderFactory.createXMLReader();
+			UserHandler contentHandler = new UserHandler();
+			xmlReader.setContentHandler(contentHandler);
+			InputSource in = new InputSource(getClass().getResourceAsStream(
+					Constants.INPUT_XML));
+			xmlReader.parse(in);
+			users = contentHandler.getUsers();
+			return (HashMap<String, User>) users;
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
-	public User getUser(HashMap<String, User> users, String login,
-			String password) {
+	public User getUser(Map<String, User> users, String login, String password) {
 		User user = users.get(login);
 		if (user != null && user.getEmailAddress().equals(login)
 				&& user.getPassword().equals(password)) {
