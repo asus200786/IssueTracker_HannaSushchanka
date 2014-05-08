@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/issues"
+	xmlns:tns="http://www.example.org/issues">
+	<element name="issues">
+		<complexType>
+			<sequence>
+				<element name="issue" type="tns:Issue" minOccurs="1"
+					maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+	<complexType name="Issue">
+		<sequence>
+			<element name="summary" type="string" />
+			<element name="description" type="string" />
+			<element name="status" type="tns:Status" />
+			<element name="resolution" type="tns:Resolution" />
+			<element name="type" type="tns:Type" />
+			<element name="priority" type="tns:Priority" />
+			<element name="project" type="string" />
+			<element name="buildFound" type="string" />
+			<element name="assignee" type="tns:UserLogin" />
+			<element name="creatingIssue" type="tns:CreatingIssue" />
+			<element name="modifingIssue" type="tns:ModifingIssue" />
+		</sequence>
+		<attribute name="idIssue" type="long" />
+	</complexType>
+	<complexType name="CreatingIssue">
+		<sequence>
+			<element name="createDate" type="tns:Date" />
+			<element name="createdBy" type="tns:UserLogin" />
+		</sequence>
+	</complexType>
+	<complexType name="ModifingIssue">
+		<sequence>
+			<element name="modifyDate" type="tns:Date" />
+			<element name="modifiedBy" type="tns:UserLogin" />
+		</sequence>
+	</complexType>
+	<complexType name="UserLogin">
+		<sequence>
+			<element name="firstname" type="tns:Name" />
+			<element name="lastname" type="tns:Name" />
+			<element name="email" type="tns:Email" />
+		</sequence>
+	</complexType>
+	<simpleType name="Date">
+		<restriction base="date">
+			<pattern value="\d{4}\-\d{2}\-\d{2}" />
+		</restriction>
+	</simpleType>
+	<simpleType name="Status">
+		<restriction base="string">
+			<enumeration value="NEW" />
+			<enumeration value="ASSIGNED" />
+			<enumeration value="IN_PROGRESS" />
+			<enumeration value="RESOLVED" />
+			<enumeration value="CLOSED" />
+			<enumeration value="REOPENED" />
+		</restriction>
+	</simpleType>
+	<simpleType name="Resolution">
+		<restriction base="string">
+			<enumeration value="FIXED" />
+			<enumeration value="INVALID" />
+			<enumeration value="WONTFIX" />
+			<enumeration value="WORKSFORME" />
+		</restriction>
+	</simpleType>
+	<simpleType name="Type">
+		<restriction base="string">
+			<enumeration value="COSMETIC" />
+			<enumeration value="BUG" />
+			<enumeration value="FEATURE" />
+			<enumeration value="PERFORMANCE" />
+		</restriction>
+	</simpleType>
+	<simpleType name="Priority">
+		<restriction base="string">
+			<enumeration value="CRITICAL" />
+			<enumeration value="MAJOR" />
+			<enumeration value="IMPORTANT" />
+			<enumeration value="MINOR" />
+		</restriction>
+	</simpleType>
+	<simpleType name="Name">
+		<restriction base="string">
+			<!--<pattern value=""/> -->
+		</restriction>
+	</simpleType>
+	<simpleType name="Email">
+		<restriction base="string">
+			<!-- <pattern value=""/> for email is maddness :) -->
+		</restriction>
+	</simpleType>
+</schema>

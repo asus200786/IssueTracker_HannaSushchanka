@@ -4,9 +4,9 @@ import java.util.List;
 
 import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.factories.IssuesFactory;
-import by.epam.epamlab.model.beans.Issue;
-import by.epam.epamlab.model.beans.User;
-import by.epam.epamlab.model.enums.RolesUser;
+import by.epam.epamlab.model.issues.beans.Issue;
+import by.epam.epamlab.model.users.beans.User;
+import by.epam.epamlab.model.users.enums.RolesUser;
 
 public class ServletUtilities {
 

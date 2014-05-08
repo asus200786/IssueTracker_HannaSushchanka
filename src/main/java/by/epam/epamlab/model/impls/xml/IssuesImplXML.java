@@ -1,10 +1,10 @@
-package by.epam.epamlab.model.impls;
+package by.epam.epamlab.model.impls.xml;
 
 import java.util.List;
 
 import by.epam.epamlab.interfaces.IIssueDAO;
-import by.epam.epamlab.model.beans.Issue;
-import by.epam.epamlab.model.beans.User;
+import by.epam.epamlab.model.issues.beans.Issue;
+import by.epam.epamlab.model.users.beans.User;
 
 public class IssuesImplXML implements IIssueDAO{
 

@@ -1,8 +1,8 @@
-package by.epam.epamlab.model.beans;
+package by.epam.epamlab.model.users.beans;
 
 import java.io.Serializable;
 
-import by.epam.epamlab.model.enums.RolesUser;
+import by.epam.epamlab.model.users.enums.RolesUser;
 
 public class User implements Serializable {
 

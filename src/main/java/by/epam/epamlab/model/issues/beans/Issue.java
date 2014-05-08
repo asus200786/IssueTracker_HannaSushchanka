@@ -1,10 +1,11 @@
-package by.epam.epamlab.model.beans;
+package by.epam.epamlab.model.issues.beans;
 
 import java.io.Serializable;
 
-import by.epam.epamlab.model.enums.IssueStatuses;
-import by.epam.epamlab.model.enums.PriorityValues;
-import by.epam.epamlab.model.enums.TypesIssues;
+import by.epam.epamlab.model.issues.enums.Status;
+import by.epam.epamlab.model.issues.enums.Priority;
+import by.epam.epamlab.model.issues.enums.Type;
+import by.epam.epamlab.model.users.beans.User;
 
 public class Issue implements Serializable {
 
@@ -14,17 +15,17 @@ public class Issue implements Serializable {
 	private static final long serialVersionUID = 201404250059L;
 
 	private int idIssue;
-	private PriorityValues priorityValues;
+	private Priority priorityValues;
 	private User assignee;
-	private TypesIssues typesIssues;
-	private IssueStatuses issueStatus;
+	private Type typesIssues;
+	private Status issueStatus;
 	private String summary;
 	public Issue() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Issue(int idIssue, PriorityValues priorityValues, User assignee,
-			TypesIssues typesIssues, IssueStatuses issueStatus, String summary) {
+	public Issue(int idIssue, Priority priorityValues, User assignee,
+			Type typesIssues, Status issueStatus, String summary) {
 		super();
 		this.idIssue = idIssue;
 		this.priorityValues = priorityValues;
@@ -39,10 +40,10 @@ public class Issue implements Serializable {
 	public void setIdIssue(int idIssue) {
 		this.idIssue = idIssue;
 	}
-	public PriorityValues getPriorityValues() {
+	public Priority getPriorityValues() {
 		return priorityValues;
 	}
-	public void setPriorityValues(PriorityValues priorityValues) {
+	public void setPriorityValues(Priority priorityValues) {
 		this.priorityValues = priorityValues;
 	}
 	public User getAssignee() {
@@ -51,16 +52,16 @@ public class Issue implements Serializable {
 	public void setAssignee(User assignee) {
 		this.assignee = assignee;
 	}
-	public TypesIssues getTypesIssues() {
+	public Type getTypesIssues() {
 		return typesIssues;
 	}
-	public void setTypesIssues(TypesIssues typesIssues) {
+	public void setTypesIssues(Type typesIssues) {
 		this.typesIssues = typesIssues;
 	}
-	public IssueStatuses getIssueStatus() {
+	public Status getIssueStatus() {
 		return issueStatus;
 	}
-	public void setIssueStatus(IssueStatuses issueStatus) {
+	public void setIssueStatus(Status issueStatus) {
 		this.issueStatus = issueStatus;
 	}
 	public String getSummary() {

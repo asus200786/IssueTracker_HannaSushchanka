@@ -12,7 +12,7 @@ import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.constants.ConstantsControllers;
 import by.epam.epamlab.factories.UserFactory;
 import by.epam.epamlab.interfaces.IUserDAO;
-import by.epam.epamlab.model.beans.User;
+import by.epam.epamlab.model.users.beans.User;
 import by.epam.epamlab.session.AbstractController;
 
 /**

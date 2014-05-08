@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:issues xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tns="http://www.example.org/issues" xsi:schemaLocation="http://www.example.org/issues issuesSchema.xsd">
+	<issue idIssue="0">
+		<summary>Example summary</summary>
+		<description>Example description</description>
+		<status>NEW</status>
+		<resolution>WORKSFORME</resolution>
+		<type>BUG</type>
+		<priority>IMPORTANT</priority>
+		<project>Elevator</project>
+		<buildFound>1.0.1</buildFound>
+		<assignee>
+			<firstname>Hanna</firstname>
+			<lastname>Sushchanka</lastname>
+			<email>Asus200786@gmail.com</email>
+		</assignee>
+		<creatingIssue>
+			<createDate>2014-05-01</createDate>
+			<createdBy>
+				<firstname>Hanna</firstname>
+				<lastname>Sushchanka</lastname>
+				<email>Asus200786@gmail.com</email>
+			</createdBy>
+		</creatingIssue>
+		<modifingIssue>
+			<modifyDate>2014-05-02</modifyDate>
+			<modifiedBy>
+				<firstname>Ivan</firstname>
+				<lastname>Dushkevich</lastname>
+				<email>Dushiv@tut.by</email>
+			</modifiedBy>
+		</modifingIssue>
+	</issue>
+</tns:issues>

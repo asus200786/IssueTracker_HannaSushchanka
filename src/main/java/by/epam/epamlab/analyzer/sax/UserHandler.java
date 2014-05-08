@@ -7,7 +7,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import by.epam.epamlab.model.beans.User;
+import by.epam.epamlab.model.users.beans.User;
 
 public class UserHandler extends DefaultHandler {
 	// private static final String USERS = "users";

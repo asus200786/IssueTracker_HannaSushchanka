@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import by.epam.epamlab.constants.ConstantsControllers;
-import by.epam.epamlab.model.beans.User;
+import by.epam.epamlab.model.users.beans.User;
 import by.epam.epamlab.utilities.ServletUtilities;
 
 /**

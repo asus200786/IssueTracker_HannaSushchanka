@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.impls;
+package by.epam.epamlab.model.impls.xml;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,7 +12,8 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import by.epam.epamlab.analyzer.sax.UserHandler;
 import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.interfaces.IUserDAO;
-import by.epam.epamlab.model.beans.User;
+import by.epam.epamlab.model.users.beans.User;
+
 
 public class UserImplXML implements IUserDAO {
 
