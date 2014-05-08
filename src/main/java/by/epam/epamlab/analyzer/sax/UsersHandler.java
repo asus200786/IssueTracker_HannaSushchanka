@@ -7,12 +7,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.model.users.beans.User;
 
-public class UserHandler extends DefaultHandler {
-	// private static final String USERS = "users";
-	private static final String START_PARSE_XML = "Start parse XML.";
-	private static final String STOP_PARSE_XML = "Stop parse XML.";
+public class UsersHandler extends DefaultHandler {
 
 	private enum UserEnum {
 		USERS, USER, LOGIN, ADDRESS
@@ -29,7 +27,7 @@ public class UserHandler extends DefaultHandler {
 	private final static int LASTNAME_ATTR_INDEX = 3;
 	private final static int EMAILADDRESS_ATTR_INDEX = 4;
 
-	public UserHandler() {
+	public UsersHandler() {
 		super();
 	}
 
@@ -39,7 +37,7 @@ public class UserHandler extends DefaultHandler {
 
 	@Override
 	public void startDocument() throws SAXException {
-		System.out.println(START_PARSE_XML);
+		System.out.println(Constants.START_PARSE_USERS_XML);
 	}
 
 	@Override
@@ -71,7 +69,7 @@ public class UserHandler extends DefaultHandler {
 
 	@Override
 	public void endDocument() throws SAXException {
-		System.out.println(STOP_PARSE_XML);
+		System.out.println(Constants.STOP_PARSE_USERS_XML);
 	}
 
 }

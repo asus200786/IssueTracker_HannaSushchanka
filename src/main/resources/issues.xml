@@ -11,24 +11,24 @@
 		<project>Elevator</project>
 		<buildFound>1.0.1</buildFound>
 		<assignee>
-			<firstname>Hanna</firstname>
-			<lastname>Sushchanka</lastname>
-			<email>Asus200786@gmail.com</email>
+			<firstnameAssignee>Hanna</firstnameAssignee>
+			<lastnameAssignee>Sushchanka</lastnameAssignee>
+			<emailAssignee>Asus200786@gmail.com</emailAssignee>
 		</assignee>
 		<creatingIssue>
 			<createDate>2014-05-01</createDate>
 			<createdBy>
-				<firstname>Hanna</firstname>
-				<lastname>Sushchanka</lastname>
-				<email>Asus200786@gmail.com</email>
+				<firstnameCreator>Hanna</firstnameCreator>
+				<lastnameCreator>Sushchanka</lastnameCreator>
+				<emailCreator>Asus200786@gmail.com</emailCreator>
 			</createdBy>
 		</creatingIssue>
 		<modifingIssue>
 			<modifyDate>2014-05-02</modifyDate>
 			<modifiedBy>
-				<firstname>Ivan</firstname>
-				<lastname>Dushkevich</lastname>
-				<email>Dushiv@tut.by</email>
+				<firstnameEditor>Ivan</firstnameEditor>
+				<lastnameEditor>Dushkevich</lastnameEditor>
+				<emailEditor>Dushiv@tut.by</emailEditor>
 			</modifiedBy>
 		</modifingIssue>
 	</issue>

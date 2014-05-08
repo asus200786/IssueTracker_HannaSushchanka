@@ -31,7 +31,7 @@ public class WelcomePageController extends AbstractController {
 				.headerWithTitle(ConstantsControllers.WELCOME_PAGE_TITLE));
 		User user = (User) session.getAttribute(ConstantsControllers.USER);
 		out.println(ServletUtilities.userMenuFragment(user));
-		// out.println(ServletUtilities.issuesListFragment(user));
+	//	out.println(ServletUtilities.issuesListFragment(user));
 		out.println(ServletUtilities.footer());
 	}
 }

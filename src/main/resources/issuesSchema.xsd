@@ -19,22 +19,43 @@
 			<element name="priority" type="tns:Priority" />
 			<element name="project" type="string" />
 			<element name="buildFound" type="string" />
-			<element name="assignee" type="tns:UserLogin" />
+			<element name="assignee" type="tns:Assignee" />
 			<element name="creatingIssue" type="tns:CreatingIssue" />
 			<element name="modifingIssue" type="tns:ModifingIssue" />
 		</sequence>
 		<attribute name="idIssue" type="long" />
 	</complexType>
+	<complexType name="Assignee">
+		<sequence>
+			<element name="firstnameAssignee" type="tns:Name" />
+			<element name="lastnameAssignee" type="tns:Name" />
+			<element name="emailAssignee" type="tns:Email" />
+		</sequence>
+	</complexType>
 	<complexType name="CreatingIssue">
 		<sequence>
 			<element name="createDate" type="tns:Date" />
-			<element name="createdBy" type="tns:UserLogin" />
+			<element name="createdBy" type="tns:CreatedBy" />
+		</sequence>
+	</complexType>
+	<complexType name="CreatedBy">
+		<sequence>
+			<element name="firstnameCreator" type="tns:Name" />
+			<element name="lastnameCreator" type="tns:Name" />
+			<element name="emailCreator" type="tns:Email" />
 		</sequence>
 	</complexType>
 	<complexType name="ModifingIssue">
 		<sequence>
 			<element name="modifyDate" type="tns:Date" />
-			<element name="modifiedBy" type="tns:UserLogin" />
+			<element name="modifiedBy" type="tns:ModifiedBy" />
+		</sequence>
+	</complexType>
+	<complexType name="ModifiedBy">
+		<sequence>
+			<element name="firstnameEditor" type="tns:Name" />
+			<element name="lastnameEditor" type="tns:Name" />
+			<element name="emailEditor" type="tns:Email" />
 		</sequence>
 	</complexType>
 	<complexType name="UserLogin">

@@ -9,7 +9,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import by.epam.epamlab.analyzer.sax.UserHandler;
+import by.epam.epamlab.analyzer.sax.UsersHandler;
 import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.interfaces.IUserDAO;
 import by.epam.epamlab.model.users.beans.User;
@@ -34,10 +34,10 @@ public class UserImplXML implements IUserDAO {
 	public HashMap<String, User> readingUserXML() {
 		try {
 			XMLReader xmlReader = XMLReaderFactory.createXMLReader();
-			UserHandler contentHandler = new UserHandler();
+			UsersHandler contentHandler = new UsersHandler();
 			xmlReader.setContentHandler(contentHandler);
 			InputSource in = new InputSource(getClass().getResourceAsStream(
-					Constants.INPUT_XML));
+					Constants.INPUT_USERS_XML));
 			xmlReader.parse(in);
 			users = contentHandler.getUsers();
 			return (HashMap<String, User>) users;
