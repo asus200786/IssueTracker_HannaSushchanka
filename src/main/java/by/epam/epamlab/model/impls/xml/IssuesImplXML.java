@@ -37,7 +37,7 @@ public class IssuesImplXML implements IIssueDAO {
 		Collection<Issue> issuesValues = issues.values();
 		List<Issue> issueList = new ArrayList<Issue>();
 		for (Issue issue : issuesValues) {
-			if (login.equals(issue.getAssignee().getEmail())){
+			if (login.equals(issue.getAssignee().getEmailAddress())){
 				issueList.add(issue);
 				if (issueList.size() == defaultNumberIssues)
 					return issueList;

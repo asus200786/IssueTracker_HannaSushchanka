@@ -120,9 +120,9 @@ public class ServletUtilities {
 				stringBuilder.append("<td>\n")
 						.append(issue.getPriorityValues()).append("</td>\n");
 				stringBuilder.append("<td>\n")
-						.append(issue.getAssignee().getFirstname()).append(" ")
-						.append(issue.getAssignee().getLastname()).append(" ")
-						.append(issue.getAssignee().getEmail())
+						.append(issue.getAssignee().getFirstName()).append(" ")
+						.append(issue.getAssignee().getLastName()).append(" ")
+						.append(issue.getAssignee().getEmailAddress())
 						.append("</td>\n");
 				stringBuilder.append("<td>\n").append(issue.getTypesIssues())
 						.append("</td>\n");

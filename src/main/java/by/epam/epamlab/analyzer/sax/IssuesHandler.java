@@ -67,13 +67,13 @@ public class IssuesHandler extends DefaultHandler {
 			currentIssue.getCreatedBy();
 			break;
 		case FIRSTNAMECREATOR:
-			currentIssue.getCreatedBy().setFirstname(content);
+			currentIssue.getCreatedBy().setFirstName(content);
 			break;
 		case LASTNAMECREATOR:
-			currentIssue.getCreatedBy().setLastname(content);
+			currentIssue.getCreatedBy().setLastName(content);
 			break;
 		case EMAILCREATOR:
-			currentIssue.getCreatedBy().setEmail(content);
+			currentIssue.getCreatedBy().setEmailAddress(content);
 			break;
 		case MODIFYDATE:
 			try {
@@ -86,13 +86,13 @@ public class IssuesHandler extends DefaultHandler {
 			currentIssue.getModifiedBy();
 			break;
 		case FIRSTNAMEEDITOR:
-			currentIssue.getModifiedBy().setFirstname(content);
+			currentIssue.getModifiedBy().setFirstName(content);
 			break;
 		case LASTNAMEEDITOR:
-			currentIssue.getModifiedBy().setLastname(content);
+			currentIssue.getModifiedBy().setLastName(content);
 			break;
 		case EMAILEDITOR:
-			currentIssue.getModifiedBy().setEmail(content);
+			currentIssue.getModifiedBy().setEmailAddress(content);
 			break;
 		case SUMMARY:
 			currentIssue.setSummary(content);
@@ -122,13 +122,13 @@ public class IssuesHandler extends DefaultHandler {
 			currentIssue.getAssignee();
 			break;
 		case FIRSTNAMEASSIGNEE:
-			currentIssue.getAssignee().setFirstname(content);
+			currentIssue.getAssignee().setFirstName(content);
 			break;
 		case LASTNAMEASSIGNEE:
-			currentIssue.getAssignee().setLastname(content);
+			currentIssue.getAssignee().setLastName(content);
 			break;
 		case EMAILASSIGNEE:
-			currentIssue.getAssignee().setEmail(content);
+			currentIssue.getAssignee().setEmailAddress(content);
 			break;
 		default:
 			break;

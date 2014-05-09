@@ -25,8 +25,6 @@ import by.epam.epamlab.utilities.ServletUtilities;
 public class WelcomePageController extends AbstractController {
 	private static final long serialVersionUID = 201404262125L;
 
-	// private static final String TYPE_MIME_HTML = "text/html";
-
 	@Override
 	protected void performTask(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
