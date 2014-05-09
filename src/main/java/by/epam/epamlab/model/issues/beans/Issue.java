@@ -23,9 +23,9 @@ public class Issue implements Serializable {
 	private String description;
 	private Date createDate;
 	private Date modifyDate;
-	private User assignee;
-	private User createdBy;
-	private User modifiedBy;
+	private User assignee =new User();
+	private User createdBy = new User();
+	private User modifiedBy = new User();
 	private String project;
 	private String buildFound;
 
@@ -115,7 +115,7 @@ public class Issue implements Serializable {
 	}
 
 	public void setIssueStatus(String issueStatus) {
-		this.issueStatus = Status.valueOf(issueStatus);
+		this.issueStatus = Status.valueOf(issueStatus.trim());
 	}
 
 	public String getSummary() {

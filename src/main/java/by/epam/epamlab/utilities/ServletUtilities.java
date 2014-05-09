@@ -1,10 +1,7 @@
 package by.epam.epamlab.utilities;
 
-import java.util.HashMap;
 import java.util.List;
 
-import by.epam.epamlab.constants.Constants;
-import by.epam.epamlab.factories.IssuesFactory;
 import by.epam.epamlab.model.issues.beans.Issue;
 import by.epam.epamlab.model.users.beans.User;
 import by.epam.epamlab.model.users.enums.RolesUser;
@@ -92,11 +89,9 @@ public class ServletUtilities {
 		return stringBuilder.toString();
 	}
 
-	public static String issuesListFragment(User user) {
-		HashMap<Long, Issue> issues = IssuesFactory.getClassFromFactory().readingIssuesXML();
-		List<Issue> issuesList = IssuesFactory.getClassFromFactory().getIssues(
-				issues, user.getEmailAddress(), Constants.DEFAULT_NUMBER_ISSUES);
+	public static String issuesListFragment(List<Issue> issuesList, User user) {
 		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("<div><h3>Issues list.</h3></div>\n");
 		if (issuesList.isEmpty()) {
 			stringBuilder.append("<div>\n");
 			if (user == null) {
@@ -126,7 +121,8 @@ public class ServletUtilities {
 						.append(issue.getPriorityValues()).append("</td>\n");
 				stringBuilder.append("<td>\n")
 						.append(issue.getAssignee().getFirstname()).append(" ")
-						.append(issue.getAssignee().getLastname())
+						.append(issue.getAssignee().getLastname()).append(" ")
+						.append(issue.getAssignee().getEmail())
 						.append("</td>\n");
 				stringBuilder.append("<td>\n").append(issue.getTypesIssues())
 						.append("</td>\n");

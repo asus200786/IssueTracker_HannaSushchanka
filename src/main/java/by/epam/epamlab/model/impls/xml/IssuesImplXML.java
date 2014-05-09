@@ -22,6 +22,7 @@ public class IssuesImplXML implements IIssueDAO {
 	private Map<Long, Issue> issues;
 
 	private IssuesImplXML() {
+		//this.issues = issues;
 	}
 
 	public synchronized static IssuesImplXML getImplXML() {
@@ -31,11 +32,12 @@ public class IssuesImplXML implements IIssueDAO {
 		return instance;
 	}
 
-	public List<Issue> getIssues(HashMap<Long, Issue> issues, String email, int defaultNumberIssues) {
+	public List<Issue> getUserIssues(String login, int defaultNumberIssues) {
+		readingIssuesXML();
 		Collection<Issue> issuesValues = issues.values();
 		List<Issue> issueList = new ArrayList<Issue>();
 		for (Issue issue : issuesValues) {
-			if (issue.getAssignee().getEmail() == email) {
+			if (login.equals(issue.getAssignee().getEmail())){
 				issueList.add(issue);
 				if (issueList.size() == defaultNumberIssues)
 					return issueList;
@@ -44,7 +46,19 @@ public class IssuesImplXML implements IIssueDAO {
 		return issueList;
 	}
 
-	public HashMap<Long, Issue> readingIssuesXML() {
+	public List<Issue> getGuestIssues(int defaultNumberIssues) {
+		readingIssuesXML();
+		Collection<Issue> issuesValues = issues.values();
+		List<Issue> issueList = new ArrayList<Issue>();
+		for (Issue issue : issuesValues) {
+				issueList.add(issue);
+				if (issueList.size() == defaultNumberIssues)
+					return issueList;
+		}
+		return issueList;
+	}
+
+	private HashMap<Long, Issue> readingIssuesXML() {
 		try {
 			XMLReader xmlReader = XMLReaderFactory.createXMLReader();
 			IssuesHandler contentHandler = new IssuesHandler();
@@ -52,6 +66,7 @@ public class IssuesImplXML implements IIssueDAO {
 			InputSource in = new InputSource(getClass().getResourceAsStream(
 					Constants.INPUT_ISSUES_XML));
 			xmlReader.parse(in);
+			System.out.println(contentHandler.getIssues());
 			issues = contentHandler.getIssues();
 			return (HashMap<Long, Issue>) issues;
 		} catch (SAXException e) {
@@ -61,5 +76,5 @@ public class IssuesImplXML implements IIssueDAO {
 		}
 		return null;
 	}
-
+	
 }

@@ -45,6 +45,7 @@ public class IssuesHandler extends DefaultHandler {
 			long idIssue = Long.valueOf(attributes
 					.getValue(ID_ISSUE_ATTR_INDEX));
 			currentIssue = new Issue(idIssue);
+			issues.put(idIssue, currentIssue);
 		}
 	}
 
@@ -62,15 +63,17 @@ public class IssuesHandler extends DefaultHandler {
 				e.printStackTrace();
 			}
 			break;
-		// Creating issue (user, date)
+		case  CREATEDBY:
+			currentIssue.getCreatedBy();
+			break;
 		case FIRSTNAMECREATOR:
-			currentIssue.getUser().setFirstname(content);
+			currentIssue.getCreatedBy().setFirstname(content);
 			break;
 		case LASTNAMECREATOR:
-			currentIssue.getUser().setLastname(content);
+			currentIssue.getCreatedBy().setLastname(content);
 			break;
 		case EMAILCREATOR:
-			currentIssue.getUser().setEmail(content);
+			currentIssue.getCreatedBy().setEmail(content);
 			break;
 		case MODIFYDATE:
 			try {
@@ -79,15 +82,17 @@ public class IssuesHandler extends DefaultHandler {
 				e.printStackTrace();
 			}
 			break;
-		// Modify issue (user, date)
+		case MODIFIEDBY:
+			currentIssue.getModifiedBy();
+			break;
 		case FIRSTNAMEEDITOR:
-			currentIssue.getUser().setFirstname(content);
+			currentIssue.getModifiedBy().setFirstname(content);
 			break;
 		case LASTNAMEEDITOR:
-			currentIssue.getUser().setLastname(content);
+			currentIssue.getModifiedBy().setLastname(content);
 			break;
 		case EMAILEDITOR:
-			currentIssue.getUser().setEmail(content);
+			currentIssue.getModifiedBy().setEmail(content);
 			break;
 		case SUMMARY:
 			currentIssue.setSummary(content);
@@ -113,19 +118,22 @@ public class IssuesHandler extends DefaultHandler {
 		case BUILDFOUND:
 			currentIssue.setBuildFound(content);
 			break;
-		// Assignee (user)
+		case ASSIGNEE:
+			currentIssue.getAssignee();
+			break;
 		case FIRSTNAMEASSIGNEE:
-			currentIssue.getUser().setFirstname(content);
+			currentIssue.getAssignee().setFirstname(content);
 			break;
 		case LASTNAMEASSIGNEE:
-			currentIssue.getUser().setLastname(content);
+			currentIssue.getAssignee().setLastname(content);
 			break;
 		case EMAILASSIGNEE:
-			currentIssue.getUser().setEmail(content);
+			currentIssue.getAssignee().setEmail(content);
 			break;
 		default:
 			break;
 		}
+		thisElement = null;
 	}
 
 	@Override

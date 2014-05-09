@@ -2,6 +2,7 @@ package by.epam.epamlab.session;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.constants.ConstantsControllers;
+import by.epam.epamlab.factories.IssuesFactory;
+import by.epam.epamlab.interfaces.IIssueDAO;
+import by.epam.epamlab.model.issues.beans.Issue;
 import by.epam.epamlab.model.users.beans.User;
 import by.epam.epamlab.utilities.ServletUtilities;
 
@@ -31,7 +36,14 @@ public class WelcomePageController extends AbstractController {
 				.headerWithTitle(ConstantsControllers.WELCOME_PAGE_TITLE));
 		User user = (User) session.getAttribute(ConstantsControllers.USER);
 		out.println(ServletUtilities.userMenuFragment(user));
-	//	out.println(ServletUtilities.issuesListFragment(user));
+		IIssueDAO iIssueDAO = IssuesFactory.getClassFromFactory();
+		List<Issue> issueList;
+		if (user==null){
+			issueList = iIssueDAO.getGuestIssues(Constants.DEFAULT_NUMBER_ISSUES);
+		} else {
+			issueList = iIssueDAO.getUserIssues(user.getLogin(),Constants.DEFAULT_NUMBER_ISSUES);
+		}
+		out.println(ServletUtilities.issuesListFragment(issueList, user));
 		out.println(ServletUtilities.footer());
 	}
 }
