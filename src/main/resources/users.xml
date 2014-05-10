@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tns:users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tns="http://www.example.org/users" xsi:schemaLocation="http://www.example.org/users users.xsd">
+	<!-- Login/Password: Asus200786@gmail.com/password; Dushiv@tut.by/dushik; 
+		Jorjick@rambler.ru/jorick -->
 	<users>
 		<user>
 			<login>Asus200786@gmail.com</login>
-			<address password="password" role="ADMINISTRATOR" firstname="Hanna"
-				lastname="Sushchanka" emailAddress="Asus200786@gmail.com" />
+			<address password="5f4dcc3b5aa765d61d8327deb882cf99" role="ADMINISTRATOR"
+				firstname="Hanna" lastname="Sushchanka" emailAddress="Asus200786@gmail.com" />
 		</user>
 		<user>
 			<login>Dushiv@tut.by</login>
-			<address password="dushik" role="USER" firstname="Ivan"
-				lastname="Dushkevich" emailAddress="Dushiv@tut.by" />
+			<address password="c1e5965c5dcd3edce68293ebe486c642" role="USER"
+				firstname="Ivan" lastname="Dushkevich" emailAddress="Dushiv@tut.by" />
 		</user>
 		<user>
 			<login>Jorjick@rambler.ru</login>
-			<address password="gorick" role="USER" firstname="Georgij"
-				lastname="Vajvichenskij" emailAddress="Jorjick@rambler.ru" />
+			<address password="5f65b610ab9aae34f73d931d1fc249b2" role="USER"
+				firstname="Georgij" lastname="Vajvichenskij" emailAddress="Jorjick@rambler.ru" />
 		</user>
 	</users>
 </tns:users>

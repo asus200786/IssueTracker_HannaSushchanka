@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.constants.ConstantsControllers;
+import by.epam.epamlab.cryptography.MD5;
 import by.epam.epamlab.factories.UserFactory;
 import by.epam.epamlab.interfaces.IUserDAO;
 import by.epam.epamlab.model.users.beans.User;
@@ -28,7 +29,8 @@ public class LoginController extends AbstractController {
 			HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter(ConstantsControllers.LOGIN);
 		System.out.println("login " + login);
-		String password = request.getParameter(ConstantsControllers.PASSWORD);
+		MD5 md5 = new MD5();
+		String password = md5.getHash(request.getParameter(ConstantsControllers.PASSWORD));
 		System.out.println("pass " + password);
 
 		String inputResult = getInputResult(login, password);

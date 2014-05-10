@@ -43,6 +43,7 @@ public class ServletUtilities {
 			stringBuilder
 					.append("<input type=\"password\" name=\"password\" size=\"25\" required=\"required\" class=\"inputPassword\">\n");
 			stringBuilder.append("<input type=\"submit\" value=\"Log In\">\n");
+			
 			stringBuilder.append("</form>\n");
 		} else {
 			stringBuilder.append("<div class=\"userMenu\">\n");

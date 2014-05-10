@@ -30,8 +30,6 @@ public class Issue implements Serializable {
 	private String project;
 	private String buildFound;
 
-//	private User user = new User();
-
 	public Issue(long idIssue) {
 		super();
 		this.idIssue = idIssue;
@@ -58,14 +56,6 @@ public class Issue implements Serializable {
 		this.project = project;
 		this.buildFound = buildFound;
 	}
-
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
 
 	public long getIdIssue() {
 		return idIssue;
@@ -202,36 +192,6 @@ public class Issue implements Serializable {
 	public void setBuildFound(String buildFound) {
 		this.buildFound = buildFound;
 	}
-
-//	public class User {
-//		private String firstname;
-//		private String lastname;
-//		private String email;
-//
-//		public String getFirstname() {
-//			return firstname;
-//		}
-//
-//		public void setFirstname(String firstname) {
-//			this.firstname = firstname;
-//		}
-//
-//		public String getLastname() {
-//			return lastname;
-//		}
-//
-//		public void setLastname(String lastname) {
-//			this.lastname = lastname;
-//		}
-//
-//		public String getEmail() {
-//			return email;
-//		}
-//
-//		public void setEmail(String email) {
-//			this.email = email;
-//		}
-//	}
 
 	@Override
 	public int hashCode() {
