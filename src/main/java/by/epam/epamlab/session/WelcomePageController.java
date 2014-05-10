@@ -36,12 +36,19 @@ public class WelcomePageController extends AbstractController {
 		out.println(ServletUtilities.userMenuFragment(user));
 		IIssueDAO iIssueDAO = IssuesFactory.getClassFromFactory();
 		List<Issue> issueList;
-		if (user==null){
-			issueList = iIssueDAO.getGuestIssues(Constants.DEFAULT_NUMBER_ISSUES);
+		if (user == null) {
+			issueList = iIssueDAO
+					.getGuestIssues(Constants.DEFAULT_NUMBER_ISSUES);
 		} else {
-			issueList = iIssueDAO.getUserIssues(user.getLogin(),Constants.DEFAULT_NUMBER_ISSUES);
+			issueList = iIssueDAO.getUserIssues(user.getLogin(),
+					Constants.DEFAULT_NUMBER_ISSUES);
 		}
 		out.println(ServletUtilities.issuesListFragment(issueList, user));
+		String message = (String) request
+				.getAttribute(ConstantsControllers.MESSAGE);
+		if (message != null) {
+			out.print(message);
+		}
 		out.println(ServletUtilities.footer());
 	}
 }
