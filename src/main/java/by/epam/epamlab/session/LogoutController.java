@@ -1,4 +1,4 @@
-package by.epam.epamlab.session.user_controllers;
+package by.epam.epamlab.session;
 
 import java.io.IOException;
 
@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import by.epam.epamlab.constants.ConstantsControllers;
-import by.epam.epamlab.session.AbstractController;
 
 /**
  * Servlet implementation class LogoutController
@@ -22,7 +21,7 @@ public class LogoutController extends AbstractController {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
 		response.sendRedirect(response.encodeRedirectURL(getServletContext()
-				.getContextPath() + ConstantsControllers.WELCOME_PAGE_URL));
+				.getContextPath() + ConstantsControllers.MAIN_JSPX));
 	}
 
 }

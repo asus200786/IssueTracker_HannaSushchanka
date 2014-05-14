@@ -1,7 +1,6 @@
 package by.epam.epamlab.session;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,7 +15,6 @@ import by.epam.epamlab.factories.IssuesFactory;
 import by.epam.epamlab.interfaces.IIssueDAO;
 import by.epam.epamlab.model.issues.beans.Issue;
 import by.epam.epamlab.model.users.beans.User;
-import by.epam.epamlab.utilities.ServletUtilities;
 
 /**
  * Servlet implementation class LoginFormController
@@ -29,11 +27,11 @@ public class WelcomePageController extends AbstractController {
 	protected void performTask(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
-		out.println(ServletUtilities
-				.headerWithTitle(ConstantsControllers.WELCOME_PAGE_TITLE));
+		// PrintWriter out = response.getWriter();
+		// out.println(ServletUtilities
+		// .headerWithTitle(ConstantsControllers.WELCOME_PAGE_TITLE));
 		User user = (User) session.getAttribute(ConstantsControllers.USER);
-		out.println(ServletUtilities.userMenuFragment(user));
+		// out.println(ServletUtilities.userMenuFragment(user));
 		IIssueDAO iIssueDAO = IssuesFactory.getClassFromFactory();
 		List<Issue> issueList;
 		if (user == null) {
@@ -43,12 +41,16 @@ public class WelcomePageController extends AbstractController {
 			issueList = iIssueDAO.getUserIssues(user.getLogin(),
 					Constants.DEFAULT_NUMBER_ISSUES);
 		}
-		out.println(ServletUtilities.issuesListFragment(issueList, user));
-		String message = (String) request
-				.getAttribute(ConstantsControllers.MESSAGE);
-		if (message != null) {
-			out.print(message);
-		}
-		out.println(ServletUtilities.footer());
+		// for JSP-implementation
+		request.setAttribute(ConstantsControllers.ISSUES_LIST, issueList);
+		jump(ConstantsControllers.MAIN_JSPX, request, response);
+
+		// out.println(ServletUtilities.issuesListFragment(issueList, user));
+		// String message = (String) request
+		// .getAttribute(ConstantsControllers.MESSAGE);
+		// if (message != null) {
+		// out.print(message);
+		// }
+		// out.println(ServletUtilities.footer());
 	}
 }

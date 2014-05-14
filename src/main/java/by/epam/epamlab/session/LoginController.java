@@ -1,4 +1,4 @@
-package by.epam.epamlab.session.user_controllers;
+package by.epam.epamlab.session;
 
 import java.io.IOException;
 import java.util.Map;
@@ -14,7 +14,6 @@ import by.epam.epamlab.cryptography.MD5;
 import by.epam.epamlab.factories.UserFactory;
 import by.epam.epamlab.interfaces.IUserDAO;
 import by.epam.epamlab.model.users.beans.User;
-import by.epam.epamlab.session.AbstractController;
 
 /**
  * Servlet implementation class LoginController
@@ -28,29 +27,32 @@ public class LoginController extends AbstractController {
 	protected void performTask(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter(ConstantsControllers.LOGIN);
-		System.out.println("login " + login);
-		MD5 md5 = new MD5();
-		String password = md5.getHash(request.getParameter(ConstantsControllers.PASSWORD));
-		System.out.println("pass " + password);
+		String password = request.getParameter(ConstantsControllers.PASSWORD);
 
 		String inputResult = getInputResult(login, password);
 		// With incorrect input data the user is returned to the home page
 		if (inputResult != null) {
 			request.setAttribute(ConstantsControllers.MESSAGE, inputResult);
-			jump(ConstantsControllers.WELCOME_PAGE_URL, request, response);
+			jump(ConstantsControllers.ERROR_LOGIN_JSPX, request, response);
 			return;
 		}
 
+		MD5 md5 = new MD5();
+		// To add "salt".
+		String passwordHash = md5.getHash(password);
+
+		// ! I think there need to handle security?
+		// request.login(login, password);
+
 		IUserDAO userDAO = UserFactory.getClassFromFactory();
 		users = userDAO.readingUserXML();
-		User user = userDAO.getUser(users, login, password);
+		User user = userDAO.getUser(users, login, passwordHash);
 		if (user != null) {
 			request.getSession().setAttribute(ConstantsControllers.USER, user);
-			response.sendRedirect(request.getServletContext().getContextPath()
-					+ ConstantsControllers.WELCOME_PAGE_URL);
+			jump(ConstantsControllers.MAIN_JSPX, request, response);
 			return;
 		} else {
-			jump(ConstantsControllers.WELCOME_PAGE_URL,
+			jump(ConstantsControllers.ERROR_LOGIN_JSPX,
 					ConstantsControllers.ERROR_AUTHORIZATION, request, response);
 		}
 	}

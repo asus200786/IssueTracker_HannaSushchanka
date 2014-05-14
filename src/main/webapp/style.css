@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background: #DCDCDC;
+	min-width: 960px;
+	width: 100%;
+	width: 100%
+}
+
+.mainWrapper {
+	margin: 0 auto;
+	min-width: 960px;
+}
+
+.main {
+	width: 960px;
+	margin: 0 auto;
+}
+
+header {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.loginForm {
+	margin: 0 auto;
+	min-width: 960px;
+}
+
+.menu {
+	float: right;
+	width: 30%;
+}
+
+.welcomeMessage {
+	margin: 0 auto;
+}
+
+.searchIssue {
+	float: left;
+}
+
+.outputIssuesList {
+	float: left;
+	width: 70%;
+}
+
+.tableDataIssues {width 100%;
+	border: 2px double gray;
+	border-collapse: collapse;
+	background: silver;
+	padding: 5px;
+}
+
+.tableDataIssues th {
+	text-align: center;
+	border: 1px double;
+}
+
+.tableDataIssues td {
+	text-align: left;
+	border: 1px solid;
+	padding-left: 5px;
+}

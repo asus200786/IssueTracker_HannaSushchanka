@@ -1,0 +1,73 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page
+		import="by.epam.epamlab.constants.ConstantsControllers" />
+	<jsp:directive.page import="by.epam.epamlab.constants.Constants" />
+	<jsp:directive.page contentType="text/html; charset=Utf-8" />
+	<div class="authentication">
+	<c:url value="/IssueTrackerSushchanka/LogoutController" var="Logout"/>
+		<c:choose>
+			<c:when test="${empty user}">
+				<div class="loginForm">
+					<c:set var="user" value="Guest" />
+					<div class="welcomeMessage">
+						<h2>Welcome, ${user}!</h2>
+						<h3>Please Log In:</h3>
+					</div>
+					<form name="loginUser" action="LoginController" method="post">
+						<strong>Enter your Login:</strong> <input type="text"
+							name="j_username" size="25" required="required" autocomplete="on" placeholder="login" /><br />
+						<strong> Enter your Password:</strong> <input type="password"
+							name="j_password" size="25" required="required" placeholder="password"/><br /> <input
+							type="submit" value="Log In" /> <input type="reset"
+							value="Reset" />
+					</form>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="welcomeMessage">
+					<h2>Welcome, ${user.firstName} ${user.lastName}!</h2>
+				</div>
+				<div class="menu">
+					<div class="userMenu">
+						<div>
+							<h3>Menu user's:</h3>
+						</div>
+						<ul class="userActions">
+							<li><a href="#">Edit profile</a></li>
+							<li><a href="#">Change password</a></li>
+							<li><button>Submit Issue</button></li>
+						</ul>
+						<ul>
+							<li><a href="/IssueTrackerSushchanka/LogoutController">Logout</a></li>
+						</ul>
+					</div>
+					<div class="adminMenu">
+						<c:if test="${user.role eq 'ADMINISTRATOR'}">
+							<div>
+								<h3>Menu administrator's.</h3>
+							</div>
+							<ul>
+								<li><ul class="submenu">
+										<li><a href="#">Projects</a></li>
+										<li><a href="#">Statuses</a></li>
+										<li><a href="#">Resolutions</a></li>
+										<li><a href="#">Priorities</a></li>
+										<li><a href="#">Types</a></li>
+									</ul></li>
+								<li><ul>
+										<li><a href="#">Add Project</a></li>
+										<li><a href="#">Add Resolution</a></li>
+										<li><a href="#">Add Priority</a></li>
+										<li><a href="#">Add Type</a></li>
+									</ul></li>
+								<li><a href="#">Search user</a></li>
+								<li><a href="#">Add user</a></li>
+							</ul>
+						</c:if>
+					</div>
+				</div>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</jsp:root>
