@@ -8,12 +8,7 @@
 	<name>IssueTrackerSushchanka Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.12</version>
-			<scope>compile</scope>
-		</dependency>
+		<!-- JEE -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -32,6 +27,7 @@
 			<version>7.0.21</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- JSTL -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -42,6 +38,22 @@
 			<groupId>org.apache.taglibs</groupId>
 			<artifactId>taglibs-standard-compat</artifactId>
 			<version>1.2.1</version>
+		</dependency>
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>apache-log4j-extras</artifactId>
+			<version>1.1</version>
 		</dependency>
 	</dependencies>
 	<build>
