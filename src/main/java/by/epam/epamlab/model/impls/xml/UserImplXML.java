@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -16,6 +18,9 @@ import by.epam.epamlab.model.users.beans.User;
 
 
 public class UserImplXML implements IUserDAO {
+	private final Logger logger = LoggerFactory.getLogger(UserImplXML.class);
+	
+	private static final String READING_USERS_XML = "Reading \"users.xml\".";
 
 	private static Map<String, User> users;
 	private static UserImplXML instance;
@@ -40,6 +45,7 @@ public class UserImplXML implements IUserDAO {
 					Constants.INPUT_USERS_XML));
 			xmlReader.parse(in);
 			users = contentHandler.getUsers();
+			logger.info(READING_USERS_XML);
 			return (HashMap<String, User>) users;
 		} catch (SAXException e) {
 			e.printStackTrace();

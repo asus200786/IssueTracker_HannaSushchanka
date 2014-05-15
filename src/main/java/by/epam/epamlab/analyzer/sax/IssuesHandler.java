@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -12,6 +14,7 @@ import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.model.issues.beans.Issue;
 
 public class IssuesHandler extends DefaultHandler {
+	private final Logger logger = LoggerFactory.getLogger(IssuesHandler.class);
 
 	private static enum ElementsIssuesEnum {
 		ISSUES, ISSUE, SUMMARY, DESCRIPTION, STATUS, RESOLUTION, TYPE, PRIORITY, PROJECT, BUILDFOUND, ASSIGNEE, FIRSTNAMEASSIGNEE, LASTNAMEASSIGNEE, EMAILASSIGNEE, CREATINGISSUE, CREATEDATE, CREATEDBY, FIRSTNAMECREATOR, LASTNAMECREATOR, EMAILCREATOR, MODIFINGISSUE, MODIFYDATE, MODIFIEDBY, FIRSTNAMEEDITOR, LASTNAMEEDITOR, EMAILEDITOR
@@ -34,7 +37,7 @@ public class IssuesHandler extends DefaultHandler {
 
 	@Override
 	public void startDocument() throws SAXException {
-		System.out.println(Constants.START_PARSE_ISSUES_XML);
+		logger.info(Constants.START_PARSE_ISSUES_XML);
 	}
 
 	@Override
@@ -138,7 +141,7 @@ public class IssuesHandler extends DefaultHandler {
 
 	@Override
 	public void endDocument() throws SAXException {
-		System.out.println(Constants.STOP_PARSE_ISSUES_XML);
+		logger.info(Constants.STOP_PARSE_ISSUES_XML);
 	}
 
 }

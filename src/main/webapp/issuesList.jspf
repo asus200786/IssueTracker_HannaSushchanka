@@ -10,8 +10,8 @@
 			<c:choose>
 				<c:when test="${empty issueList}">
 					<c:choose>
-						<c:when test="${user eq 'Guest'}"> The application does not contain issues.</c:when>
-						<c:otherwise>Designated issues are absent.</c:otherwise>
+						<c:when test="${user eq 'Guest'}"> ${JSPX_CONSTANTS.NOT_ISSUES_MESSAGE_FOR_GUEST}</c:when>
+						<c:otherwise>${JSPX_CONSTANTS.NOT_ISSUES_MESSAGE_FOR_USERS}</c:otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>

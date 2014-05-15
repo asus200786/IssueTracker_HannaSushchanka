@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -18,11 +20,14 @@ import by.epam.epamlab.interfaces.IIssueDAO;
 import by.epam.epamlab.model.issues.beans.Issue;
 
 public class IssuesImplXML implements IIssueDAO {
+	private final Logger logger = LoggerFactory.getLogger(IssuesImplXML.class);
+	
+	private static final String READING_ISSUES_XML = "Reading \"issues.xml\".";
+	
 	private static IssuesImplXML instance;
 	private Map<Long, Issue> issues;
 
 	private IssuesImplXML() {
-		//this.issues = issues;
 	}
 
 	public synchronized static IssuesImplXML getImplXML() {
@@ -66,8 +71,8 @@ public class IssuesImplXML implements IIssueDAO {
 			InputSource in = new InputSource(getClass().getResourceAsStream(
 					Constants.INPUT_ISSUES_XML));
 			xmlReader.parse(in);
-			System.out.println(contentHandler.getIssues());
 			issues = contentHandler.getIssues();
+			logger.info(READING_ISSUES_XML);
 			return (HashMap<Long, Issue>) issues;
 		} catch (SAXException e) {
 			e.printStackTrace();

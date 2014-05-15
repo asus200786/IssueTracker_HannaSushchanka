@@ -3,6 +3,8 @@ package by.epam.epamlab.analyzer.sax;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -11,7 +13,8 @@ import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.model.users.beans.User;
 
 public class UsersHandler extends DefaultHandler {
-
+	private final Logger logger = LoggerFactory.getLogger(UsersHandler.class);
+	
 	private enum UserEnum {
 		USERS, USER, LOGIN, ADDRESS
 	}
@@ -37,7 +40,7 @@ public class UsersHandler extends DefaultHandler {
 
 	@Override
 	public void startDocument() throws SAXException {
-		System.out.println(Constants.START_PARSE_USERS_XML);
+		logger.info(Constants.START_PARSE_USERS_XML);
 	}
 
 	@Override
@@ -69,7 +72,7 @@ public class UsersHandler extends DefaultHandler {
 
 	@Override
 	public void endDocument() throws SAXException {
-		System.out.println(Constants.STOP_PARSE_USERS_XML);
+		logger.info(Constants.STOP_PARSE_USERS_XML);
 	}
 
 }
