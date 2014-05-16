@@ -2,9 +2,9 @@ package by.epam.epamlab.utilities;
 
 import java.util.List;
 
-import by.epam.epamlab.model.issues.beans.Issue;
-import by.epam.epamlab.model.users.beans.User;
-import by.epam.epamlab.model.users.enums.RolesUser;
+import by.epam.epamlab.model.beans.issues.Issue;
+import by.epam.epamlab.model.beans.users.User;
+import by.epam.epamlab.model.beans.users.enums.RolesUser;
 
 public class ServletUtilities {
 

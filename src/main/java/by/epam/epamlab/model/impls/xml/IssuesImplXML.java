@@ -14,10 +14,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import by.epam.epamlab.analyzer.sax.IssuesHandler;
 import by.epam.epamlab.constants.Constants;
-import by.epam.epamlab.interfaces.IIssueDAO;
-import by.epam.epamlab.model.issues.beans.Issue;
+import by.epam.epamlab.exceptions.ExceptionDAO;
+import by.epam.epamlab.model.beans.issues.Issue;
+import by.epam.epamlab.model.impls.xml.analyzer.sax.IssuesHandler;
+import by.epam.epamlab.model.interfaces.IIssueDAO;
 
 public class IssuesImplXML implements IIssueDAO {
 	private final Logger logger = LoggerFactory.getLogger(IssuesImplXML.class);
@@ -79,6 +80,11 @@ public class IssuesImplXML implements IIssueDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	public Issue getObject(long idObject) throws ExceptionDAO {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

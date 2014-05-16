@@ -27,6 +27,7 @@
 			<version>7.0.21</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<!-- JSTL -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -39,6 +40,7 @@
 			<artifactId>taglibs-standard-compat</artifactId>
 			<version>1.2.1</version>
 		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -54,6 +56,13 @@
 			<groupId>log4j</groupId>
 			<artifactId>apache-log4j-extras</artifactId>
 			<version>1.1</version>
+		</dependency>
+
+		<!-- H2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.178</version>
 		</dependency>
 	</dependencies>
 	<build>
