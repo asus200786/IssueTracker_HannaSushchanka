@@ -16,7 +16,7 @@
 	<!-- h2 -->
 	<context-param>
 		<param-name>db.url</param-name>
-		<param-value>jdbc:h2:~/test</param-value>
+		<param-value>jdbc:h2:~/IssueTrackerSushchanka</param-value>
 	</context-param>
 	<context-param>
 		<param-name>db.user</param-name>
@@ -26,6 +26,11 @@
 		<param-name>db.password</param-name>
 		<param-value></param-value>
 	</context-param>
+	<context-param>
+		<param-name>db.url.isObtainConrext</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
 	<!-- security -->
 	<security-constraint>
 		<web-resource-collection>

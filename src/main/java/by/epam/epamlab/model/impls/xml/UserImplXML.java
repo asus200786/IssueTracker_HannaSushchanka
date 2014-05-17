@@ -54,7 +54,7 @@ public class UserImplXML implements IUserDAO {
 		}
 	}
 
-	public User getUser(Map<String, User> users, String login, String password) {
+	public User getUser(String login, String password) {
 		User user = users.get(login);
 		if (user != null && user.getEmailAddress().equals(login)
 				&& user.getPassword().equals(password)) {

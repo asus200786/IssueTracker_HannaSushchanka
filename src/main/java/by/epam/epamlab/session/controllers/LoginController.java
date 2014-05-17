@@ -51,7 +51,7 @@ public class LoginController extends AbstractController {
 
 			IUserDAO userDAO;
 			userDAO = UserFactory.getClassFromFactory();
-			User user = userDAO.getUser(users, login, passwordHash);
+			User user = userDAO.getUser(login, passwordHash);
 			if (user != null) {
 				request.getSession().setAttribute(ConstantsControllers.USER,
 						user);

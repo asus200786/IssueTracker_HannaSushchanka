@@ -1,6 +1,9 @@
 package by.epam.epamlab.constants;
 
 public class Constants {
+	public static final String DELIMETER = "/";
+	public static final String SEPARATOR="\\";
+	
 	public static final String EMPTY_STRING = "";
 	public static final String ERROR_ANALYZER_SAX = "Error SAX parser";
 	public final static String ERROR_IO_STREAM = "Error IO stream";

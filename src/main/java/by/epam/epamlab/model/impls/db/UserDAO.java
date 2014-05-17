@@ -1,8 +1,5 @@
 package by.epam.epamlab.model.impls.db;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.model.interfaces.IUserDAO;
@@ -22,12 +19,7 @@ public class UserDAO implements IUserDAO {
 		return instance;
 	}
 
-	public User getUser(Map<String, User> users, String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public HashMap<String, User> readingUserXML() {
+	public User getUser(String login, String password) {
 		// TODO Auto-generated method stub
 		return null;
 	}

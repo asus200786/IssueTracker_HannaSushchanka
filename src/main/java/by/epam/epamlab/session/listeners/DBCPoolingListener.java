@@ -14,16 +14,23 @@ import org.h2.jdbcx.JdbcConnectionPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import by.epam.epamlab.constants.Constants;
+
 /**
  * Application Lifecycle Listener implementation class DBCPoolingListener
  * 
  */
 @WebListener
 public class DBCPoolingListener implements ServletContextListener {
+	Logger logger = LoggerFactory.getLogger(DBCPoolingListener.class);
 
+	private static final String JDBC_CONNECT_TO_H2 = "jdbc:h2:";
+	private static final String OBTAIN_CONTEXT = "true";
+	private static final String OBTAIN_CONTEXT_DEFAULT = "false";
 	private static final String DB_PASSWORD_DEFAULT_NAME = "";
 	private static final String DB_USER_DEFAULT_NAME = "sa";
-	private static final String DB_URL_DEFAULT_VALUE = "jdbs:h2:~/test";
+	private static final String DB_URL_DEFAULT_VALUE = "jdbc:h2:~/IssueTrackerSushchanka";
+	private static final String OBTAIN_CONTEXT_PARAM_NAME = "db.url.isObtainConrext";
 	private static final String DB_PASSWORD_PARAM_NAME = "db.password";
 	private static final String DB_USER_PARAM_NAME = "db.user";
 	private static final String DB_URL_PARAM_NAME = "db.url";
@@ -31,11 +38,10 @@ public class DBCPoolingListener implements ServletContextListener {
 	private static final String ERROR_H2_SQL_CONNECTION = "Error obtaining the H2 SQL connection";
 	private static final String ERROR_CLOSING_H2_SQL_CONNECTION = "Error closing the H2 SQL Connection";
 
-	Logger logger = LoggerFactory.getLogger(DBCPoolingListener.class);
-
 	private String url;
 	private String user;
 	private String password;
+	private String isObtainContext;
 
 	private JdbcConnectionPool pool;
 	private Connection connection;
@@ -50,6 +56,8 @@ public class DBCPoolingListener implements ServletContextListener {
 	public DBCPoolingListener() {
 	}
 
+	// Here I doubt it. Is implementing Singleton in the listener probably not
+	// correct? I can not create private constructor DBCPoolingListener().
 	public static DBCPoolingListener getInstance() {
 		if (instance == null) {
 			instance = new DBCPoolingListener();
@@ -65,6 +73,7 @@ public class DBCPoolingListener implements ServletContextListener {
 		Driver.load();
 		ServletContext servletContext = servletContextEvent.getServletContext();
 		loadParameters(servletContext);
+		changeUrlDataBase(servletContext);
 		setUpConnectionPool(servletContext);
 		setUpConnection(servletContext);
 		logger.info(DBCP_START);
@@ -77,12 +86,25 @@ public class DBCPoolingListener implements ServletContextListener {
 				DB_USER_DEFAULT_NAME);
 		password = parameters(servletContext, DB_PASSWORD_PARAM_NAME,
 				DB_PASSWORD_DEFAULT_NAME);
+		// I introduce an additional parameter, to write the condition that
+		// changes the way to create a database with the "C:\ Users\ userName\"
+		// disk to the project resources
+		isObtainContext = parameters(servletContext, OBTAIN_CONTEXT_PARAM_NAME,
+				OBTAIN_CONTEXT_DEFAULT);
 	}
 
 	private String parameters(ServletContext servletContext, String key,
 			String defaultValue) {
 		String parameter = servletContext.getInitParameter(key);
 		return parameter == null ? defaultValue : parameter;
+	}
+
+	private void changeUrlDataBase(ServletContext servletContext) {
+		if (isObtainContext != null && isObtainContext.equals(OBTAIN_CONTEXT)){
+			url = servletContext.getRealPath(Constants.DELIMETER)+"WEB-INF/db/"+url;
+			url = url.replace(Constants.SEPARATOR, Constants.DELIMETER);
+			url = JDBC_CONNECT_TO_H2 + url;
+		}
 	}
 
 	private void setUpConnectionPool(ServletContext servletContext) {
