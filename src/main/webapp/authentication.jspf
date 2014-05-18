@@ -7,38 +7,54 @@
 				<div class="loginForm">
 					<c:set var="user" value="Guest" />
 					<div class="welcomeMessage">
-						<h2>Welcome, ${user}!</h2>
-						<h3>Please Log In:</h3>
+						<h2>
+							<c:out value="${constantsControllers.WELCOME_JSPX}" />
+							&amp;nbsp;
+							<c:out value="${user}" />
+							&#33;
+						</h2>
+						<h3>
+							<c:out value="${constantsControllers.LOG_IN_MESSAGE}" />
+						</h3>
 					</div>
 					<form name="loginUser" action="LoginController" method="post">
-						<strong>${constantsControllers.ENTER_LOGIN_FORM_JSPX}</strong>
-						<input
+						<strong><c:out
+								value="${constantsControllers.ENTER_LOGIN_FORM_JSPX}" /></strong> <input
 							type="text" name="j_username" size="25" required="required"
-							autocomplete="on" placeholder="login" /><br />
-						<strong>${constantsControllers.ENTER_PASSWORD_FORM_JSPX}</strong>
-						<input type="password" name="j_password" size="25"
-							required="required" placeholder="password" /><br />
-						<input type="submit" value="Log In" />
-						<input type="reset"	value="Reset" />
+							autocomplete="on" placeholder="login" /><br /> <strong><c:out
+								value="${constantsControllers.ENTER_PASSWORD_FORM_JSPX}" /></strong> <input
+							type="password" name="j_password" size="25" required="required"
+							placeholder="password" /><br /> <input type="submit"
+							value="Log In" /> <input type="reset" value="Reset" />
 					</form>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="welcomeMessage">
-					<h2>Welcome, ${user.firstName} ${user.lastName}!</h2>
+					<h2>
+						<c:out value=" ${constantsControllers.WELCOME_JSPX}" />
+						&amp;nbsp;
+						<c:out value="${user.firstName}" />
+						&amp;nbsp;
+						<c:out value="${user.lastName}" />
+						&#33;
+					</h2>
 				</div>
 				<div class="menu">
 					<div class="userMenu">
 						<div>
-							<h3>${constantsControllers.USER_MENU_MESSAGE_JSPX}</h3>
+							<h3>
+								<c:out value="${constantsControllers.USER_MENU_MESSAGE_JSPX}" />
+							</h3>
 						</div>
 						<ul class="userActions">
-							<li><a href="#">Edit profile</a></li>
-							<li><a href="#">Change password</a></li>
-							<li><button>Submit Issue</button></li>
+							<li><a href="#">${constantsControllers.EDIT_PROFILE}</a></li>
+							<li><a href="#">${constantsControllers.CHANGE_PASSWORD}</a></li>
+							<li><button>${constantsControllers.SUBMIT_ISSUE}</button></li>
 						</ul>
 						<ul>
-							<li><a href="${constantsControllers.LOGOUT_CONTROLLER_URL}">Logout</a></li>
+							<li><a href="${constantsControllers.LOGOUT_CONTROLLER_URL}"><c:out
+										value="${constantsControllers.LOGOUT}" /></a></li>
 						</ul>
 					</div>
 					<div class="adminMenu">
@@ -48,20 +64,20 @@
 							</div>
 							<ul>
 								<li><ul class="submenu">
-										<li><a href="#">Projects</a></li>
-										<li><a href="#">Statuses</a></li>
-										<li><a href="#">Resolutions</a></li>
-										<li><a href="#">Priorities</a></li>
-										<li><a href="#">Types</a></li>
+										<li><a href="#">${constantsControllers.PROJECTS}</a></li>
+										<li><a href="#">${constantsControllers.STATUSES}</a></li>
+										<li><a href="#">${constantsControllers.RESOLUTIONS}</a></li>
+										<li><a href="#">${constantsControllers.PRIORITIES}</a></li>
+										<li><a href="#">${constantsControllers.TYPES}</a></li>
 									</ul></li>
 								<li><ul>
-										<li><a href="#">Add Project</a></li>
-										<li><a href="#">Add Resolution</a></li>
-										<li><a href="#">Add Priority</a></li>
-										<li><a href="#">Add Type</a></li>
+										<li><a href="#">${constantsControllers.ADD_PROJECT}</a></li>
+										<li><a href="#">${constantsControllers.ADD_RESOLUTION}</a></li>
+										<li><a href="#">${constantsControllers.ADD_PRIORITY}</a></li>
+										<li><a href="#">${constantsControllers.ADD_TYPE}</a></li>
 									</ul></li>
-								<li><a href="#">Search user</a></li>
-								<li><a href="#">Add user</a></li>
+								<li><a href="#">${constantsControllers.SEARCH_USER}</a></li>
+								<li><a href="#">${constantsControllers.ADD_USER}</a></li>
 							</ul>
 						</c:if>
 					</div>

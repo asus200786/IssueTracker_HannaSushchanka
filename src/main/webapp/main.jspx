@@ -5,14 +5,14 @@
 	<jsp:directive.page contentType="text/html; charset=Utf-8" />
 	<html>
 <head>
-<title>Welcome Page / Dashboard</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<title><c:out value="${constantsControllers.WELCOME_PAGE_TITLE}"/></title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
 	<div class="mainWrapper">
 		<div class="main">
 			<header>
-				<h1>Join our Issue-Tracker!</h1>
+				<h1><c:out value="${constantsControllers.WELCOME_MESSAGE_JSPX}"/></h1>
 			</header>
 			<c:if test="${empty requestScope.issueList}">
 				<c:redirect url="/WelcomePageController"></c:redirect>

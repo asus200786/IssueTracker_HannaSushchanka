@@ -14,10 +14,160 @@ public class ConstantsControllers {
 	public static final String USERS = "users";
 	public static final String ISSUES_LIST = "issueList";
 
-	public static String WELCOME_PAGE_TITLE = "Welcom page / Dashboard";
+	// For authentication.jspf & mail.jspx
+	private final String WELCOME_PAGE_TITLE = "Welcom page / Dashboard";
+
+	public String getWELCOME_PAGE_TITLE() {
+		return WELCOME_PAGE_TITLE;
+	}
+
+	private final String WELCOME_JSPX = "Welcom,";
+
+	public String getWELCOME_JSPX() {
+		return WELCOME_JSPX;
+	}
+
+	private final String LOG_IN_MESSAGE = "Please Log In:";
+
+	public String getLOG_IN_MESSAGE() {
+		return LOG_IN_MESSAGE;
+	}
+
+	private final String EDIT_PROFILE = "Edit profile";
+
+	public String getEDIT_PROFILE() {
+		return EDIT_PROFILE;
+	}
+
+	private final String CHANGE_PASSWORD = "Change password";
+
+	public String getCHANGE_PASSWORD() {
+		return CHANGE_PASSWORD;
+	}
+
+	private final String SUBMIT_ISSUE = "Submit Issue";
+
+	public String getSUBMIT_ISSUE() {
+		return SUBMIT_ISSUE;
+	}
+
+	private final String PROJECTS = "Projects";
+
+	public String getPROJECTS() {
+		return PROJECTS;
+	}
+
+	private final String STATUSES = "Statuses";
+
+	public String getSTATUSES() {
+		return STATUSES;
+	}
+
+	private final String RESOLUTIONS = "Resolutions";
+
+	public String getRESOLUTIONS() {
+		return RESOLUTIONS;
+	}
+
+	private final String PRIORITIES = "Priorities";
+
+	public String getPRIORITIES() {
+		return PRIORITIES;
+	}
+
+	private final String TYPES = "Types";
+
+	public String getTYPES() {
+		return TYPES;
+	}
+
+	private final String ADD_PROJECT = "Add project";
+
+	public String getADD_PROJECT() {
+		return ADD_PROJECT;
+	}
+
+	private final String ADD_RESOLUTION = "Add resolution";
+
+	public String getADD_RESOLUTION() {
+		return ADD_RESOLUTION;
+	}
+
+	private final String ADD_PRIORITY = "Add priority";
+
+	public String getADD_PRIORITY() {
+		return ADD_PRIORITY;
+	}
+
+	private final String ADD_TYPE = "Add type";
+
+	public String getADD_TYPE() {
+		return ADD_TYPE;
+	}
+
+	private final String SEARCH_USER = "Search user";
+
+	public String getSEARCH_USER() {
+		return SEARCH_USER;
+	}
+
+	private final String SEARCH_ISSUE = "Search issue";
+
+	public String getSEARCH_ISSUE() {
+		return SEARCH_ISSUE;
+	}
+
+	private final String ADD_USER = "Add user";
+
+	public String getADD_USER() {
+		return ADD_USER;
+	}
+
+	// for issuesList.jspf
+	private final String ISSUES_LIST_JSPX = "Issues List.";
+
+	public String getISSUES_LIST_JSPX() {
+		return ISSUES_LIST_JSPX;
+	}
+
+	private final String ID_TABLE_HEADER = "Id";
+
+	public String getID_TABLE_HEADER() {
+		return ID_TABLE_HEADER;
+	}
+
+	private final String PRIORITY_TABLE_HEADER = "Priority";
+
+	public String getPRIORITY_TABLE_HEADER() {
+		return PRIORITY_TABLE_HEADER;
+	}
+
+	private final String ASSIGNEE_TABLE_HEADER = "Assignee";
+
+	public String getASSIGNEE_TABLE_HEADER() {
+		return ASSIGNEE_TABLE_HEADER;
+	}
+
+	private final String TYPE_TABLE_HEADER = "Type";
+
+	public String getTYPE_TABLE_HEADER() {
+		return TYPE_TABLE_HEADER;
+	}
+
+	private final String STATUS_TABLE_HEADER = "Status";
+
+	public String getSTATUS_TABLE_HEADER() {
+		return STATUS_TABLE_HEADER;
+	}
+
+	private final String SUMMARY_TABLE_HEADER = "Summary";
+
+	public String getSUMMARY_TABLE_HEADER() {
+		return SUMMARY_TABLE_HEADER;
+	}
 
 	// Messages for jspx;
-	public static String NOT_ISSUES_MESSAGE_FOR_GUEST = " The application does not contain issues.";
+	private static String NOT_ISSUES_MESSAGE_FOR_GUEST = " The application does not contain issues.";
 
 	public static String getNOT_ISSUES_MESSAGE_FOR_GUEST() {
 		return NOT_ISSUES_MESSAGE_FOR_GUEST;
@@ -40,7 +190,7 @@ public class ConstantsControllers {
 	public String getENTER_PASSWORD_FORM_JSPX() {
 		return ENTER_PASSWORD_FORM_JSPX;
 	}
-	
+
 	private final String ADMIN_MENU_MESSAGE_JSPX = "Menu administrator's.";
 
 	public String getADMIN_MENU_MESSAGE_JSPX() {
@@ -48,12 +198,16 @@ public class ConstantsControllers {
 	}
 
 	private final String USER_MENU_MESSAGE_JSPX = "Menu user's.";
-	
+
 	public String getUSER_MENU_MESSAGE_JSPX() {
 		return USER_MENU_MESSAGE_JSPX;
 	}
-	
-	
+
+	private final String WELCOME_MESSAGE_JSPX = "Join our Issue-Tracker!";
+
+	public String getWELCOME_MESSAGE_JSPX() {
+		return WELCOME_MESSAGE_JSPX;
+	}
 
 	// errors
 	public static final String ERROR_NULL = "Sorry. Please enter \"login\" and \"password\".";
@@ -61,8 +215,15 @@ public class ConstantsControllers {
 	public static final String ERROR_AUTHORIZATION = "Error of authorization. Check that the input data.";
 	// urls
 	public static final String ISSUES_PAGE_URL = "/WelcomePageController";
-	public final String LOGOUT_CONTROLLER_URL = "/IssueTrackerSushchanka/LogoutController";
-	
+
+	private final String LOGOUT = "Logout";
+
+	public String getLOGOUT() {
+		return LOGOUT;
+	}
+
+	private final String LOGOUT_CONTROLLER_URL = "/IssueTrackerSushchanka/LogoutController";
+
 	public String getLOGOUT_CONTROLLER_URL() {
 		return LOGOUT_CONTROLLER_URL;
 	}

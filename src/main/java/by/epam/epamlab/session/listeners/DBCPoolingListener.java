@@ -22,15 +22,17 @@ import by.epam.epamlab.constants.Constants;
  */
 @WebListener
 public class DBCPoolingListener implements ServletContextListener {
+	private static final String SERVER_DB_DIRECTIVE = "WEB-INF/db/";
+
 	Logger logger = LoggerFactory.getLogger(DBCPoolingListener.class);
 
 	private static final String JDBC_CONNECT_TO_H2 = "jdbc:h2:";
-	private static final String OBTAIN_CONTEXT = "true";
-	private static final String OBTAIN_CONTEXT_DEFAULT = "false";
+	private static final String CONNECT_TO_NEW_DB = "true";
+	private static final String NOT_CONNECT_TO_NEW_DB = "false";
 	private static final String DB_PASSWORD_DEFAULT_NAME = "";
 	private static final String DB_USER_DEFAULT_NAME = "sa";
 	private static final String DB_URL_DEFAULT_VALUE = "jdbc:h2:~/IssueTrackerSushchanka";
-	private static final String OBTAIN_CONTEXT_PARAM_NAME = "db.url.isObtainConrext";
+	private static final String CREATING_NEW_DB_PARAM_NAME = "db.url.newDataBase";
 	private static final String DB_PASSWORD_PARAM_NAME = "db.password";
 	private static final String DB_USER_PARAM_NAME = "db.user";
 	private static final String DB_URL_PARAM_NAME = "db.url";
@@ -41,7 +43,7 @@ public class DBCPoolingListener implements ServletContextListener {
 	private String url;
 	private String user;
 	private String password;
-	private String isObtainContext;
+	private String isConnectToDBMSForNewDB;
 
 	private JdbcConnectionPool pool;
 	private Connection connection;
@@ -73,24 +75,21 @@ public class DBCPoolingListener implements ServletContextListener {
 		Driver.load();
 		ServletContext servletContext = servletContextEvent.getServletContext();
 		loadParameters(servletContext);
-		changeUrlDataBase(servletContext);
+		createUrlNewDataBase(servletContext);
 		setUpConnectionPool(servletContext);
 		setUpConnection(servletContext);
 		logger.info(DBCP_START);
 	}
 
 	private void loadParameters(ServletContext servletContext) {
+		isConnectToDBMSForNewDB = parameters(servletContext,
+				CREATING_NEW_DB_PARAM_NAME, NOT_CONNECT_TO_NEW_DB);
 		url = parameters(servletContext, DB_URL_PARAM_NAME,
 				DB_URL_DEFAULT_VALUE);
 		user = parameters(servletContext, DB_USER_PARAM_NAME,
 				DB_USER_DEFAULT_NAME);
 		password = parameters(servletContext, DB_PASSWORD_PARAM_NAME,
 				DB_PASSWORD_DEFAULT_NAME);
-		// I introduce an additional parameter, to write the condition that
-		// changes the way to create a database with the "C:\ Users\ userName\"
-		// disk to the project resources
-		isObtainContext = parameters(servletContext, OBTAIN_CONTEXT_PARAM_NAME,
-				OBTAIN_CONTEXT_DEFAULT);
 	}
 
 	private String parameters(ServletContext servletContext, String key,
@@ -99,9 +98,10 @@ public class DBCPoolingListener implements ServletContextListener {
 		return parameter == null ? defaultValue : parameter;
 	}
 
-	private void changeUrlDataBase(ServletContext servletContext) {
-		if (isObtainContext != null && isObtainContext.equals(OBTAIN_CONTEXT)){
-			url = servletContext.getRealPath(Constants.DELIMETER)+"WEB-INF/db/"+url;
+	private void createUrlNewDataBase(ServletContext servletContext) {
+		if (isConnectToDBMSForNewDB != null && isConnectToDBMSForNewDB.equals(CONNECT_TO_NEW_DB)) {
+			url = servletContext.getRealPath(Constants.DELIMETER
+					+ SERVER_DB_DIRECTIVE + url);
 			url = url.replace(Constants.SEPARATOR, Constants.DELIMETER);
 			url = JDBC_CONNECT_TO_H2 + url;
 		}
