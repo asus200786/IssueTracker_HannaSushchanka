@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.epam.epamlab.constants.Constants;
+import by.epam.epamlab.constants.ConstantsControllers;
 
 /**
  * Application Lifecycle Listener implementation class DBCPoolingListener
@@ -22,17 +23,13 @@ import by.epam.epamlab.constants.Constants;
  */
 @WebListener
 public class DBCPoolingListener implements ServletContextListener {
-	private static final String SERVER_DB_DIRECTIVE = "WEB-INF/db/";
-
 	Logger logger = LoggerFactory.getLogger(DBCPoolingListener.class);
 
+	private static final String SERVER_DB_DIRECTIVE = "WEB-INF/db/";
 	private static final String JDBC_CONNECT_TO_H2 = "jdbc:h2:";
-	private static final String CONNECT_TO_NEW_DB = "true";
-	private static final String NOT_CONNECT_TO_NEW_DB = "false";
 	private static final String DB_PASSWORD_DEFAULT_NAME = "";
 	private static final String DB_USER_DEFAULT_NAME = "sa";
-	private static final String DB_URL_DEFAULT_VALUE = "jdbc:h2:~/IssueTrackerSushchanka";
-	private static final String CREATING_NEW_DB_PARAM_NAME = "db.url.newDataBase";
+	private static final String DB_URL_DEFAULT_VALUE = "IssueTrackerSushchanka";
 	private static final String DB_PASSWORD_PARAM_NAME = "db.password";
 	private static final String DB_USER_PARAM_NAME = "db.user";
 	private static final String DB_URL_PARAM_NAME = "db.url";
@@ -43,14 +40,12 @@ public class DBCPoolingListener implements ServletContextListener {
 	private String url;
 	private String user;
 	private String password;
-	private String isConnectToDBMSForNewDB;
 
 	private JdbcConnectionPool pool;
 	private Connection connection;
 
 	private static DBCPoolingListener instance;
 	private static final String DATA_SOURCE_POOL = "dataSourcePool";
-	private static final String CONNECTION = "connection";
 
 	private static final String DBCP_DESTROYED = "DBCP destroyed.";
 	private static final String DBCP_START = "DBCP start.";
@@ -72,18 +67,16 @@ public class DBCPoolingListener implements ServletContextListener {
 	 */
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		instance = this;
-		Driver.load();
 		ServletContext servletContext = servletContextEvent.getServletContext();
 		loadParameters(servletContext);
 		createUrlNewDataBase(servletContext);
+		Driver.load();
 		setUpConnectionPool(servletContext);
 		setUpConnection(servletContext);
 		logger.info(DBCP_START);
 	}
 
 	private void loadParameters(ServletContext servletContext) {
-		isConnectToDBMSForNewDB = parameters(servletContext,
-				CREATING_NEW_DB_PARAM_NAME, NOT_CONNECT_TO_NEW_DB);
 		url = parameters(servletContext, DB_URL_PARAM_NAME,
 				DB_URL_DEFAULT_VALUE);
 		user = parameters(servletContext, DB_USER_PARAM_NAME,
@@ -99,12 +92,13 @@ public class DBCPoolingListener implements ServletContextListener {
 	}
 
 	private void createUrlNewDataBase(ServletContext servletContext) {
-		if (isConnectToDBMSForNewDB != null && isConnectToDBMSForNewDB.equals(CONNECT_TO_NEW_DB)) {
-			url = servletContext.getRealPath(Constants.DELIMETER
-					+ SERVER_DB_DIRECTIVE + url);
-			url = url.replace(Constants.SEPARATOR, Constants.DELIMETER);
-			url = JDBC_CONNECT_TO_H2 + url;
-		}
+		url = servletContext.getRealPath(Constants.DELIMETER)
+				+ SERVER_DB_DIRECTIVE + url;
+		logger.info("DB URL:" + url);
+		url = url.replace(Constants.SEPARATOR, Constants.DELIMETER);
+		logger.info("DB URL:" + url);
+		url = JDBC_CONNECT_TO_H2 + url;
+		logger.info("DB URL:" + url);
 	}
 
 	private void setUpConnectionPool(ServletContext servletContext) {
@@ -115,7 +109,7 @@ public class DBCPoolingListener implements ServletContextListener {
 	private void setUpConnection(ServletContext servletContext) {
 		try {
 			connection = pool.getConnection();
-			servletContext.setAttribute(CONNECTION, connection);
+			servletContext.setAttribute(ConstantsControllers.CONNECTION, connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(ERROR_H2_SQL_CONNECTION, e);
@@ -143,7 +137,7 @@ public class DBCPoolingListener implements ServletContextListener {
 	private void closeConnection(ServletContext servletContext) {
 		try {
 			connection.close();
-			servletContext.removeAttribute(CONNECTION);
+			servletContext.removeAttribute(ConstantsControllers.CONNECTION);
 			connection = null;
 		} catch (SQLException e) {
 			e.printStackTrace();

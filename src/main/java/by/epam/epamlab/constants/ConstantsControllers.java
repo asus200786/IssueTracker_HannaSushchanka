@@ -10,9 +10,12 @@ public class ConstantsControllers {
 	public static final String PASSWORD = "j_password";
 	public static final String FILENAME = "filename";
 	public static final String JSPX_CONSTANTS = "constantsControllers";
+	public static final String CONNECTION = "Connection";
 
 	public static final String USERS = "users";
 	public static final String ISSUES_LIST = "issueList";
+	public static final String TYPES_LIST = "typesList";
+	public static final String PRIORITIES_LIST = "prioritiesList";
 
 	// For authentication.jspf & mail.jspx
 	private final String WELCOME_PAGE_TITLE = "Welcom page / Dashboard";
@@ -209,10 +212,15 @@ public class ConstantsControllers {
 		return WELCOME_MESSAGE_JSPX;
 	}
 
+	// Constants for Adding Issue.
+	public static final String SUMMARY = "summary";
+	public static final String DESCRIPTION = "description";
+
 	// errors
 	public static final String ERROR_NULL = "Sorry. Please enter \"login\" and \"password\".";
 	public static final String ERROR_EMPTY = "Field\'s empty. Please enter \"login\" and \"password\".";
 	public static final String ERROR_AUTHORIZATION = "Error of authorization. Check that the input data.";
+	public static final String ERROR_ACCESS_ISSUES_LIST = "List of issues not accessible.";
 	// urls
 	public static final String ISSUES_PAGE_URL = "/WelcomePageController";
 
@@ -229,7 +237,7 @@ public class ConstantsControllers {
 	}
 
 	// jsp
-	public static final String MAIN_JSPX = "/main.jspx";
-	public static final String ERROR_LOGIN_JSPX = "/errorLogin.jspx";
+	public static final String MAIN_JSPX = "/view/main.jspx";
+	public static final String ERROR_LOGIN_JSPX = "/view/errorLogin.jspx";
 
 }

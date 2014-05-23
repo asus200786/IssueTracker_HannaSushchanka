@@ -27,8 +27,7 @@ import by.epam.epamlab.model.interfaces.IIssueDAO;
 public class WelcomePageController extends AbstractController {
 	private static final long serialVersionUID = 201404262125L;
 	final Logger logger = LoggerFactory.getLogger(WelcomePageController.class);
-	
-	
+
 	private static final String EXCEPTION_WELCOME_PAGE_CONTROLLER = "Exception in WelcomePageController";
 
 	@Override
@@ -40,31 +39,26 @@ public class WelcomePageController extends AbstractController {
 		// .headerWithTitle(ConstantsControllers.WELCOME_PAGE_TITLE));
 		User user = (User) session.getAttribute(ConstantsControllers.USER);
 		// out.println(ServletUtilities.userMenuFragment(user));
-		IIssueDAO iIssueDAO = IssuesFactory.getClassFromFactory();
-		List<Issue> issueList;
 		try {
+			IIssueDAO iIssueDAO = IssuesFactory.getClassFromFactory();
+			List<Issue> issueList;
 			if (user == null) {
 				issueList = iIssueDAO
-						.getGuestIssues(Constants.DEFAULT_NUMBER_ISSUES);
+						.getLastAddedIssues(Constants.DEFAULT_NUMBER_ISSUES);
 			} else {
-
-				issueList = iIssueDAO.getUserIssues(user.getLogin(),
+				issueList = iIssueDAO.getUserIssues(user.getIdUser(),
 						Constants.DEFAULT_NUMBER_ISSUES);
-			}
 
+			}
 			// for JSP-implementation
 			request.setAttribute(ConstantsControllers.ISSUES_LIST, issueList);
 			jump(ConstantsControllers.MAIN_JSPX, request, response);
 		} catch (ExceptionDAO e) {
 			e.printStackTrace();
-			logger.info(EXCEPTION_WELCOME_PAGE_CONTROLLER, e);
+			logger.error(EXCEPTION_WELCOME_PAGE_CONTROLLER);
+			jump(ConstantsControllers.ERROR_LOGIN_JSPX,
+					EXCEPTION_WELCOME_PAGE_CONTROLLER, request, response);
 		}
-		// out.println(ServletUtilities.issuesListFragment(issueList, user));
-		// String message = (String) request
-		// .getAttribute(ConstantsControllers.MESSAGE);
-		// if (message != null) {
-		// out.print(message);
-		// }
-		// out.println(ServletUtilities.footer());
+
 	}
 }

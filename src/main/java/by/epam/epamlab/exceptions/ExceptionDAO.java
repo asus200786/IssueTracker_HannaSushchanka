@@ -16,4 +16,8 @@ public class ExceptionDAO extends Exception {
 		super(message);
 	}
 
+	public ExceptionDAO(Throwable cause) {
+		super(cause);
+	}
+
 }

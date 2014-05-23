@@ -1,7 +1,6 @@
 package by.epam.epamlab.session.controllers;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +25,6 @@ import by.epam.epamlab.model.interfaces.IUserDAO;
 public class LoginController extends AbstractController {
 	private static final long serialVersionUID = 201404252031L;
 	final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	private Map<String, User> users;
 
 	@Override
 	protected void performTask(HttpServletRequest request,
@@ -43,11 +41,7 @@ public class LoginController extends AbstractController {
 		}
 		try {
 			MD5 md5 = new MD5();
-			// To add "salt".
 			String passwordHash = md5.getHash(password);
-
-			// ! I think there need to handle security?
-			// request.login(login, password);
 
 			IUserDAO userDAO;
 			userDAO = UserFactory.getClassFromFactory();
@@ -64,7 +58,6 @@ public class LoginController extends AbstractController {
 			}
 		} catch (ExceptionDAO e) {
 			e.printStackTrace();
-			
 		}
 	}
 

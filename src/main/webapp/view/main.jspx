@@ -6,7 +6,7 @@
 	<html>
 <head>
 <title><c:out value="${constantsControllers.WELCOME_PAGE_TITLE}"/></title>
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="view/css/style.css" />
 </head>
 <body>
 	<div class="mainWrapper">
@@ -17,8 +17,8 @@
 			<c:if test="${empty requestScope.issueList}">
 				<c:redirect url="/WelcomePageController"></c:redirect>
 			</c:if>
-			<jsp:directive.include file="authentication.jspf" />
-			<jsp:directive.include file="issuesList.jspf" />
+			<jsp:directive.include file="/view/authentication.jspf" />
+			<jsp:directive.include file="/view/issuesList.jspf" />
 		</div>
 	</div>
 </body>

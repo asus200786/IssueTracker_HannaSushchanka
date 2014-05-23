@@ -50,7 +50,8 @@
 						<ul class="userActions">
 							<li><a href="#">${constantsControllers.EDIT_PROFILE}</a></li>
 							<li><a href="#">${constantsControllers.CHANGE_PASSWORD}</a></li>
-							<li><button>${constantsControllers.SUBMIT_ISSUE}</button></li>
+							<li><a href="/AddingElementsIssueController"><input type="button"
+									value=" ${constantsControllers.SUBMIT_ISSUE}" /></a></li>
 						</ul>
 						<ul>
 							<li><a href="${constantsControllers.LOGOUT_CONTROLLER_URL}"><c:out

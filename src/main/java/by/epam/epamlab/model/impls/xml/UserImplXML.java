@@ -1,6 +1,7 @@
 package by.epam.epamlab.model.impls.xml;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class UserImplXML implements IUserDAO {
 	private static UserImplXML instance;
 
 	private UserImplXML() throws ExceptionDAO {
-		 readingUserXML();
+		readingUserXML();
 	}
 
 	public synchronized static UserImplXML getImplXML() throws ExceptionDAO {
@@ -47,7 +48,7 @@ public class UserImplXML implements IUserDAO {
 			logger.info(READING_USERS_XML);
 		} catch (SAXException e) {
 			e.printStackTrace();
-			throw new ExceptionDAO("SAX Exception",e);
+			throw new ExceptionDAO("SAX Exception", e);
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new ExceptionDAO("IOException", e);
@@ -63,12 +64,34 @@ public class UserImplXML implements IUserDAO {
 		return null;
 	}
 
-	public User getObject(long idObject) throws ExceptionDAO {
+	public User getObjectById(long idObject) throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<User> getObjectsList() throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public User getUserById(long userId) throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public User getUserByEmailAddress(String emailAddress) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void addUser(User user) throws ExceptionDAO {
+		// TODO Auto-generated method stub
 
+	}
+
+	public List<User> getUserList() throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

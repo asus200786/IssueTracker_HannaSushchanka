@@ -17,6 +17,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.issues.Issue;
+import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.model.impls.xml.analyzer.sax.IssuesHandler;
 import by.epam.epamlab.model.interfaces.IIssueDAO;
 
@@ -83,9 +84,26 @@ public class IssuesImplXML implements IIssueDAO {
 		return null;
 	}
 
-	public Issue getObject(long idObject) throws ExceptionDAO {
+	public Issue getObjectById(long idObject) throws ExceptionDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public List<Issue> getObjectsList() throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Issue> getIssueListbyAssignee(User assignee)
+			throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addIssue(Issue issue) throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

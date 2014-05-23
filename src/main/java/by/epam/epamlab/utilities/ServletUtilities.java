@@ -3,8 +3,8 @@ package by.epam.epamlab.utilities;
 import java.util.List;
 
 import by.epam.epamlab.model.beans.issues.Issue;
+import by.epam.epamlab.model.beans.users.RolesUser;
 import by.epam.epamlab.model.beans.users.User;
-import by.epam.epamlab.model.beans.users.enums.RolesUser;
 
 public class ServletUtilities {
 
@@ -116,7 +116,7 @@ public class ServletUtilities {
 			stringBuilder.append("</thead>\n");
 			for (Issue issue : issuesList) {
 				stringBuilder.append("<tbody><tr>\n");
-				stringBuilder.append("<td>\n").append(issue.getIdIssue())
+				stringBuilder.append("<td>\n").append(issue.getId())
 						.append("</td>\n");
 				stringBuilder.append("<td>\n")
 						.append(issue.getPriorityValues()).append("</td>\n");

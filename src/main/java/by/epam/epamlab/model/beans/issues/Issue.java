@@ -3,49 +3,51 @@ package by.epam.epamlab.model.beans.issues;
 import java.io.Serializable;
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.List;
 
-import by.epam.epamlab.model.beans.issues.enums.Priority;
-import by.epam.epamlab.model.beans.issues.enums.Resolution;
-import by.epam.epamlab.model.beans.issues.enums.Status;
-import by.epam.epamlab.model.beans.issues.enums.Type;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import by.epam.epamlab.model.beans.AbstractObject;
+import by.epam.epamlab.model.beans.projects.BuildProject;
+import by.epam.epamlab.model.beans.projects.Project;
 import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.utilities.DateHelper;
 
-public class Issue implements Serializable {
-
+public class Issue extends AbstractObject implements Serializable {
+	Logger logger = LoggerFactory.getLogger(Issue.class);
 	private static final long serialVersionUID = 201404250059L;
 
-	private long idIssue;
-	private Priority priorityValues;
+	private Priority priority;
 	private Resolution resolution;
-	private Type typesIssues;
-	private Status issueStatus;
+	private Type type;
 	private String summary;
 	private String description;
 	private Date createDate;
 	private Date modifyDate;
-	private User assignee =new User();
-	private User createdBy = new User();
-	private User modifiedBy = new User();
-	private String project;
-	private String buildFound;
+	private User assignee;
+	private User createdBy;
+	private User modifiedBy;
+	private Project project;
+	private Status issueStatus;
+	private BuildProject build;
 
-	public Issue(long idIssue) {
+	private List<Attachment> attachments;
+	private List<CommentIssue> commentsIssue;
+
+	public Issue() {
 		super();
-		this.idIssue = idIssue;
 	}
 
-	public Issue(long idIssue, Date createDate, User createdBy,
-			Date modifyDate, User modifiedBy, String summary,
-			String description, Status issueStatus, Resolution resolution,
-			Type typesIssues, Priority priorityValues, String project,
-			String buildFound, User assignee) {
+	public Issue(long idIssue, Priority priority, Resolution resolution,
+			Type type, String summary, String description, Date createDate,
+			Date modifyDate, User assignee, User createdBy, User modifiedBy,
+			Project project, Status issueStatus, BuildProject build) {
 		super();
-		this.idIssue = idIssue;
-		this.priorityValues = priorityValues;
+		setId(idIssue);
+		this.priority = priority;
 		this.resolution = resolution;
-		this.typesIssues = typesIssues;
-		this.issueStatus = issueStatus;
+		this.type = type;
 		this.summary = summary;
 		this.description = description;
 		this.createDate = createDate;
@@ -54,27 +56,16 @@ public class Issue implements Serializable {
 		this.createdBy = createdBy;
 		this.modifiedBy = modifiedBy;
 		this.project = project;
-		this.buildFound = buildFound;
-	}
-
-	public long getIdIssue() {
-		return idIssue;
-	}
-
-	public void setIdIssue(long idIssue) {
-		this.idIssue = idIssue;
+		this.issueStatus = issueStatus;
+		this.build = build;
 	}
 
 	public Priority getPriorityValues() {
-		return priorityValues;
+		return priority;
 	}
 
 	public void setPriorityValues(Priority priorityValues) {
-		this.priorityValues = priorityValues;
-	}
-
-	public void setPriorityValues(String priorityValues) {
-		this.priorityValues = Priority.valueOf(priorityValues);
+		this.priority = priorityValues;
 	}
 
 	public User getAssignee() {
@@ -86,16 +77,17 @@ public class Issue implements Serializable {
 	}
 
 	public Type getTypesIssues() {
-		return typesIssues;
+		return type;
 	}
 
 	public void setTypesIssues(Type typesIssues) {
-		this.typesIssues = typesIssues;
+		this.type = typesIssues;
 	}
 
-	public void setTypesIssues(String typesIssues) {
-		this.typesIssues = Type.valueOf(typesIssues);
-	}
+	//
+	// public void setTypesIssues(String typesIssues) {
+	// this.typesIssues = Type.valueOf(typesIssues);
+	// }
 
 	public Status getIssueStatus() {
 		return issueStatus;
@@ -103,10 +95,6 @@ public class Issue implements Serializable {
 
 	public void setIssueStatus(Status issueStatus) {
 		this.issueStatus = issueStatus;
-	}
-
-	public void setIssueStatus(String issueStatus) {
-		this.issueStatus = Status.valueOf(issueStatus.trim());
 	}
 
 	public String getSummary() {
@@ -125,9 +113,10 @@ public class Issue implements Serializable {
 		this.resolution = resolution;
 	}
 
-	public void setResolution(String resolution) {
-		this.resolution = Resolution.valueOf(resolution);
-	}
+	//
+	// public void setResolution(String resolution) {
+	// this.resolution = Resolution.valueOf(resolution);
+	// }
 
 	public String getDescription() {
 		return description;
@@ -177,42 +166,50 @@ public class Issue implements Serializable {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public String getProject() {
+	public Project getProject() {
 		return project;
 	}
 
-	public void setProject(String project) {
+	public void setProject(Project project) {
 		this.project = project;
 	}
 
-	public String getBuildFound() {
-		return buildFound;
+	public BuildProject getBuildFound() {
+		return build;
 	}
 
-	public void setBuildFound(String buildFound) {
-		this.buildFound = buildFound;
+	public void setBuildFound(BuildProject build) {
+		this.build = build;
+	}
+
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
+	}
+
+	public List<CommentIssue> getCommentsIssue() {
+		return commentsIssue;
+	}
+
+	public void setCommentsIssue(List<CommentIssue> commentsIssue) {
+		this.commentsIssue = commentsIssue;
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (idIssue ^ (idIssue >>> 32));
-		return result;
+	public String toString() {
+		return "Issue [priority=" + priority + ", resolution=" + resolution
+				+ ", type=" + type + ", summary=" + summary + ", description="
+				+ description + ", createDate=" + createDate + ", modifyDate="
+				+ modifyDate + ", assignee=" + assignee + ", createdBy="
+				+ createdBy + ", modifiedBy=" + modifiedBy + ", project="
+				+ project + ", issueStatus=" + issueStatus + ", build=" + build
+				+ ", attachments=" + attachments + ", commentsIssue="
+				+ commentsIssue + "]";
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Issue other = (Issue) obj;
-		if (idIssue != other.idIssue)
-			return false;
-		return true;
-	}
+	
+	
 
 }

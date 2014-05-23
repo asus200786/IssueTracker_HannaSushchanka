@@ -1,14 +1,14 @@
 package by.epam.epamlab.model.beans.users;
 
-import java.io.Serializable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.users.enums.RolesUser;
+import by.epam.epamlab.model.beans.AbstractObject;
 
-public class User implements Serializable {
-
+public class User extends AbstractObject {
+	Logger logger = LoggerFactory.getLogger(User.class);
 	private static final long serialVersionUID = 201404240248L;
 
-	private int idUser;
 	private String login;
 	private String firstName;
 	private String lastName;
@@ -33,14 +33,6 @@ public class User implements Serializable {
 		this.lastName = lastName;
 		this.emailAddress = emailAddress;
 
-	}
-
-	public int getIdUser() {
-		return idUser;
-	}
-
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
 	}
 
 	public String getLogin() {
@@ -124,9 +116,9 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [idUser=" + idUser + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", emailAddress=" + emailAddress
-				+ ", role=" + role + ", password=" + password + "]";
+		return "User [Id="+super.getId()+"firstName=" + firstName + ", lastName=" + lastName
+				+ ", emailAddress=" + emailAddress + ", role=" + role
+				+ ", password=" + password + "]";
 	}
 
 }
