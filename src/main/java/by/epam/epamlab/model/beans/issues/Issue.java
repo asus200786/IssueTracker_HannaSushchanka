@@ -60,6 +60,10 @@ public class Issue extends AbstractObject implements Serializable {
 		this.build = build;
 	}
 
+	public Issue(long idIssue) {
+		super.setId(idIssue);
+	}
+
 	public Priority getPriorityValues() {
 		return priority;
 	}
@@ -209,7 +213,5 @@ public class Issue extends AbstractObject implements Serializable {
 				+ ", attachments=" + attachments + ", commentsIssue="
 				+ commentsIssue + "]";
 	}
-	
-	
 
 }

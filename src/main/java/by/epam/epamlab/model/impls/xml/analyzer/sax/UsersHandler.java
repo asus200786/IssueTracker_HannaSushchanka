@@ -50,11 +50,11 @@ public class UsersHandler extends DefaultHandler {
 
 		if (UserEnum.ADDRESS.equals(thisElement)) {
 			User currUser = new User(login,
-					attributes.getValue(PASSWORD_ATTR_INDEX),
-					attributes.getValue(ROLE_ATTR_INDEX),
 					attributes.getValue(FIRSTNAME_ATTR_INDEX),
 					attributes.getValue(LASTNAME_ATTR_INDEX),
-					attributes.getValue(EMAILADDRESS_ATTR_INDEX));
+					attributes.getValue(EMAILADDRESS_ATTR_INDEX),
+					attributes.getValue(PASSWORD_ATTR_INDEX),
+					attributes.getValue(ROLE_ATTR_INDEX));
 			users.put(login, currUser);
 		}
 	}

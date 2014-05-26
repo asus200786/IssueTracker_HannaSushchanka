@@ -14,7 +14,7 @@ public class Type extends AbstractObject {
 		super();
 	}
 
-	public Type(String type) {
+	public Type(Short igType, String type) {
 		super();
 		this.type = type;
 	}

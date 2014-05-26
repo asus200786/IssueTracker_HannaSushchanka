@@ -20,15 +20,26 @@ public class User extends AbstractObject {
 		super();
 	}
 
-	public User(String login, String password, String role) {
+	public User(long idUser, String login, String password, RolesUser role) {
 		this.login = login;
 		this.password = password;
-		setRole(role);
+		this.role = role;
 	}
 
-	public User(String login, String password, String role, String firstName,
-			String lastName, String emailAddress) {
-		this(login, password, role);
+	
+	public User(String login, String firstName, String lastName,
+			String emailAddress, String role, String password) {
+		this.login = login;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailAddress = emailAddress;
+		setRole(role);
+		this.password = password;
+	}
+
+	public User(long idUser, String login, String password, RolesUser role,
+			String firstName, String lastName, String emailAddress) {
+		this(idUser, login, password, role);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailAddress = emailAddress;
@@ -40,7 +51,7 @@ public class User extends AbstractObject {
 	}
 
 	public void setLogin(String login) {
-		this.login = login;
+		this.login = password;
 	}
 
 	public String getFirstName() {
@@ -71,15 +82,14 @@ public class User extends AbstractObject {
 		return role;
 	}
 
-	private void setRole(String role) {
-		this.role = RolesUser.valueOf(role);
-
-	}
-
 	public void setRole(RolesUser role) {
 		this.role = role;
 	}
 
+	public void setRole(String role) {
+		this.role = RolesUser.valueOf(role);
+	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -116,9 +126,9 @@ public class User extends AbstractObject {
 
 	@Override
 	public String toString() {
-		return "User [Id="+super.getId()+"firstName=" + firstName + ", lastName=" + lastName
-				+ ", emailAddress=" + emailAddress + ", role=" + role
-				+ ", password=" + password + "]";
+		return "User [Id=" + super.getId() + "firstName=" + firstName
+				+ ", lastName=" + lastName + ", emailAddress=" + emailAddress
+				+ ", role=" + role + ", password=" + password + "]";
 	}
 
 }

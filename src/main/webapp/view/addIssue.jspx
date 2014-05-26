@@ -24,40 +24,41 @@
 		<div class="statusIssue">
 			<c:out value="Status: " />
 			<select name="statusIssue" required="required">
-				<c:forEach var="status" items="${requestScope.statuses}">
-					<option value="${status.id}">${status.name}</option>
+				<c:forEach var="status" items="${requestScope.statusesMap}">
+					<option value="${status.idStatus}">${status.status}</option>
 				</c:forEach>
 			</select>
 		</div>
 		<div class="typeIssue">
 			<c:out value="Type: " />
 			<select name="typeIssue" required="required">
-				<c:forEach var="type" items="${requestScope.types}">
-					<option value="${type.id}">${type.name}</option>
+				<c:forEach var="type" items="${requestScope.typesMap}">
+					<option value="${type.idType}">${type.type}</option>
 				</c:forEach>
 			</select>
 		</div>
 		<div class="priorityIssue">
 			<c:out value="Priority: " />
 			<select name="priorityIssue" required="required">
-				<c:forEach var="priority" items="${requestScope.priorities}">
-					<option value="${priority.id}">${priority.name}</option>
+				<c:forEach var="priority" items="${requestScope.prioritiesMap}">
+					<option value="${priority.idPriority}">${priority.priority}</option>
 				</c:forEach>
 			</select>
 		</div>
 		<div class="projectIssue">
 			<c:out value="Project: " />
 			<select name="projectIssue" required="required">
-				<c:forEach var="project" items="${requestScope.projects}">
-					<option value="${project.id}">${project.name}</option>
+				<c:forEach var="project" items="${requestScope.projectsList}">
+					<option value="${project.idProject}">${project.nameProject}</option>
 				</c:forEach>
 			</select>
 		</div>
 		<div class="buildFoundIssue">
 			<c:out value="Build Found: " />
 			<select name="buildFoundIssue" required="required">
-				<c:forEach var="buildFound" items="${requestScope.buildsFound}">
-					<option value="${buildFound.id}">${buildFound.name}</option>
+				<c:forEach var="buildFound"
+					items="${requestScope.buildsProjectList}">
+					<option value="${buildFound.idProject}">${buildFound.buildProject}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -65,7 +66,7 @@
 			<select name="assigneeIssue">
 				<c:out value="Assidnee: " />
 				<c:forEach var="assignee" items="${requestScope.assignees}">
-					<option value="${assignee.id}">${assignee.name}</option>
+					<option value="${assignee.idUser}">${assignee.firstName}&amp;nbsp;${assignee.lastName}</option>
 				</c:forEach>
 			</select>
 		</div>

@@ -13,9 +13,14 @@ public class ConstantsControllers {
 	public static final String CONNECTION = "Connection";
 
 	public static final String USERS = "users";
-	public static final String ISSUES_LIST = "issueList";
-	public static final String TYPES_LIST = "typesList";
-	public static final String PRIORITIES_LIST = "prioritiesList";
+	public static final String ISSUES_LIST = "issuesList";
+	public static final String ASSIGNEES_LIST = "assigneesList";
+	public static final String PROJECTS_LIST = "projectsList";
+	public static final String BUILDS_PROJECT_LIST = "buildsProjectList";
+	public static final String TYPES_MAP = "typesMap";
+	public static final String STATUSES_MAP = "statusesMap";
+	public static final String RESOLUTIONS_MAP = "resolutionsMap";
+	public static final String PRIORITIES_MAP = "prioritiesMap";
 
 	// For authentication.jspf & mail.jspx
 	private final String WELCOME_PAGE_TITLE = "Welcom page / Dashboard";
@@ -239,5 +244,6 @@ public class ConstantsControllers {
 	// jsp
 	public static final String MAIN_JSPX = "/view/main.jspx";
 	public static final String ERROR_LOGIN_JSPX = "/view/errorLogin.jspx";
+	public static final String ADDING_ISSUE_JSPX = "/view/addIssue.jspx";
 
 }

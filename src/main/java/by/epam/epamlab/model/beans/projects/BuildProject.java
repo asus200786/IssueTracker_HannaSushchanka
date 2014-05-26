@@ -18,7 +18,7 @@ public class BuildProject extends AbstractObject implements Serializable {
 		super();
 	}
 
-	public BuildProject(String buildProject, Project project) {
+	public BuildProject(short idProject, String buildProject, Project project) {
 		super();
 		this.buildProject = buildProject;
 		this.project = project;

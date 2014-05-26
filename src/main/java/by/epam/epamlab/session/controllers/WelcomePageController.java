@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.constants.ConstantsControllers;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.issues.Issue;
@@ -43,11 +42,9 @@ public class WelcomePageController extends AbstractController {
 			IIssueDAO iIssueDAO = IssuesFactory.getClassFromFactory();
 			List<Issue> issueList;
 			if (user == null) {
-				issueList = iIssueDAO
-						.getLastAddedIssues(Constants.DEFAULT_NUMBER_ISSUES);
+				issueList = iIssueDAO.getObjectsList();
 			} else {
-				issueList = iIssueDAO.getUserIssues(user.getIdUser(),
-						Constants.DEFAULT_NUMBER_ISSUES);
+				issueList = iIssueDAO.getIssueListbyAssignee(user);
 
 			}
 			// for JSP-implementation

@@ -66,7 +66,7 @@ public class IssuesHandler extends DefaultHandler {
 				e.printStackTrace();
 			}
 			break;
-		case  CREATEDBY:
+		case CREATEDBY:
 			currentIssue.getCreatedBy();
 			break;
 		case FIRSTNAMECREATOR:
@@ -104,22 +104,22 @@ public class IssuesHandler extends DefaultHandler {
 			currentIssue.setDescription(content);
 			break;
 		case STATUS:
-			currentIssue.setIssueStatus(content);
+			currentIssue.getIssueStatus().setStatus(content);
 			break;
 		case RESOLUTION:
-			currentIssue.setResolution(content);
+			currentIssue.getResolution().setResolution(content);
 			break;
 		case TYPE:
-			currentIssue.setTypesIssues(content);
+			currentIssue.getTypesIssues().setType(content);
 			break;
 		case PRIORITY:
-			currentIssue.setPriorityValues(content);
+			currentIssue.getPriorityValues().setPriority(content);
 			break;
 		case PROJECT:
-			currentIssue.setProject(content);
+			currentIssue.getProject().setNameProject(content);
 			break;
 		case BUILDFOUND:
-			currentIssue.setBuildFound(content);
+			currentIssue.getBuildFound().setBuildProject(content);
 			break;
 		case ASSIGNEE:
 			currentIssue.getAssignee();

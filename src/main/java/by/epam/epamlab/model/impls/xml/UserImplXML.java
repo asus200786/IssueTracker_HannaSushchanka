@@ -79,10 +79,6 @@ public class UserImplXML implements IUserDAO {
 		return null;
 	}
 
-	public User getUserByEmailAddress(String emailAddress) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public void addUser(User user) throws ExceptionDAO {
 		// TODO Auto-generated method stub
@@ -90,6 +86,11 @@ public class UserImplXML implements IUserDAO {
 	}
 
 	public List<User> getUserList() throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public User getUserByLogin(String login) throws ExceptionDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}

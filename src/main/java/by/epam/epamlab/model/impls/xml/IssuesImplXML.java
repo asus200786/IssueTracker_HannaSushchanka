@@ -105,5 +105,10 @@ public class IssuesImplXML implements IIssueDAO {
 		
 	}
 
+	public void updateIssue(Issue issue) throws ExceptionDAO {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

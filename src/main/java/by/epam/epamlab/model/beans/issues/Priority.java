@@ -13,7 +13,7 @@ public class Priority extends AbstractObject {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Priority(String priority) {
+	public Priority(Short idPriority, String priority) {
 		super();
 		this.priority = priority;
 	}

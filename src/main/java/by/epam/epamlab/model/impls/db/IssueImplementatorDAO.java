@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,12 +61,11 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					.getAttribute(ConstantsControllers.CONNECTION);
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_ISSUE_BY_ID);
-
 			preparedStatement.setLong(SQLConstants.ID_ISSUE_PARAMETER_INDEX,
 					idIssue);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				issue = readingIssuesDB(preparedStatement);
+				issue = readingIssuesDB(preparedStatement, resultSet);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,7 +73,6 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
 		}
-
 		return issue;
 	}
 
@@ -90,7 +89,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					.prepareStatement(SQLConstants.SELECT_N_LAST_ADDED_ISSUES);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				issue = readingIssuesDB(preparedStatement);
+				issue = readingIssuesDB(preparedStatement, resultSet);
 				issues.add(issue);
 			}
 		} catch (SQLException e) {
@@ -102,7 +101,8 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		return issues;
 	}
 
-	public List<Issue> getIssueListbyAssignee(User assignee) throws ExceptionDAO {
+	public List<Issue> getIssueListbyAssignee(User assignee)
+			throws ExceptionDAO {
 		Issue issue = null;
 		List<Issue> issues = new ArrayList<Issue>();
 		connection = null;
@@ -117,7 +117,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					assignee.getId());
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				issue = readingIssuesDB(preparedStatement);
+				issue = readingIssuesDB(preparedStatement, resultSet);
 				issues.add(issue);
 			}
 		} catch (SQLException e) {
@@ -130,7 +130,115 @@ public class IssueImplementatorDAO implements IIssueDAO {
 	}
 
 	public void addIssue(Issue issue) throws ExceptionDAO {
+		connection = null;
+		preparedStatement = null;
+		try {
+			connection = (Connection) servletContext
+					.getAttribute(ConstantsControllers.CONNECTION);
+			preparedStatement = connection
+					.prepareStatement(SQLConstants.ADDING_ISSUE);
+			preparedStatement.setString(
+					SQLConstants.ADDING_ISSUE_SUMMARY_PARAMETER_INDEX,
+					issue.getSummary());
+			preparedStatement.setString(
+					SQLConstants.ADDING_ISSUE_DESCRIPTION_PARAMETER_INDEX,
+					issue.getDescription());
+			preparedStatement.setLong(
+					SQLConstants.ADDING_ISSUE_STATUS_PARAMETER_INDEX, issue
+							.getIssueStatus().getId());
+			preparedStatement.setLong(
+					SQLConstants.ADDING_ISSUE_TYPE_PARAMETER_INDEX, issue
+							.getTypesIssues().getId());
+			preparedStatement.setLong(
+					SQLConstants.ADDING_ISSUE_PRIORITY_PARAMETER_INDEX, issue
+							.getPriorityValues().getId());
+			preparedStatement.setLong(
+					SQLConstants.ADDING_ISSUE_PROJECT_PARAMETER_INDEX, issue
+							.getProject().getId());
+			preparedStatement.setLong(
+					SQLConstants.ADDING_ISSUE_BUILD_PROJECT_PARAMETER_INDEX,
+					issue.getBuildFound().getId());
+			if (issue.getAssignee() != null) {
+				preparedStatement.setLong(
+						SQLConstants.ADDING_ISSUE_ASSIGNEE_PARAMETER_INDEX,
+						issue.getAssignee().getId());
+			} else {
+				preparedStatement.setNull(
+						SQLConstants.ADDING_ISSUE_ASSIGNEE_PARAMETER_INDEX,
+						java.sql.Types.INTEGER);
+			}
+			preparedStatement.setLong(
+					SQLConstants.ADDING_ISSUE_CREATE_BY_USER_PARAMETER_INDEX,
+					issue.getCreatedBy().getId());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			throw new ExceptionDAO(
+					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		}
+	}
 
+	public void updateIssue(Issue issue) throws ExceptionDAO {
+		connection = null;
+		preparedStatement = null;
+		resultSet = null;
+		try {
+			connection = (Connection) servletContext
+					.getAttribute(ConstantsControllers.CONNECTION);
+			preparedStatement = connection
+					.prepareStatement(SQLConstants.UPDATE_ISSUE);
+			preparedStatement.setString(
+					SQLConstants.SUMMARY_UPDATE_ISSUE_PARAMETER_INDEX,
+					issue.getSummary());
+			preparedStatement.setString(
+					SQLConstants.DESCRIPTION_UPDATE_ISSUE_PARAMETER_INDEX,
+					issue.getDescription());
+			preparedStatement.setLong(
+					SQLConstants.STATUS_UPDATE_ISSUE_PARAMETER_INDEX, issue
+							.getIssueStatus().getId());
+			if (issue.getResolution() != null) {
+				preparedStatement.setLong(
+						SQLConstants.RESOLUTION_UPDATE_ISSUE_PARAMETER_INDEX,
+						issue.getResolution().getId());
+			} else {
+				preparedStatement.setNull(
+						SQLConstants.RESOLUTION_UPDATE_ISSUE_PARAMETER_INDEX,
+						java.sql.Types.BIGINT);
+			}
+			preparedStatement.setLong(
+					SQLConstants.TYPE_UPDATE_ISSUE_PARAMETER_INDEX, issue
+							.getTypesIssues().getId());
+			preparedStatement.setLong(
+					SQLConstants.PRIORITY_UPDATE_ISSUE_PARAMETER_INDEX, issue
+							.getPriorityValues().getId());
+			preparedStatement.setLong(
+					SQLConstants.PROJECT_UPDATE_ISSUE_PARAMETER_INDEX, issue
+							.getProject().getId());
+			preparedStatement.setLong(
+					SQLConstants.BUILD_FOUND_UPDATE_ISSUE_PARAMETER_INDEX,
+					issue.getBuildFound().getId());
+			if (issue.getAssignee() != null) {
+				preparedStatement.setLong(
+						SQLConstants.ASSIGNEE_UPDATE_ISSUE_PARAMETER_INDEX,
+						issue.getAssignee().getId());
+			} else {
+				preparedStatement.setLong(
+						SQLConstants.ASSIGNEE_UPDATE_ISSUE_PARAMETER_INDEX,
+						Types.INTEGER);
+			}
+			preparedStatement.setLong(
+					SQLConstants.MODIFIED_BY_UPDATE_ISSUE_PARAMETER_INDEX,
+					issue.getModifiedBy().getId());
+			preparedStatement.setLong(
+					SQLConstants.IDISSUE_UPDATE_PARAMETER_INDEX, issue.getId());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			throw new ExceptionDAO(
+					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		}
 	}
 
 	//
@@ -169,12 +277,10 @@ public class IssueImplementatorDAO implements IIssueDAO {
 	// }
 	// }
 
-	private Issue readingIssuesDB(PreparedStatement preparedStatement)
-			throws ExceptionDAO {
+	private Issue readingIssuesDB(PreparedStatement preparedStatement,
+			ResultSet resultSet) throws ExceptionDAO {
 		Issue issue = null;
-		ResultSet resultSet = null;
 		try {
-			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				long idIssue = resultSet
 						.getLong(SQLConstants.ID_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
@@ -227,11 +333,11 @@ public class IssueImplementatorDAO implements IIssueDAO {
 						assigneeUser, createdByUser, modifiedByUser, project,
 						status, buildProject);
 			}
-			return issue;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(e);
 		}
+		return issue;
 	}
 }
