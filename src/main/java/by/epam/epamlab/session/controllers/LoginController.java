@@ -15,7 +15,7 @@ import by.epam.epamlab.constants.ConstantsControllers;
 import by.epam.epamlab.cryptography.MD5;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.users.User;
-import by.epam.epamlab.model.factories.UserFactory;
+import by.epam.epamlab.model.factories.DAOFactory;
 import by.epam.epamlab.model.interfaces.IUserDAO;
 
 /**
@@ -44,7 +44,7 @@ public class LoginController extends AbstractController {
 			String passwordHash = md5.getHash(password);
 
 			IUserDAO userDAO;
-			userDAO = UserFactory.getClassFromFactory();
+			userDAO = DAOFactory.getUserDAOFromFactory();
 			User user = userDAO.getUser(login, passwordHash);
 			if (user != null) {
 				request.getSession().setAttribute(ConstantsControllers.USER,

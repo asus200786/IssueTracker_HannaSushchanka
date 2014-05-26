@@ -10,7 +10,7 @@ public class Type extends AbstractObject {
 	Logger logger = LoggerFactory.getLogger(Type.class);
 	private String type;
 
-	public Type() {
+	public Type(Short idType) {
 		super();
 	}
 

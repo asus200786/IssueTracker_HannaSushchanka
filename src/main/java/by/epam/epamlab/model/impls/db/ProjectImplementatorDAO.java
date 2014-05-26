@@ -102,16 +102,12 @@ public class ProjectImplementatorDAO implements IProjectDAO {
 						.getString(SQLConstants.PROJECT_NAME_PARAMETER_INDEX);
 				String descriptionProject = resultSet
 						.getString(SQLConstants.DESCRIPTION_PROJECT_PARAMETER_INDEX);
-				long idBuildProject;
-
-				idBuildProject = resultSet
-						.getLong(SQLConstants.BUILD_PROJECT_PARAMETER_INDEX);
-				BuildProject buildProject = new BuildProject();
-				buildProject.setId(idBuildProject);
+				short idBuildProject = resultSet
+						.getShort(SQLConstants.BUILD_PROJECT_PARAMETER_INDEX);
+				BuildProject buildProject = new BuildProject(idBuildProject);
 				long idManagerProject = resultSet
 						.getLong(SQLConstants.MANAGER_PROJECT_PARAMETER_INDEX);
-				User managerProject = new User();
-				managerProject.setId(idManagerProject);
+				User managerProject = new User(idManagerProject);
 				project = new Project(idProject, projectName,
 						descriptionProject, managerProject, buildProject);
 			}
@@ -120,9 +116,7 @@ public class ProjectImplementatorDAO implements IProjectDAO {
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
-
 		}
 		return project;
-
 	}
 }

@@ -10,11 +10,11 @@ public class Status extends AbstractObject {
 	Logger logger = LoggerFactory.getLogger(Status.class);
 	private String status;
 
-	public Status() {
+	public Status(short idStatus) {
 		super();
 	}
 
-	public Status(long idStatus, String status) {
+	public Status(short idStatus, String status) {
 		super();
 		setId(idStatus);
 		this.status = status;

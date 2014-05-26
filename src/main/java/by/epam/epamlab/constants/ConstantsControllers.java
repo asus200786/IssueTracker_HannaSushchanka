@@ -14,6 +14,8 @@ public class ConstantsControllers {
 
 	public static final String USERS = "users";
 	public static final String ISSUES_LIST = "issuesList";
+	public static final String ID_ISSUE = "idIssue";
+	public static final String ISSUE = "issue";
 	public static final String ASSIGNEES_LIST = "assigneesList";
 	public static final String PROJECTS_LIST = "projectsList";
 	public static final String BUILDS_PROJECT_LIST = "buildsProjectList";
@@ -21,6 +23,12 @@ public class ConstantsControllers {
 	public static final String STATUSES_MAP = "statusesMap";
 	public static final String RESOLUTIONS_MAP = "resolutionsMap";
 	public static final String PRIORITIES_MAP = "prioritiesMap";
+	public static final String STATUS_ISSUE = "statusIssue";
+	public static final String TYPE_ISSUE = "typeIssue";
+	public static final String PRIORITY_ISSUE = "priorityIssue";
+	public static final String PROJECT = "projectIssue";
+	public static final String BUILD_PROJECT = "buildFound";
+	public static final String ASSIGNEE = "assigneeIssue";
 
 	// For authentication.jspf & mail.jspx
 	private final String WELCOME_PAGE_TITLE = "Welcom page / Dashboard";
@@ -226,6 +234,7 @@ public class ConstantsControllers {
 	public static final String ERROR_EMPTY = "Field\'s empty. Please enter \"login\" and \"password\".";
 	public static final String ERROR_AUTHORIZATION = "Error of authorization. Check that the input data.";
 	public static final String ERROR_ACCESS_ISSUES_LIST = "List of issues not accessible.";
+	public static final String NULL_REQUIRED_FIELDS = "Please. Enter data in the required fields.";
 	// urls
 	public static final String ISSUES_PAGE_URL = "/WelcomePageController";
 
@@ -245,5 +254,6 @@ public class ConstantsControllers {
 	public static final String MAIN_JSPX = "/view/main.jspx";
 	public static final String ERROR_LOGIN_JSPX = "/view/errorLogin.jspx";
 	public static final String ADDING_ISSUE_JSPX = "/view/addIssue.jspx";
+	public static final String EDIT_ISSUE_JSP = "/view/editIssue.jspx";
 
 }

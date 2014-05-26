@@ -26,7 +26,9 @@
 					<table class="tableDataIssues">
 						<thead>
 							<tr>
-								<th><c:out value="${constantsControllers.ID_TABLE_HEADER }" /></th>
+								<th><a
+									href='<c:url value = "/EditElementsIssueController"/>'> <c:out
+											value="${constantsControllers.ID_TABLE_HEADER }" /></a></th>
 								<th><c:out
 										value="${constantsControllers.PRIORITY_TABLE_HEADER }" /></th>
 								<th><c:out

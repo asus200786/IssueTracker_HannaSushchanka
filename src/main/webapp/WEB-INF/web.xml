@@ -22,7 +22,6 @@
     <param-name>db.password</param-name>
     <param-value></param-value>
   </context-param>
- 
   <security-constraint>
     <web-resource-collection>
       <web-resource-name></web-resource-name>

@@ -16,7 +16,7 @@ public class User extends AbstractObject {
 	private RolesUser role;
 	private String password;
 
-	public User() {
+	public User(long idUser) {
 		super();
 	}
 

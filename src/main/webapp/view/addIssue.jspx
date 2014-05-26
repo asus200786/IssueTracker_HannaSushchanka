@@ -25,7 +25,7 @@
 			<c:out value="Status: " />
 			<select name="statusIssue" required="required">
 				<c:forEach var="status" items="${requestScope.statusesMap}">
-					<option value="${status.idStatus}">${status.status}</option>
+					<option value="${status.key}">${status.value}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -33,7 +33,7 @@
 			<c:out value="Type: " />
 			<select name="typeIssue" required="required">
 				<c:forEach var="type" items="${requestScope.typesMap}">
-					<option value="${type.idType}">${type.type}</option>
+					<option value="${type.key}">${type.value}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -41,7 +41,7 @@
 			<c:out value="Priority: " />
 			<select name="priorityIssue" required="required">
 				<c:forEach var="priority" items="${requestScope.prioritiesMap}">
-					<option value="${priority.idPriority}">${priority.priority}</option>
+					<option value="${priority.key}">${priority.value}</option>
 				</c:forEach>
 			</select>
 		</div>

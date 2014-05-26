@@ -9,8 +9,18 @@
 </head>
 <body>
 	<jsp:directive.include file="/view/authentication.jspf" />
-
-
+	<div class = "rowTable">
+		<c:if test="${not empty requestScope.issue}">
+			<form action="/EditIssueController" method="post">
+				<div>
+				
+				</div>
+				<div>
+				<input type="submit" value="Save Changes"/>
+				</div>
+			</form>
+		</c:if>
+	</div>
 </body>
 	</html>
 </jsp:root>

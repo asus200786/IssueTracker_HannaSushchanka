@@ -39,6 +39,23 @@ public class Issue extends AbstractObject implements Serializable {
 		super();
 	}
 
+	public Issue(Priority priority, Type type,
+			String summary, String description, User assignee, User createdBy,
+			Project project, Status issueStatus, BuildProject build) {
+		super();
+		this.priority = priority;
+		this.type = type;
+		this.summary = summary;
+		this.description = description;
+		this.assignee = assignee;
+		this.createdBy = createdBy;
+		this.project = project;
+		this.issueStatus = issueStatus;
+		this.build = build;
+	}
+
+
+
 	public Issue(long idIssue, Priority priority, Resolution resolution,
 			Type type, String summary, String description, Date createDate,
 			Date modifyDate, User assignee, User createdBy, User modifiedBy,

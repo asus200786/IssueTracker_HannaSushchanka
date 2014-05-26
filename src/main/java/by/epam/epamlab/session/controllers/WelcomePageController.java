@@ -16,7 +16,7 @@ import by.epam.epamlab.constants.ConstantsControllers;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.issues.Issue;
 import by.epam.epamlab.model.beans.users.User;
-import by.epam.epamlab.model.factories.IssuesFactory;
+import by.epam.epamlab.model.factories.DAOFactory;
 import by.epam.epamlab.model.interfaces.IIssueDAO;
 
 /**
@@ -39,7 +39,7 @@ public class WelcomePageController extends AbstractController {
 		User user = (User) session.getAttribute(ConstantsControllers.USER);
 		// out.println(ServletUtilities.userMenuFragment(user));
 		try {
-			IIssueDAO iIssueDAO = IssuesFactory.getClassFromFactory();
+			IIssueDAO iIssueDAO = DAOFactory.getIssueDAOFromFactory();
 			List<Issue> issueList;
 			if (user == null) {
 				issueList = iIssueDAO.getObjectsList();
