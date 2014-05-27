@@ -10,7 +10,7 @@ public class Resolution extends AbstractObject {
 	Logger logger = LoggerFactory.getLogger(Resolution.class);
 	private String resolution;
 
-	public Resolution() {
+	public Resolution(short idResolution) {
 		super();
 	}
 

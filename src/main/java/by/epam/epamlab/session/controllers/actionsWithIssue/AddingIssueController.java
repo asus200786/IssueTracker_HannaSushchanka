@@ -36,7 +36,7 @@ public class AddingIssueController extends AbstractController {
 	protected void performTask(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String summary = request.getParameter(ConstantsControllers.SUMMARY);
-		String descriprion = request
+		String description = request
 				.getParameter(ConstantsControllers.DESCRIPTION);
 		String status = request.getParameter(ConstantsControllers.STATUS_ISSUE);
 		String type = request.getParameter(ConstantsControllers.TYPE_ISSUE);
@@ -48,8 +48,8 @@ public class AddingIssueController extends AbstractController {
 		String assignee = request.getParameter(ConstantsControllers.ASSIGNEE);
 
 		if (summary == null || summary.equals(Constants.EMPTY_STRING)
-				|| descriprion == null
-				|| descriprion.equals(Constants.EMPTY_STRING) || status == null
+				|| description == null
+				|| description.equals(Constants.EMPTY_STRING) || status == null
 				|| type == null || priority == null || project == null
 				|| buildFound == null) {
 			jump(ConstantsControllers.ADDING_ISSUE_JSPX,
@@ -78,7 +78,7 @@ public class AddingIssueController extends AbstractController {
 				}
 
 				Issue issue = new Issue(new Priority(idPriority), new Type(idType),
-						summary, descriprion, new User(idAssignee), new User(
+						summary, description, new User(idAssignee), new User(
 								idCreatedByUser), new Project(idProject),
 						new Status(idStatus), new BuildProject(idBuildProject));
 				

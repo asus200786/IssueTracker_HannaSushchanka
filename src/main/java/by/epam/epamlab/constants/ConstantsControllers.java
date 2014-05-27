@@ -21,6 +21,7 @@ public class ConstantsControllers {
 	public static final String BUILDS_PROJECT_LIST = "buildsProjectList";
 	public static final String TYPES_MAP = "typesMap";
 	public static final String STATUSES_MAP = "statusesMap";
+	public static final String RESOLUTION_ISSUE = "resolutionIssue";
 	public static final String RESOLUTIONS_MAP = "resolutionsMap";
 	public static final String PRIORITIES_MAP = "prioritiesMap";
 	public static final String STATUS_ISSUE = "statusIssue";

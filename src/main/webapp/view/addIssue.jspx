@@ -25,7 +25,7 @@
 			<c:out value="Status: " />
 			<select name="statusIssue" required="required">
 				<c:forEach var="status" items="${requestScope.statusesMap}">
-					<option value="${status.key}">${status.value}</option>
+					<option value="${status.value.id}">${status.value.status}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -33,7 +33,7 @@
 			<c:out value="Type: " />
 			<select name="typeIssue" required="required">
 				<c:forEach var="type" items="${requestScope.typesMap}">
-					<option value="${type.key}">${type.value}</option>
+					<option value="${type.value.id}">${type.value.type}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -41,7 +41,7 @@
 			<c:out value="Priority: " />
 			<select name="priorityIssue" required="required">
 				<c:forEach var="priority" items="${requestScope.prioritiesMap}">
-					<option value="${priority.key}">${priority.value}</option>
+					<option value="${priority.value.id}">${priority.value.priority}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -49,7 +49,7 @@
 			<c:out value="Project: " />
 			<select name="projectIssue" required="required">
 				<c:forEach var="project" items="${requestScope.projectsList}">
-					<option value="${project.idProject}">${project.nameProject}</option>
+					<option value="${project.id}">${project.nameProject}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -58,15 +58,15 @@
 			<select name="buildFoundIssue" required="required">
 				<c:forEach var="buildFound"
 					items="${requestScope.buildsProjectList}">
-					<option value="${buildFound.idProject}">${buildFound.buildProject}</option>
+					<option value="${buildFound.id}">${buildFound.buildProject}</option>
 				</c:forEach>
 			</select>
 		</div>
 		<div class="assigneeIssue">
+			<c:out value="Assidnee: " />
 			<select name="assigneeIssue">
-				<c:out value="Assidnee: " />
 				<c:forEach var="assignee" items="${requestScope.assignees}">
-					<option value="${assignee.idUser}">${assignee.firstName}&amp;nbsp;${assignee.lastName}</option>
+					<option value="${assignee.id}">${assignee.firstName}&amp;nbsp;${assignee.lastName}</option>
 				</c:forEach>
 			</select>
 		</div>

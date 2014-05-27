@@ -1,22 +1,128 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions" version="2.0">
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:frm="http://java.sun.com/jsp/jstl/fmt" version="2.0">
 	<jsp:directive.page contentType="text/html; charset=Utf-8" />
 	<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 <title>Edit Issue</title>
 </head>
 <body>
 	<jsp:directive.include file="/view/authentication.jspf" />
-	<div class = "rowTable">
+	<div class="rowTable">
 		<c:if test="${not empty requestScope.issue}">
 			<form action="/EditIssueController" method="post">
-				<div>
-				
+				<div class="columnEditIssue">
+					<c:out value="Id Issue: " />
+					<c:out value="${requestScope.issue.id}" />
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Create Date: " />
+					<frm:formatDate value="${issue.createDate}" pattern="yyyy-MM-dd"
+						var="createDate" />
+					<c:out value="${createDate}" />
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Created By: " />
+					<c:out value="${issue.createdBy.firstName }" />
+					&amp;nbsp;
+					<c:out value="${issue.createdBy.lastName }" />
+				</div>
+				<c:if test="issue.modifiedBy.id ne 0">
+					<div class="columnEditIssue">
+						<c:out value="Modify Date: " />
+						<frm:formatDate value="${issue.modifyDate }" pattern="yyyy-MM-dd"
+							var="modifyDate" />
+						<c:out value="${modifyDate}" />
+					</div>
+					<div class="columnEditIssue">
+						<c:out value="Modified By: " />
+						<c:out value="${issue.modifiedBy.firstName }" />
+						&amp;nbsp;
+						<c:out value="${issue.modifiedBy.lastName }" />
+					</div>
+				</c:if>
+				<div class="columnEditIssue">
+					<c:out value="Summary: " />
+					<input type="text" name="summary" required="required" />
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Descriprion: " />
+					<input type="text" name="description" required="required" />
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Status: " />
+					<select name="statusIssue" required="required">
+						<c:forEach var="status" items="${requestScope.statusesMap}">
+							<option value="${status.value.id}"><c:out
+									value="${status.value.status}" />
+							</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Resolution: " />
+					<select name="resolutionIssue" required="required">
+						<c:forEach var="resolution" items="${requestScope.resolutionsMap}">
+							<option value="${resolution.value.id}"><c:out
+									value="${resolution.value.resolution}" />
+							</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Type: " />
+					<select name="typeIssue" required="required">
+						<c:forEach var="type" items="${requestScope.typesMap}">
+							<option value="${type.value.id}">
+								<c:out value="${type.value.type}" />
+							</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Priority: " />
+					<select name="priorityIssue" required="required">
+						<c:forEach var="priority" items="${requestScope.prioritiesMap}">
+							<option value="${priority.value.id}">
+								<c:out value="${priority.value.priority}" />
+							</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Project: " />
+					<select name="projectIssue" required="required">
+						<c:forEach var="project" items="${requestScope.projectsList}">
+							<option value="${project.id}"><c:out
+									value=" ${project.nameProject}" /></option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Build Found: " />
+					<select name="buildFoundIssue" required="required">
+						<c:forEach var="buildFound"
+							items="${requestScope.buildsProjectList}">
+							<option value="${buildFound.id}">
+								<c:out value="${buildFound.buildProject}" />
+							</option>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="columnEditIssue">
+					<c:out value="Assidnee: " />
+					<select name="assigneeIssue">
+						<c:forEach var="assignee" items="${requestScope.assignees}">
+							<option value="${assignee.id}">
+								<c:out value="${assignee.firstName}" />&amp;nbsp;
+								<c:out value="${assignee.lastName}" /></option>
+						</c:forEach>
+					</select>
 				</div>
 				<div>
-				<input type="submit" value="Save Changes"/>
+					<input type="submit" value="Save Changes" />
 				</div>
 			</form>
 		</c:if>
