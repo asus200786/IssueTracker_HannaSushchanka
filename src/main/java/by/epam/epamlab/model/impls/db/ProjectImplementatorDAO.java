@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,13 +16,13 @@ import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.projects.BuildProject;
 import by.epam.epamlab.model.beans.projects.Project;
 import by.epam.epamlab.model.beans.users.User;
+import by.epam.epamlab.model.impls.db.connections.Connections;
 import by.epam.epamlab.model.interfaces.IProjectDAO;
 
 public class ProjectImplementatorDAO implements IProjectDAO {
 	Logger logger = LoggerFactory.getLogger(ProjectImplementatorDAO.class);
 
 	private static ProjectImplementatorDAO instance;
-	private ServletContext servletContext;
 	private Connection connection;
 	private PreparedStatement preparedStatement;
 	private ResultSet resultSet;
@@ -47,8 +45,7 @@ public class ProjectImplementatorDAO implements IProjectDAO {
 
 		Project project = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_PROJECT_BY_ID);
 			preparedStatement.setLong(SQLConstants.PROJECT_ID_PARAMETER_INDEX,
@@ -73,8 +70,7 @@ public class ProjectImplementatorDAO implements IProjectDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_ALL_PROJECTS);
 			resultSet = preparedStatement.executeQuery();

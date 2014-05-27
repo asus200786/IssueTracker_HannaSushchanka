@@ -9,8 +9,6 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +24,7 @@ import by.epam.epamlab.model.beans.projects.BuildProject;
 import by.epam.epamlab.model.beans.projects.Project;
 import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.model.factories.DAOFactory;
+import by.epam.epamlab.model.impls.db.connections.Connections;
 import by.epam.epamlab.model.interfaces.IIssueDAO;
 import by.epam.epamlab.model.interfaces.IUserDAO;
 
@@ -36,7 +35,6 @@ public class IssueImplementatorDAO implements IIssueDAO {
 	private Connection connection;
 	private PreparedStatement preparedStatement;
 	private ResultSet resultSet;
-	private ServletContext servletContext;
 
 	private IssueImplementatorDAO() {
 		super();
@@ -57,8 +55,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 
 		Issue issue = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_ISSUE_BY_ID);
 			preparedStatement.setLong(SQLConstants.ID_ISSUE_PARAMETER_INDEX,
@@ -83,8 +80,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_N_LAST_ADDED_ISSUES);
 			resultSet = preparedStatement.executeQuery();
@@ -109,8 +105,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_N_LAST_ADDED_ISSUE_BY_ASSIGNEE);
 			preparedStatement.setLong(SQLConstants.ID_ASSIGNEE_PARAMETER_INDEX,
@@ -133,8 +128,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		connection = null;
 		preparedStatement = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.ADDING_ISSUE);
 			preparedStatement.setString(
@@ -184,8 +178,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.UPDATE_ISSUE);
 			preparedStatement.setString(

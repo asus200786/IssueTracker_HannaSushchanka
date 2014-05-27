@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +15,13 @@ import by.epam.epamlab.constants.SQLConstants;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.users.RolesUser;
 import by.epam.epamlab.model.beans.users.User;
+import by.epam.epamlab.model.impls.db.connections.Connections;
 import by.epam.epamlab.model.interfaces.IUserDAO;
 
 public class UserImplementatorDAO implements IUserDAO {
 	Logger logger = LoggerFactory.getLogger(UserImplementatorDAO.class);
 	private static UserImplementatorDAO instance;
 
-	private ServletContext servletContext;
 	private Connection connection;
 	private PreparedStatement preparedStatement;
 	private ResultSet resultSet;
@@ -45,8 +43,7 @@ public class UserImplementatorDAO implements IUserDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_USER_BY_ID);
 			preparedStatement.setLong(SQLConstants.ID_USER_PARAMETER_INDEX,
@@ -71,8 +68,7 @@ public class UserImplementatorDAO implements IUserDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_ALL_USERS);
 			resultSet = preparedStatement.executeQuery();
@@ -94,12 +90,11 @@ public class UserImplementatorDAO implements IUserDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_USER_BY_LOGIN);
-			preparedStatement.setString(SQLConstants.USER_BY_LOGIN_PARAMETER_INDEX,
-					login);
+			preparedStatement.setString(
+					SQLConstants.USER_BY_LOGIN_PARAMETER_INDEX, login);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				user = readindUserFromDB(preparedStatement, resultSet);
@@ -119,13 +114,13 @@ public class UserImplementatorDAO implements IUserDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_USER_BY_LOGIN_AND_PASSWORD);
-			preparedStatement.setString(SQLConstants.USER_BY_LOGIN_PARAMETER_INDEX,
-					login);
-			preparedStatement.setString(SQLConstants.USER_BY_PASSWORD_PARAMETER_INDEX, password);
+			preparedStatement.setString(
+					SQLConstants.USER_BY_LOGIN_PARAMETER_INDEX, login);
+			preparedStatement.setString(
+					SQLConstants.USER_BY_PASSWORD_PARAMETER_INDEX, password);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				user = readindUserFromDB(preparedStatement, resultSet);

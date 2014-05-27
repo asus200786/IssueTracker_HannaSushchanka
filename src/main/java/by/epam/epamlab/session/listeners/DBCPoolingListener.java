@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.constants.ConstantsControllers;
+import by.epam.epamlab.model.impls.db.connections.Connections;
 
 /**
  * Application Lifecycle Listener implementation class DBCPoolingListener
@@ -41,7 +42,7 @@ public class DBCPoolingListener implements ServletContextListener {
 	private String user;
 	private String password;
 
-	private JdbcConnectionPool pool;
+	private static JdbcConnectionPool pool;
 	private Connection connection;
 
 	private static DBCPoolingListener instance;
@@ -103,13 +104,15 @@ public class DBCPoolingListener implements ServletContextListener {
 
 	private void setUpConnectionPool(ServletContext servletContext) {
 		pool = JdbcConnectionPool.create(url, user, password);
+		Connections.setConnectionPool(pool);
 		servletContext.setAttribute(DATA_SOURCE_POOL, pool);
 	}
 
 	private void setUpConnection(ServletContext servletContext) {
 		try {
-			connection = pool.getConnection();
-			servletContext.setAttribute(ConstantsControllers.CONNECTION, connection);
+			connection = Connections.getConnection();
+			servletContext.setAttribute(ConstantsControllers.CONNECTION,
+					connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(ERROR_H2_SQL_CONNECTION, e);
@@ -136,7 +139,7 @@ public class DBCPoolingListener implements ServletContextListener {
 
 	private void closeConnection(ServletContext servletContext) {
 		try {
-			connection.close();
+			Connections.closeConnection(connection);
 			servletContext.removeAttribute(ConstantsControllers.CONNECTION);
 			connection = null;
 		} catch (SQLException e) {

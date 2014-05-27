@@ -18,12 +18,12 @@ public class SQLConstants {
 	public static final int MODIFY_BY_TABLE_ISSUE_COLUMN_INDEX = 14;
 
 	public static final String SELECT_ISSUE_BY_ID = "SELECT idIssue, summaryIssue,"
-			+ "descriptionIssue, statuses.status as status, resolutions.resolution as resolution,"
-			+ "types.type as type, priorities.priority as priority, project,"
-			+ "buildsproject.namebuild as buildfound, assignee, create_date, create_by, modify_date, modified_by"
+			+ "descriptionIssue, statuses.status AS status, resolutions.resolution AS resolution,"
+			+ "types.type AS type, priorities.priority AS priority, project,"
+			+ "buildsproject.namebuild AS buildfound, assignee, create_date, create_by, modify_date, modified_by"
 			+ "FROM Issues"
 			+ "INNER JOIN statuses ON issues.status = statuses.idStatus"
-			+ "LEFT JOIN resolutions ON issues.resolution = resolutions.idResolution"
+			+ "INNER JOIN resolutions ON issues.resolution = resolutions.idResolution"
 			+ "INNER JOIN types ON issues.type = types.idType"
 			+ "INNER JOIN priorities ON issues.priority = priorities.idPriority"
 			+ "INNER JOIN buildsproject ON issues.buildFound = buildsproject.idBuildProject"
@@ -31,31 +31,26 @@ public class SQLConstants {
 	public static final int ID_ISSUE_PARAMETER_INDEX = 1;
 
 	public static final String SELECT_N_LAST_ADDED_ISSUE_BY_ASSIGNEE = "SELECT * FROM(SELECT idIssue, summaryIssue,"
-			+ "descriptionIssue, statuses.status as status, resolutions.resolution as resolution,"
-			+ "types.type as type, priorities.priority as priority, project,"
-			+ "buildsproject.namebuild as buildfound, assignee, create_date, create_by, modify_date, modified_by,"
-			+ "ROW_NUMBER() (ORDER BY create_date DESC) rn"
+			+ "descriptionIssue, statuses.status AS status, resolutions.resolution AS resolution,"
+			+ "types.type AS type, priorities.priority AS priority, project,"
+			+ "buildsproject.namebuild AS buildfound, assignee, create_date, create_by, modify_date, modified_by,"
+			+ "ROW_NUMBER() OVER (ORDER BY create_date DESC) AS RowNumber"
 			+ "FROM Issues"
 			+ "INNER JOIN statuses ON issues.status = statuses.idStatus"
-			+ "LEFT JOIN resolutions ON issues.resolution = resolutions.idResolution"
+			+ "INNER JOIN resolutions ON issues.resolution = resolutions.idResolution"
 			+ "INNER JOIN types ON issues.type = types.idType"
 			+ "INNER JOIN priorities ON issues.priority = priorities.idPriority"
-			+ "INNER JOIN buildsproject ON issues.buildFound = buildsproject.idBuildProject"
-			+ "WHERE issues.assignee = ?, rn BETWEEN 0 AND 11 ORDER BY rn";
+			+ "INNER JOIN buildsproject ON issues.buildFound = buildsproject.idBuildProject)"
+			+ "WHERE issues.assignee = ?, RowNumber BETWEEN 0 AND 11 ORDER BY RowNumber";
 	public static final int ID_ASSIGNEE_PARAMETER_INDEX = 1;
 
-	public static final String SELECT_N_LAST_ADDED_ISSUES = "SELECT * FROM( SELECT idIssue, summaryIssue,"
-			+ "descriptionIssue, statuses.status as status, resolutions.resolution as resolution,"
-			+ "types.type as type, priorities.priority as priority, project,"
-			+ "buildsproject.namebuild as buildfound, assignee, create_date, create_by, modify_date, modified_by,"
-			+ "ROW_NUMBER() (ORDER BY create_date DESC) rn"
-			+ "FROM Issues"
-			+ "INNER JOIN statuses ON issues.status = statuses.idStatus"
-			+ "LEFT JOIN resolutions ON issues.resolution = resolutions.idResolution"
-			+ "INNER JOIN types ON issues.type = types.idType"
-			+ "INNER JOIN priorities ON issues.priority = priorities.idPriority"
-			+ "INNER JOIN buildsproject ON issues.buildFound = buildsproject.idBuildProject) WHERE rn BETWEEN 0 AND 11"
-			+ "ORDER BY rn";
+	public static final String SELECT_N_LAST_ADDED_ISSUES = "SELECT * FROM (SELECT idIssue, summaryIssue,"
+			+ "descriptionIssue, statuses.status AS status, resolutions.resolution AS resolution,"
+			+ "types.type AS type, priorities.priority AS priority, project,"
+			+ "buildsproject.namebuild AS buildfound, assignee, create_date, create_by, modify_date, modified_by,"
+			+ "ROW_NUMBER() OVER (ORDER BY create_date DESC) AS RowNumber"
+			+ "FROM Issues, Statuses, Resolutions, Types, Priorities, Buildsproject)"
+			+ " WHERE RowNumber BETWEEN 0 AND 11 ORDER BY RowNumber";
 
 	public static final String ADDING_ISSUE = "INSERT INTO Issues (summaryIssue, "
 			+ "descriprionIssue, status, type, priority, project, buildFound, assignee, "
@@ -128,36 +123,34 @@ public class SQLConstants {
 			+ "FROM Users"
 			+ "WHERE login = ?";
 	public static final int USER_BY_LOGIN_PARAMETER_INDEX = 1;
-	
+
 	public static final String SELECT_USER_BY_LOGIN_AND_PASSWORD = "SELECT idUser, firstName, lastName,"
 			+ "emailAddress, role, password, login"
 			+ "FROM Users"
 			+ "WHERE login = ?, password = ?";
-	
+
 	public static final int USER_BY_PASSWORD_PARAMETER_INDEX = 2;
-	
-	public static final String SELECT_STATUSES_FROM_DB ="SELECT idStatus, status"
+
+	public static final String SELECT_STATUSES_FROM_DB = "SELECT idStatus, status"
 			+ "FROM Statuses";
 	public static final int ID_DETAIL_PARAMETER_INDEX = 1;
 	public static final int DETAIL_NAME_PARAMETER_INDEX = 2;
-	
+
 	public static final String SELECT_TYPES_FROM_DB = "SELECT idType, type"
 			+ "FROM Types";
 	public static final String SELECT_PRIORITIES_FROM_DB = "SELECT idPriority, priority"
 			+ "FROM Priorities";
 	public static final String SELECT_RESOLUTIONS_FROM_DB = "SELECT idResolution, resolution"
 			+ "FROM Resolutions";
-	
+
 	public static final String SELECT_BUILD_PROJECT_BY_ID = "SELECT idBuildProject, nameBuild"
 			+ "FROM BuildsProject WHERE idBuildProject = ?";
 	public static final int ID_PROJECT_BUILD_PARAMETER_NAME = 1;
-	
+
 	public static final int ID_BUILD_COLUMN_INDEX = 1;
 	public static final int BUILD_PROJECT_VALUE_COLUMN_INDEX = 2;
 	public static final int ID_PROJECTS_FOREIGN_KEY_COLUMN_INDEX = 3;
-	
+
 	public static final String SELECT_ALL_BUILDS_PROJECTS = "SELECT idBuildProject, nameBuild"
 			+ "FROM BuildsProjects ORDER BY idBuildProject ASC";
-	
-
 }

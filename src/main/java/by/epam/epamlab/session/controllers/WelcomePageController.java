@@ -45,7 +45,6 @@ public class WelcomePageController extends AbstractController {
 				issueList = iIssueDAO.getObjectsList();
 			} else {
 				issueList = iIssueDAO.getIssueListbyAssignee(user);
-
 			}
 			// for JSP-implementation
 			request.setAttribute(ConstantsControllers.ISSUES_LIST, issueList);
@@ -53,8 +52,6 @@ public class WelcomePageController extends AbstractController {
 		} catch (ExceptionDAO e) {
 			e.printStackTrace();
 			logger.error(EXCEPTION_WELCOME_PAGE_CONTROLLER);
-			jump(ConstantsControllers.ERROR_LOGIN_JSPX,
-					EXCEPTION_WELCOME_PAGE_CONTROLLER, request, response);
 		}
 
 	}

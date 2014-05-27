@@ -7,23 +7,21 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.constants.ConstantsControllers;
 import by.epam.epamlab.constants.SQLConstants;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.issues.Priority;
 import by.epam.epamlab.model.beans.issues.Resolution;
 import by.epam.epamlab.model.beans.issues.Status;
 import by.epam.epamlab.model.beans.issues.Type;
+import by.epam.epamlab.model.impls.db.connections.Connections;
 import by.epam.epamlab.model.interfaces.IFeatureIssueDAO;
 
 public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 	Logger logger = LoggerFactory.getLogger(FeatureIssueImplementatorDAO.class);
-	private ServletContext servletContext;
+
 	private Connection connection;
 	private PreparedStatement preparedStatement;
 	private ResultSet resultSet;
@@ -48,8 +46,7 @@ public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 		Status status = null;
 		Map<Short, Status> statuses = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_STATUSES_FROM_DB);
 			resultSet = preparedStatement.executeQuery();
@@ -78,8 +75,7 @@ public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 		Resolution resolution = null;
 		Map<Short, Resolution> resolutions = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_RESOLUTIONS_FROM_DB);
 			resultSet = preparedStatement.executeQuery();
@@ -107,8 +103,7 @@ public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 		Priority priority = null;
 		Map<Short, Priority> priorities = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_PRIORITIES_FROM_DB);
 			resultSet = preparedStatement.executeQuery();
@@ -136,8 +131,7 @@ public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 		Type resolution = null;
 		Map<Short, Type> types = null;
 		try {
-			connection = (Connection) servletContext
-					.getAttribute(ConstantsControllers.CONNECTION);
+			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_TYPES_FROM_DB);
 			resultSet = preparedStatement.executeQuery();
