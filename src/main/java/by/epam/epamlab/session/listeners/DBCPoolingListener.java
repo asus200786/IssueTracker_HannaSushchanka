@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.epam.epamlab.constants.Constants;
-import by.epam.epamlab.constants.ConstantsControllers;
 import by.epam.epamlab.model.impls.db.connections.Connections;
 
 /**
@@ -105,14 +104,14 @@ public class DBCPoolingListener implements ServletContextListener {
 	private void setUpConnectionPool(ServletContext servletContext) {
 		pool = JdbcConnectionPool.create(url, user, password);
 		Connections.setConnectionPool(pool);
-		servletContext.setAttribute(DATA_SOURCE_POOL, pool);
+//		servletContext.setAttribute(DATA_SOURCE_POOL, pool);
 	}
 
 	private void setUpConnection(ServletContext servletContext) {
 		try {
 			connection = Connections.getConnection();
-			servletContext.setAttribute(ConstantsControllers.CONNECTION,
-					connection);
+//			servletContext.setAttribute(ConstantsControllers.CONNECTION,
+//					connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(ERROR_H2_SQL_CONNECTION, e);
@@ -133,14 +132,14 @@ public class DBCPoolingListener implements ServletContextListener {
 
 	private void disposeConnectionPool(ServletContext servletContext) {
 		pool.dispose();
-		servletContext.removeAttribute(DATA_SOURCE_POOL);
+//		servletContext.removeAttribute(DATA_SOURCE_POOL);
 		pool = null;
 	}
 
 	private void closeConnection(ServletContext servletContext) {
 		try {
 			Connections.closeConnection(connection);
-			servletContext.removeAttribute(ConstantsControllers.CONNECTION);
+//			servletContext.removeAttribute(ConstantsControllers.CONNECTION);
 			connection = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -166,5 +165,4 @@ public class DBCPoolingListener implements ServletContextListener {
 			logger.error(ERROR_H2_SHUTDOWN, e);
 		}
 	}
-
 }
