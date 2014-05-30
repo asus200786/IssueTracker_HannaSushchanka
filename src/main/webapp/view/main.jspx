@@ -14,8 +14,8 @@
 			<header>
 				<h1><c:out value="${constantsControllers.WELCOME_MESSAGE_JSPX}"/></h1>
 			</header>
-			<c:if test="${empty requestScope.issueList}">
-				<c:redirect url="/WelcomePageController"></c:redirect>
+			<c:if test="${empty issueList}">
+				<jsp:forward page="/WelcomePageController"/>
 			</c:if>
 			<jsp:directive.include file="/view/authentication.jspf" />
 			<jsp:directive.include file="/view/issuesList.jspf" />

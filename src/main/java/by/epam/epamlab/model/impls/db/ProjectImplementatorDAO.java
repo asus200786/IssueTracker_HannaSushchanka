@@ -52,13 +52,26 @@ public class ProjectImplementatorDAO implements IProjectDAO {
 					idProject);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				project = readingProjectFromDB(preparedStatement, resultSet);
+				project = readingProjectFromDB();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return project;
 	}
@@ -75,7 +88,7 @@ public class ProjectImplementatorDAO implements IProjectDAO {
 					.prepareStatement(SQLConstants.SELECT_ALL_PROJECTS);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				project = readingProjectFromDB(preparedStatement, resultSet);
+				project = readingProjectFromDB();
 				projects.add(project);
 			}
 		} catch (SQLException e) {
@@ -83,36 +96,47 @@ public class ProjectImplementatorDAO implements IProjectDAO {
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return projects;
 	}
 
-	public Project readingProjectFromDB(PreparedStatement preparedStatement,
-			ResultSet resultSet) throws ExceptionDAO {
-		Project project = null;
+	public Project readingProjectFromDB() throws ExceptionDAO {
 		try {
-			while (resultSet.next()) {
-				long idProject = resultSet
-						.getLong(SQLConstants.ID_PROJECT_PARAMETER_INDEX);
-				String projectName = resultSet
-						.getString(SQLConstants.PROJECT_NAME_PARAMETER_INDEX);
-				String descriptionProject = resultSet
-						.getString(SQLConstants.DESCRIPTION_PROJECT_PARAMETER_INDEX);
-				short idBuildProject = resultSet
-						.getShort(SQLConstants.BUILD_PROJECT_PARAMETER_INDEX);
-				BuildProject buildProject = new BuildProject(idBuildProject);
-				long idManagerProject = resultSet
-						.getLong(SQLConstants.MANAGER_PROJECT_PARAMETER_INDEX);
-				User managerProject = new User(idManagerProject);
-				project = new Project(idProject, projectName,
-						descriptionProject, managerProject, buildProject);
-			}
+			Project project;
+
+			long idProject = resultSet
+					.getLong(SQLConstants.ID_PROJECT_PARAMETER_INDEX);
+			String projectName = resultSet
+					.getString(SQLConstants.PROJECT_NAME_PARAMETER_INDEX);
+			String descriptionProject = resultSet
+					.getString(SQLConstants.DESCRIPTION_PROJECT_PARAMETER_INDEX);
+			short idBuildProject = resultSet
+					.getShort(SQLConstants.BUILD_PROJECT_PARAMETER_INDEX);
+			BuildProject buildProject = new BuildProject(idBuildProject);
+			long idManagerProject = resultSet
+					.getLong(SQLConstants.MANAGER_PROJECT_PARAMETER_INDEX);
+			User managerProject = new User(idManagerProject);
+			project = new Project(idProject, projectName, descriptionProject,
+					managerProject, buildProject);
+			return project;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
 		}
-		return project;
 	}
 }

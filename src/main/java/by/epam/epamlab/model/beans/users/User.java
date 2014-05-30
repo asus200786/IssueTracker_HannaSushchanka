@@ -21,6 +21,7 @@ public class User extends AbstractObject {
 	}
 
 	public User(long idUser, String login, String password, RolesUser role) {
+		super.setId(idUser);
 		this.login = login;
 		this.password = password;
 		this.role = role;

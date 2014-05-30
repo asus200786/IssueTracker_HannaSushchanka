@@ -19,9 +19,11 @@ import by.epam.epamlab.model.beans.issues.Priority;
 import by.epam.epamlab.model.beans.issues.Resolution;
 import by.epam.epamlab.model.beans.issues.Status;
 import by.epam.epamlab.model.beans.issues.Type;
+import by.epam.epamlab.model.beans.projects.BuildProject;
 import by.epam.epamlab.model.beans.projects.Project;
 import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.model.factories.DAOFactory;
+import by.epam.epamlab.model.interfaces.IBuildProjectDAO;
 import by.epam.epamlab.model.interfaces.IFeatureIssueDAO;
 import by.epam.epamlab.model.interfaces.IIssueDAO;
 import by.epam.epamlab.model.interfaces.IProjectDAO;
@@ -39,9 +41,10 @@ public class EditElementsIssueController extends AbstractController {
 	@Override
 	protected void performTask(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
 		try {
 			long idIssue = Long.valueOf(request
-					.getParameter(ConstantsControllers.ID_ISSUE));
+					.getParameter(ConstantsControllers.EDIT_ID_ISSUE));
 			IIssueDAO issueDAO = DAOFactory.getIssueDAOFromFactory();
 			Issue issue = issueDAO.getObjectById(idIssue);
 			if (issue == null) {
@@ -57,6 +60,10 @@ public class EditElementsIssueController extends AbstractController {
 			IProjectDAO projectDAO = DAOFactory.getProjectDAOFromFactory();
 			List<Project> projects = projectDAO.getObjectsList();
 			request.setAttribute(ConstantsControllers.PROJECTS_LIST, projects);
+			
+			IBuildProjectDAO buildProjectDAO = DAOFactory.getBuildProjectDAOFromFactory();
+			List<BuildProject> buildProjects = buildProjectDAO.getObjectsList();
+			request.setAttribute(ConstantsControllers.BUILD_PROJECT_LIST, buildProjects);
 
 			IFeatureIssueDAO featureIssueDAO = DAOFactory
 					.getFeatureIssueDAOFromFactory();

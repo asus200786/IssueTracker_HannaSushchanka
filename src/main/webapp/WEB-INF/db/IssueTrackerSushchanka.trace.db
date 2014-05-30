@@ -1752,3 +1752,48 @@ INSERT INTO "PUBLIC"."RESOLUTIONS"("IDRESOLUTION","RESOLUTION")VALUES(?,?) -- (?
 org.h2.jdbc.JdbcSQLException: Таблица "RESOLUTION" не найдена
 Table "RESOLUTION" not found; SQL statement:
 DROP Table resolution [42102-178]
+05-29 22:58:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT IDUSER, FIRSTNAME, LASTNAME, ""
+			+ ""EMAILADDRESS, ROLE, PASSWORD, LOGIN ""
+			+ ""FROM USERS ""
+			+ ""WHERE LOGIN = ?,[*] PASSWORD = ? "
+Syntax error in SQL statement "SELECT IDUSER, FIRSTNAME, LASTNAME, ""
+			+ ""EMAILADDRESS, ROLE, PASSWORD, LOGIN ""
+			+ ""FROM USERS ""
+			+ ""WHERE LOGIN = ?,[*] PASSWORD = ? "; SQL statement:
+SELECT idUser, firstName, lastName, "
+			+ "emailAddress, role, password, login "
+			+ "FROM Users "
+			+ "WHERE login = ?, password = ? [42000-178]
+05-29 22:58:38 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "
+			+ " не найден
+Column "
+			+ " not found; SQL statement:
+SELECT idUser, firstName, lastName, "
+			+ "emailAddress, role, password, login "
+			+ "FROM Users "
+			+ "WHERE (login = ?, password = ?) [42122-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:148)
+	at org.h2.expression.Alias.optimize(Alias.java:52)
+	at org.h2.command.dml.Select.prepare(Select.java:831)
+	at org.h2.command.Parser.prepareCommand(Parser.java:248)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+05-29 22:59:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT * FROM USERS WHERE LOGIN = ASUS200786@[*]GMAIL.COM, PASSWORD=5F4DCC3B5AA765D61D8327DEB882CF99 "
+Syntax error in SQL statement "SELECT * FROM USERS WHERE LOGIN = ASUS200786@[*]GMAIL.COM, PASSWORD=5F4DCC3B5AA765D61D8327DEB882CF99 "; SQL statement:
+SELECT * FROM USERS WHERE login = Asus200786@gmail.com, password=5f4dcc3b5aa765d61d8327deb882cf99 [42000-178]

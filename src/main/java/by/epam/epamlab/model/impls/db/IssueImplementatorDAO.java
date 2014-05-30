@@ -12,6 +12,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.constants.ConstantsControllers;
 import by.epam.epamlab.constants.SQLConstants;
 import by.epam.epamlab.exceptions.ExceptionDAO;
@@ -62,13 +63,26 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					idIssue);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				issue = readingIssuesDB(preparedStatement, resultSet);
+				issue = readingIssuesDB();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return issue;
 	}
@@ -85,7 +99,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					.prepareStatement(SQLConstants.SELECT_N_LAST_ADDED_ISSUES);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				issue = readingIssuesDB(preparedStatement, resultSet);
+				issue = readingIssuesDB();
 				issues.add(issue);
 			}
 		} catch (SQLException e) {
@@ -93,6 +107,19 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return issues;
 	}
@@ -105,14 +132,15 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
+			long assigneeId = assignee.getId();
 			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_N_LAST_ADDED_ISSUE_BY_ASSIGNEE);
 			preparedStatement.setLong(SQLConstants.ID_ASSIGNEE_PARAMETER_INDEX,
-					assignee.getId());
+					assigneeId);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				issue = readingIssuesDB(preparedStatement, resultSet);
+				issue = readingIssuesDB();
 				issues.add(issue);
 			}
 		} catch (SQLException e) {
@@ -120,6 +148,19 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return issues;
 	}
@@ -170,6 +211,19 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 	}
 
@@ -231,6 +285,19 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 	}
 
@@ -270,62 +337,67 @@ public class IssueImplementatorDAO implements IIssueDAO {
 	// }
 	// }
 
-	private Issue readingIssuesDB(PreparedStatement preparedStatement,
-			ResultSet resultSet) throws ExceptionDAO {
-		Issue issue = null;
+	private Issue readingIssuesDB() throws ExceptionDAO {
+		Issue issue;
+		String resolutionName;
 		try {
-			while (resultSet.next()) {
-				long idIssue = resultSet
-						.getLong(SQLConstants.ID_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
-				String summaryIssue = resultSet
-						.getString(SQLConstants.SUMMARY_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
-				String descriptionIssue = resultSet
-						.getString(SQLConstants.DESCRIPTION_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
-				long idStatus = resultSet
-						.getLong(SQLConstants.STATUS_TABLE_ISSUE_COLUMN_INDEX);
-				Status status = DAOFactory.getFeatureIssueDAOFromFactory()
-						.getStatuses().get(idStatus);
-				long idResolution = resultSet
-						.getLong(SQLConstants.RESOLUTION_TABLE_ISSUE_COLUMN_INDEX);
-				Resolution resolution = DAOFactory
-						.getFeatureIssueDAOFromFactory().getResolutions()
-						.get(idResolution);
-				long idType = resultSet
-						.getLong(SQLConstants.TYPE_TABLE_ISSUE_COLUMN_INDEX);
-				Type type = DAOFactory.getFeatureIssueDAOFromFactory()
-						.getTypes().get(idType);
-				long idPriority = resultSet
-						.getLong(SQLConstants.PRIORITY_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
-				Priority priority = DAOFactory.getFeatureIssueDAOFromFactory()
-						.getPriorities().get(idPriority);
-				long idProject = resultSet
-						.getLong(SQLConstants.PROJECT_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
-				Project project = DAOFactory.getProjectDAOFromFactory()
-						.getObjectById(idProject);
-				long idBuildFound = resultSet
-						.getLong(SQLConstants.BUILD_FOUND_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
-				BuildProject buildProject = DAOFactory
-						.getProjectDAOFromFactory().getObjectById(idBuildFound)
-						.getCurrentBuildProject();
-				long idAssigneeUser = resultSet
-						.getLong(SQLConstants.ASSIGNEE_TABLE_ISSUE_COLUMN_INDEX);
-				IUserDAO userDAO = DAOFactory.getUserDAOFromFactory();
-				User assigneeUser = userDAO.getObjectById(idAssigneeUser);
-				Date createDate = resultSet
-						.getDate(SQLConstants.CREATE_DATE_TABLE_ISSUE_COLUMN_INDEX);
-				long idCreatedByUser = resultSet
-						.getLong(SQLConstants.CREATE_BY_TABLE_ISSUE_COLUMN_INDEX);
-				User createdByUser = userDAO.getObjectById(idCreatedByUser);
-				Date modifyDate = resultSet
-						.getDate(SQLConstants.MODIFY_DATE_TABLE_ISSUE_COLUMN_INDEX);
-				long idModifiedByUser = resultSet
-						.getLong(SQLConstants.MODIFY_BY_TABLE_ISSUE_COLUMN_INDEX);
-				User modifiedByUser = userDAO.getObjectById(idModifiedByUser);
-				issue = new Issue(idIssue, priority, resolution, type,
-						summaryIssue, descriptionIssue, createDate, modifyDate,
-						assigneeUser, createdByUser, modifiedByUser, project,
-						status, buildProject);
+			long idIssue = resultSet
+					.getLong(SQLConstants.ID_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
+			String summaryIssue = resultSet
+					.getString(SQLConstants.SUMMARY_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
+			String descriptionIssue = resultSet
+					.getString(SQLConstants.DESCRIPTION_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
+			short idStatus = resultSet
+					.getShort(SQLConstants.STATUS_TABLE_ISSUE_COLUMN_INDEX);
+			String statusName = DAOFactory.getFeatureIssueDAOFromFactory()
+					.getStatuses().get(idStatus).getStatus();
+			Status status = new Status(idStatus, statusName);
+			short idResolution = resultSet
+					.getShort(SQLConstants.RESOLUTION_TABLE_ISSUE_COLUMN_INDEX);
+			if (idResolution == 0) {
+				resolutionName = Constants.EMPTY_STRING;
+			} else {
+				resolutionName = DAOFactory.getFeatureIssueDAOFromFactory()
+						.getResolutions().get(idResolution).getResolution();
 			}
+			Resolution resolution = new Resolution(idResolution, resolutionName);
+			short idType = resultSet
+					.getShort(SQLConstants.TYPE_TABLE_ISSUE_COLUMN_INDEX);
+			String typeName = DAOFactory.getFeatureIssueDAOFromFactory()
+					.getTypes().get(idType).getType();
+			Type type = new Type(idType, typeName);
+			short idPriority = resultSet
+					.getShort(SQLConstants.PRIORITY_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
+			String priorityName = DAOFactory.getFeatureIssueDAOFromFactory()
+					.getPriorities().get(idPriority).getPriority();
+			Priority priority = new Priority(idPriority, priorityName);
+			long idProject = resultSet
+					.getLong(SQLConstants.PROJECT_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
+			Project project = DAOFactory.getProjectDAOFromFactory()
+					.getObjectById(idProject);
+			long idBuildFound = resultSet
+					.getLong(SQLConstants.BUILD_FOUND_ISSUE_TABLE_ISSUE_COLUMN_INDEX);
+			BuildProject buildProject = DAOFactory
+					.getBuildProjectDAOFromFactory()
+					.getObjectById(idBuildFound);
+			long idAssigneeUser = resultSet
+					.getLong(SQLConstants.ASSIGNEE_TABLE_ISSUE_COLUMN_INDEX);
+			IUserDAO userDAO = DAOFactory.getUserDAOFromFactory();
+			User assigneeUser = userDAO.getObjectById(idAssigneeUser);
+			Date createDate = resultSet
+					.getDate(SQLConstants.CREATE_DATE_TABLE_ISSUE_COLUMN_INDEX);
+			long idCreatedByUser = resultSet
+					.getLong(SQLConstants.CREATE_BY_TABLE_ISSUE_COLUMN_INDEX);
+			User createdByUser = userDAO.getObjectById(idCreatedByUser);
+			Date modifyDate = resultSet
+					.getDate(SQLConstants.MODIFY_DATE_TABLE_ISSUE_COLUMN_INDEX);
+			long idModifiedByUser = resultSet
+					.getLong(SQLConstants.MODIFY_BY_TABLE_ISSUE_COLUMN_INDEX);
+			User modifiedByUser = userDAO.getObjectById(idModifiedByUser);
+			issue = new Issue(idIssue, priority, resolution, type,
+					summaryIssue, descriptionIssue, createDate, modifyDate,
+					assigneeUser, createdByUser, modifiedByUser, project,
+					status, buildProject);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);

@@ -17,7 +17,7 @@
 							<c:out value="${constantsControllers.LOG_IN_MESSAGE}" />
 						</h3>
 					</div>
-					<form name="loginUser" action="LoginController" method="post">
+					<form name="loginUser" action="${contextPath}/LoginController" method="post">
 						<strong><c:out
 								value="${constantsControllers.ENTER_LOGIN_FORM_JSPX}" /></strong> <input
 							type="text" name="j_username" size="25" required="required"

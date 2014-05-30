@@ -59,11 +59,23 @@ public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 				status = new Status(idStatus, nameStatus);
 				statuses.put(idStatus, status);
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return statuses;
 	}
@@ -92,6 +104,19 @@ public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return resolutions;
 	}
@@ -120,6 +145,19 @@ public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return priorities;
 	}
@@ -148,6 +186,19 @@ public class FeatureIssueImplementatorDAO implements IFeatureIssueDAO {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return types;
 	}

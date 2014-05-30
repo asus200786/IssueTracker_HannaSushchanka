@@ -28,7 +28,7 @@ import by.epam.epamlab.session.controllers.AbstractController;
 /**
  * Servlet implementation class EditIssue
  */
-@WebServlet("/EditIssue")
+@WebServlet("/EditIssueController")
 public class EditIssueController extends AbstractController {
 	private static final long serialVersionUID = 201405202113L;
 	Logger logger = LoggerFactory.getLogger(EditIssueController.class);
@@ -36,7 +36,7 @@ public class EditIssueController extends AbstractController {
 	@Override
 	protected void performTask(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String isIssue = request.getParameter(ConstantsControllers.ID_ISSUE);
+		String idIssue = request.getParameter(ConstantsControllers.EDIT_ID_ISSUE);
 		String summary = request.getParameter(ConstantsControllers.SUMMARY);
 		String description = request
 				.getParameter(ConstantsControllers.DESCRIPTION);
@@ -62,7 +62,7 @@ public class EditIssueController extends AbstractController {
 		short resolutionId;
 		short typeId;
 		try {
-			issueId = Long.valueOf(isIssue);
+			issueId = Long.valueOf(idIssue);
 			statusId = Short.valueOf(status);
 			resolutionId = Short.valueOf(resolution);
 			typeId = Short.valueOf(type);

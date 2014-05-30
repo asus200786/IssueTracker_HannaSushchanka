@@ -5,17 +5,19 @@
 	<jsp:directive.page contentType="text/html; charset=Utf-8" />
 	<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Edit Issue</title>
 </head>
 <body>
 	<jsp:directive.include file="/view/authentication.jspf" />
 	<div class="rowTable">
 		<c:if test="${not empty requestScope.issue}">
-			<form action="/EditIssueController" method="post">
+			<form action="${contextPath}/EditIssueController" method="post">
 				<div class="columnEditIssue">
 					<c:out value="Id Issue: " />
 					<c:out value="${requestScope.issue.id}" />
+					<input type="hidden" value="${requestScope.issue.id}"
+						name="editIdIssue" />
 				</div>
 				<div class="columnEditIssue">
 					<c:out value="Create Date: " />
@@ -45,19 +47,30 @@
 				</c:if>
 				<div class="columnEditIssue">
 					<c:out value="Summary: " />
-					<input type="text" name="summary" required="required" />
+					<input type="text" name="summary" required="required"
+						value="${issue.summary}" />
 				</div>
 				<div class="columnEditIssue">
 					<c:out value="Descriprion: " />
-					<input type="text" name="description" required="required" />
+					<input type="text" name="description" required="required"
+						value="${issue.description}" />
 				</div>
 				<div class="columnEditIssue">
 					<c:out value="Status: " />
 					<select name="statusIssue" required="required">
 						<c:forEach var="status" items="${requestScope.statusesMap}">
-							<option value="${status.value.id}"><c:out
-									value="${status.value.status}" />
-							</option>
+							<c:choose>
+								<c:when test="${status.value.id eq issue.issueStatus.id}">
+									<option value="${status.value.id}" selected="selected">
+										<c:out value="${status.value.status}" />
+									</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${status.value.id}">
+										<c:out value="${status.value.status}" />
+									</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</select>
 				</div>
@@ -103,8 +116,7 @@
 				<div class="columnEditIssue">
 					<c:out value="Build Found: " />
 					<select name="buildFoundIssue" required="required">
-						<c:forEach var="buildFound"
-							items="${requestScope.buildsProjectList}">
+						<c:forEach var="buildFound" items="${requestScope.buildProjects}">
 							<option value="${buildFound.id}">
 								<c:out value="${buildFound.buildProject}" />
 							</option>
@@ -112,12 +124,23 @@
 					</select>
 				</div>
 				<div class="columnEditIssue">
-					<c:out value="Assidnee: " />
+					<c:out value="Assignee: " />
 					<select name="assigneeIssue">
-						<c:forEach var="assignee" items="${requestScope.assignees}">
-							<option value="${assignee.id}">
-								<c:out value="${assignee.firstName}" />&amp;nbsp;
-								<c:out value="${assignee.lastName}" /></option>
+						<c:forEach var="assignee" items="${assigneesList}">
+							<c:choose>
+								<c:when test="${assignee.id eq issue.assignee.id}">
+									<option value="${assignee.id}" selected="selected">
+										<c:out value="${assignee.firstName}" />&amp;nbsp;
+										<c:out value="${assignee.lastName}" />
+									</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${assignee.id}">
+										<c:out value="${assignee.firstName}" />&amp;nbsp;
+										<c:out value="${assignee.lastName}" />
+									</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</select>
 				</div>

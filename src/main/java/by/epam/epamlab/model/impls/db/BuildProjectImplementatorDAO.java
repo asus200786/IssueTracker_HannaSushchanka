@@ -14,7 +14,6 @@ import by.epam.epamlab.constants.ConstantsControllers;
 import by.epam.epamlab.constants.SQLConstants;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.projects.BuildProject;
-import by.epam.epamlab.model.beans.projects.Project;
 import by.epam.epamlab.model.impls.db.connections.Connections;
 import by.epam.epamlab.model.interfaces.IBuildProjectDAO;
 
@@ -36,7 +35,6 @@ public class BuildProjectImplementatorDAO implements IBuildProjectDAO {
 			instance = new BuildProjectImplementatorDAO();
 		}
 		return instance;
-
 	}
 
 	public BuildProject getObjectById(long idBuildProject) throws ExceptionDAO {
@@ -54,44 +52,32 @@ public class BuildProjectImplementatorDAO implements IBuildProjectDAO {
 					idBuildProject);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				buildProject = readingBuildProjectFromDB(preparedStatement,
-						resultSet);
+				buildProject = readingBuildProjectFromDB();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
-		}
-		return buildProject;
-	}
-
-	private BuildProject readingBuildProjectFromDB(
-			PreparedStatement preparedStatement, ResultSet resultSet)
-			throws ExceptionDAO {
-		BuildProject buildProject = null;
-		try {
-			while (resultSet.next()) {
-				Short idBuildProject = resultSet
-						.getShort(SQLConstants.ID_BUILD_COLUMN_INDEX);
-				String nameBuildProject = resultSet
-						.getString(SQLConstants.BUILD_PROJECT_VALUE_COLUMN_INDEX);
-				int idProject = resultSet
-						.getInt(SQLConstants.ID_PROJECTS_FOREIGN_KEY_COLUMN_INDEX);
-				buildProject = new BuildProject(idBuildProject,
-						nameBuildProject, new Project(idProject));
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			logger.error(e.getMessage(), e);
-			throw new ExceptionDAO(
-					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+			Connections.closeConnection(connection);
 		}
 		return buildProject;
 	}
 
 	public List<BuildProject> getObjectsList() throws ExceptionDAO {
-		BuildProject buildProject = null;
+		BuildProject buildProject;
 		List<BuildProject> buildsProject = new ArrayList<BuildProject>();
 		connection = null;
 		preparedStatement = null;
@@ -102,8 +88,7 @@ public class BuildProjectImplementatorDAO implements IBuildProjectDAO {
 					.prepareStatement(SQLConstants.SELECT_ALL_BUILDS_PROJECTS);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				buildProject = readingBuildProjectFromDB(preparedStatement,
-						resultSet);
+				buildProject = readingBuildProjectFromDB();
 				buildsProject.add(buildProject);
 			}
 		} catch (SQLException e) {
@@ -111,8 +96,40 @@ public class BuildProjectImplementatorDAO implements IBuildProjectDAO {
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return buildsProject;
 	}
 
+	private BuildProject readingBuildProjectFromDB() throws ExceptionDAO {
+		BuildProject buildProject;
+		try {
+			Short idBuildProject = resultSet
+					.getShort(SQLConstants.ID_BUILD_COLUMN_INDEX);
+			String nameBuildProject = resultSet
+					.getString(SQLConstants.BUILD_PROJECT_VALUE_COLUMN_INDEX);
+			long idProject = resultSet
+					.getLong(SQLConstants.ID_PROJECT_FOR_BUILD_COLUMN_INDEX);
+			buildProject = new BuildProject(idBuildProject, nameBuildProject,
+					idProject);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			throw new ExceptionDAO(
+					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		}
+		return buildProject;
+	}
 }

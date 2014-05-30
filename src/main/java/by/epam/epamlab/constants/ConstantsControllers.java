@@ -13,7 +13,7 @@ public class ConstantsControllers {
 	public static final String CONNECTION = "Connection";
 
 	public static final String USERS = "users";
-	public static final String ISSUES_LIST = "issuesList";
+	public static final String ISSUES_LIST = "issueList";
 	public static final String ID_ISSUE = "idIssue";
 	public static final String ISSUE = "issue";
 	public static final String ASSIGNEES_LIST = "assigneesList";
@@ -183,7 +183,8 @@ public class ConstantsControllers {
 		return SUMMARY_TABLE_HEADER;
 	}
 
-	// Messages for jspx;
+	// Messages for jspx;	
+	
 	private static String NOT_ISSUES_MESSAGE_FOR_GUEST = " The application does not contain issues.";
 
 	public static String getNOT_ISSUES_MESSAGE_FOR_GUEST() {
@@ -256,5 +257,9 @@ public class ConstantsControllers {
 	public static final String ERROR_LOGIN_JSPX = "/view/errorLogin.jspx";
 	public static final String ADDING_ISSUE_JSPX = "/view/addIssue.jspx";
 	public static final String EDIT_ISSUE_JSP = "/view/editIssue.jspx";
+	public static final String CONTEXT_PATH = "contextPath";
+	public static final String EDIT_ID_ISSUE = "editIdIssue";
+	public static final String BUILD_PROJECT_LIST = "buildProjects";
+	
 
 }

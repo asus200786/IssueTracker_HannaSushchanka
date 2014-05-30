@@ -34,8 +34,8 @@ public class ConstantsListener implements ServletContextListener {
 		ConstantsControllers constantsControllers = new ConstantsControllers();
 		event.getServletContext().setAttribute(
 				ConstantsControllers.JSPX_CONSTANTS, constantsControllers);
-		
-		
+		String contextPath = event.getServletContext().getContextPath();
+		event.getServletContext().setAttribute(ConstantsControllers.CONTEXT_PATH, contextPath);
 		logger.info(SERVLET_CONTEXT_LISTENER_START);
 	}
 

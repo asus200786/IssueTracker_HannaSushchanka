@@ -12,16 +12,16 @@ public class BuildProject extends AbstractObject implements Serializable {
 	Logger logger = LoggerFactory.getLogger(BuildProject.class);
 
 	private String buildProject;
-	private Project project;
+	private long idProject;
 
 	public BuildProject(short idBuildProject) {
 		super();
 	}
 
-	public BuildProject(short idBuildProject, String buildProject, Project project) {
+	public BuildProject(short idBuildProject, String buildProject, long idProject) {
 		super();
 		this.buildProject = buildProject;
-		this.project = project;
+		this.idProject = idProject;
 	}
 
 	public String getBuildProject() {
@@ -32,18 +32,18 @@ public class BuildProject extends AbstractObject implements Serializable {
 		this.buildProject = buildProject;
 	}
 
-	public Project getProject() {
-		return project;
+	public long getIdProject() {
+		return idProject;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
+	public void setIdProject(long idProject) {
+		this.idProject = idProject;
 	}
 
 	@Override
 	public String toString() {
-		return "BuildProject [buildProject=" + buildProject + ", project="
-				+ project + "]";
+		return "BuildProject [buildProject=" + buildProject + ", idProject="
+				+ idProject + "]";
 	}
 
 }

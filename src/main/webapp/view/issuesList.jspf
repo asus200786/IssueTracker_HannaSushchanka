@@ -26,8 +26,7 @@
 					<table class="tableDataIssues">
 						<thead>
 							<tr>
-								<th><a href="/EditElementsIssueController"><c:out
-											value="${constantsControllers.ID_TABLE_HEADER }" /></a></th>
+								<th><c:out value="${constantsControllers.ID_TABLE_HEADER }" /></th>
 								<th><c:out
 										value="${constantsControllers.PRIORITY_TABLE_HEADER }" /></th>
 								<th><c:out
@@ -43,13 +42,15 @@
 						<tbody>
 							<c:forEach var="issue" items="${issueList}">
 								<tr>
-									<td><c:out value="${issue.idIssue}" /></td>
-									<td><c:out value="${issue.priorityValues}" /></td>
+									<td><a
+										href="${contextPath}/EditElementsIssueController?editIdIssue=${issue.id}"><c:out
+												value="${issue.id}" /></a></td>
+									<td><c:out value="${issue.priorityValues.priority}" /></td>
 									<td><c:out value="${issue.assignee.firstName}" />
 										&amp;nbsp;<c:out value=" ${issue.assignee.lastName}" />&amp;nbsp;
 										<c:out value="${issue.assignee.emailAddress}" /></td>
-									<td><c:out value="${issue.typesIssues}" /></td>
-									<td><c:out value="${issue.issueStatus}" /></td>
+									<td><c:out value="${issue.typesIssues.type}" /></td>
+									<td><c:out value="${issue.issueStatus.status}" /></td>
 									<td><c:out value=" ${issue.summary}" /></td>
 								</tr>
 							</c:forEach>

@@ -1,6 +1,7 @@
 package by.epam.epamlab.session.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -40,19 +41,21 @@ public class WelcomePageController extends AbstractController {
 		// out.println(ServletUtilities.userMenuFragment(user));
 		try {
 			IIssueDAO iIssueDAO = DAOFactory.getIssueDAOFromFactory();
-			List<Issue> issueList;
+			List<Issue> issueList = new ArrayList<Issue>() ;
 			if (user == null) {
 				issueList = iIssueDAO.getObjectsList();
 			} else {
 				issueList = iIssueDAO.getIssueListbyAssignee(user);
 			}
 			// for JSP-implementation
-			request.setAttribute(ConstantsControllers.ISSUES_LIST, issueList);
+//			for (Issue issue : issueList) {
+//				System.out.println("="+issue);
+//			}
+			session.setAttribute(ConstantsControllers.ISSUES_LIST, issueList);
 			jump(ConstantsControllers.MAIN_JSPX, request, response);
 		} catch (ExceptionDAO e) {
 			e.printStackTrace();
 			logger.error(EXCEPTION_WELCOME_PAGE_CONTROLLER);
 		}
-
 	}
 }

@@ -50,13 +50,26 @@ public class UserImplementatorDAO implements IUserDAO {
 					idUser);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				user = readindUserFromDB(preparedStatement, resultSet);
+				user = readindUserFromDB();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return user;
 	}
@@ -73,13 +86,26 @@ public class UserImplementatorDAO implements IUserDAO {
 					.prepareStatement(SQLConstants.SELECT_ALL_USERS);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				user = readindUserFromDB(preparedStatement, resultSet);
+				user = readindUserFromDB();
 				users.add(user);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return users;
 	}
@@ -97,13 +123,26 @@ public class UserImplementatorDAO implements IUserDAO {
 					SQLConstants.USER_BY_LOGIN_PARAMETER_INDEX, login);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				user = readindUserFromDB(preparedStatement, resultSet);
+				user = readindUserFromDB();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return user;
 	}
@@ -123,13 +162,26 @@ public class UserImplementatorDAO implements IUserDAO {
 					SQLConstants.USER_BY_PASSWORD_PARAMETER_INDEX, password);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				user = readindUserFromDB(preparedStatement, resultSet);
+				user = readindUserFromDB();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
 			throw new ExceptionDAO(
 					ConstantsControllers.ERROR_ACCESS_ISSUES_LIST, e);
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				logger.error(e.getMessage(), e);
+				throw new ExceptionDAO();
+			}
+			Connections.closeConnection(connection);
 		}
 		return user;
 	}
@@ -138,29 +190,26 @@ public class UserImplementatorDAO implements IUserDAO {
 
 	}
 
-	private User readindUserFromDB(PreparedStatement preparedStatement,
-			ResultSet resultSet) throws ExceptionDAO {
-		User user = null;
+	private User readindUserFromDB() throws ExceptionDAO {
+		User user;
 		try {
-			while (resultSet.next()) {
-				long idUser = resultSet
-						.getLong(SQLConstants.ID_USER_PARAMETER_INDEX);
-				String firstName = resultSet
-						.getString(SQLConstants.FIRSTNAME_USER_PARAMETER_INDEX);
-				String lastName = resultSet
-						.getString(SQLConstants.LASTNAME_USER_PARAMETER_INDEX);
-				String emailAddress = resultSet
-						.getString(SQLConstants.EMAILADDRESS_USER_PARAMETER_INDEX);
-				String roleUser = resultSet
-						.getString(SQLConstants.ROLE_USER_PARAMETER_INDEX);
-				RolesUser role = RolesUser.valueOf(roleUser);
-				String password = resultSet
-						.getString(SQLConstants.PASSWORD_USER_PARAMETER_INDEX);
-				String login = resultSet
-						.getString(SQLConstants.LOGIN_USER_PARAMETER_NAME);
-				user = new User(idUser, login, password, role, firstName,
-						lastName, emailAddress);
-			}
+			long idUser = resultSet
+					.getLong(SQLConstants.ID_USER_PARAMETER_INDEX);
+			String firstName = resultSet
+					.getString(SQLConstants.FIRSTNAME_USER_PARAMETER_INDEX);
+			String lastName = resultSet
+					.getString(SQLConstants.LASTNAME_USER_PARAMETER_INDEX);
+			String emailAddress = resultSet
+					.getString(SQLConstants.EMAILADDRESS_USER_PARAMETER_INDEX);
+			String roleUser = resultSet
+					.getString(SQLConstants.ROLE_USER_PARAMETER_INDEX);
+			RolesUser role = RolesUser.valueOf(roleUser);
+			String password = resultSet
+					.getString(SQLConstants.PASSWORD_USER_PARAMETER_INDEX);
+			String login = resultSet
+					.getString(SQLConstants.LOGIN_USER_PARAMETER_NAME);
+			user = new User(idUser, login, password, role, firstName, lastName,
+					emailAddress);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
