@@ -41,16 +41,12 @@ public class WelcomePageController extends AbstractController {
 		// out.println(ServletUtilities.userMenuFragment(user));
 		try {
 			IIssueDAO iIssueDAO = DAOFactory.getIssueDAOFromFactory();
-			List<Issue> issueList = new ArrayList<Issue>() ;
+			List<Issue> issueList = new ArrayList<Issue>();
 			if (user == null) {
 				issueList = iIssueDAO.getObjectsList();
 			} else {
 				issueList = iIssueDAO.getIssueListbyAssignee(user);
 			}
-			// for JSP-implementation
-//			for (Issue issue : issueList) {
-//				System.out.println("="+issue);
-//			}
 			session.setAttribute(ConstantsControllers.ISSUES_LIST, issueList);
 			jump(ConstantsControllers.MAIN_JSPX, request, response);
 		} catch (ExceptionDAO e) {

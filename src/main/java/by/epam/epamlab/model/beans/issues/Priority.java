@@ -9,19 +9,27 @@ public class Priority extends AbstractObject {
 	private static final long serialVersionUID = 201405192246L;
 	Logger logger = LoggerFactory.getLogger(Priority.class);
 	private String priority;
+
 	public Priority(Short idPriority) {
-		super();
-		// TODO Auto-generated constructor stub
+		setId(idPriority);
 	}
+
 	public Priority(Short idPriority, String priority) {
-		super();
+		setId(idPriority);
 		this.priority = priority;
 	}
+
 	public String getPriority() {
 		return priority;
 	}
+
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+
+	@Override
+	public String toString() {
+		return "Priority [priority=" + priority + "]";
 	}
 
 }

@@ -29,7 +29,7 @@ public class Issue extends AbstractObject implements Serializable {
 	private User createdBy;
 	private User modifiedBy;
 	private Project project;
-	private Status issueStatus;
+	private Status status;
 	private BuildProject build;
 
 	private List<Attachment> attachments;
@@ -39,9 +39,9 @@ public class Issue extends AbstractObject implements Serializable {
 		super();
 	}
 
-	public Issue(Priority priority, Type type,
-			String summary, String description, User assignee, User createdBy,
-			Project project, Status issueStatus, BuildProject build) {
+	public Issue(Priority priority, Type type, String summary,
+			String description, User assignee, User createdBy, Project project,
+			Status status, BuildProject build) {
 		super();
 		this.priority = priority;
 		this.type = type;
@@ -50,14 +50,14 @@ public class Issue extends AbstractObject implements Serializable {
 		this.assignee = assignee;
 		this.createdBy = createdBy;
 		this.project = project;
-		this.issueStatus = issueStatus;
+		this.status = status;
 		this.build = build;
 	}
 
-	public Issue(long idIssue, Priority priority, Resolution resolution, Type type,
-			String summary, String description, User assignee, User modifiedBy,
-			Project project, Status issueStatus, BuildProject build) {
-		super();
+	public Issue(long idIssue, Priority priority, Resolution resolution,
+			Type type, String summary, String description, User assignee,
+			User modifiedBy, Project project, Status status, BuildProject build) {
+		setId(idIssue);
 		this.priority = priority;
 		this.resolution = resolution;
 		this.type = type;
@@ -66,14 +66,14 @@ public class Issue extends AbstractObject implements Serializable {
 		this.assignee = assignee;
 		this.modifiedBy = modifiedBy;
 		this.project = project;
-		this.issueStatus = issueStatus;
+		this.status = status;
 		this.build = build;
 	}
 
 	public Issue(long idIssue, Priority priority, Resolution resolution,
 			Type type, String summary, String description, Date createDate,
 			Date modifyDate, User assignee, User createdBy, User modifiedBy,
-			Project project, Status issueStatus, BuildProject build) {
+			Project project, Status status, BuildProject build) {
 		super();
 		setId(idIssue);
 		this.priority = priority;
@@ -87,20 +87,20 @@ public class Issue extends AbstractObject implements Serializable {
 		this.createdBy = createdBy;
 		this.modifiedBy = modifiedBy;
 		this.project = project;
-		this.issueStatus = issueStatus;
+		this.status = status;
 		this.build = build;
 	}
 
 	public Issue(long idIssue) {
-		super.setId(idIssue);
+		setId(idIssue);
 	}
 
-	public Priority getPriorityValues() {
+	public Priority getPriority() {
 		return priority;
 	}
 
-	public void setPriorityValues(Priority priorityValues) {
-		this.priority = priorityValues;
+	public void setPriority(Priority priority) {
+		this.priority = priority;
 	}
 
 	public User getAssignee() {
@@ -111,12 +111,12 @@ public class Issue extends AbstractObject implements Serializable {
 		this.assignee = assignee;
 	}
 
-	public Type getTypesIssues() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setTypesIssues(Type typesIssues) {
-		this.type = typesIssues;
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 	//
@@ -124,12 +124,12 @@ public class Issue extends AbstractObject implements Serializable {
 	// this.typesIssues = Type.valueOf(typesIssues);
 	// }
 
-	public Status getIssueStatus() {
-		return issueStatus;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setIssueStatus(Status issueStatus) {
-		this.issueStatus = issueStatus;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public String getSummary() {
@@ -209,11 +209,11 @@ public class Issue extends AbstractObject implements Serializable {
 		this.project = project;
 	}
 
-	public BuildProject getBuildFound() {
+	public BuildProject getBuild() {
 		return build;
 	}
 
-	public void setBuildFound(BuildProject build) {
+	public void setBuild(BuildProject build) {
 		this.build = build;
 	}
 
@@ -240,7 +240,7 @@ public class Issue extends AbstractObject implements Serializable {
 				+ description + ", createDate=" + createDate + ", modifyDate="
 				+ modifyDate + ", assignee=" + assignee + ", createdBy="
 				+ createdBy + ", modifiedBy=" + modifiedBy + ", project="
-				+ project + ", issueStatus=" + issueStatus + ", build=" + build
+				+ project + ", status=" + status + ", build=" + build
 				+ ", attachments=" + attachments + ", commentsIssue="
 				+ commentsIssue + "]";
 	}

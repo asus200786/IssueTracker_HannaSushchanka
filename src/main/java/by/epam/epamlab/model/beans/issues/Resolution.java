@@ -11,11 +11,10 @@ public class Resolution extends AbstractObject {
 	private String resolution;
 
 	public Resolution(short idResolution) {
-		super();
+		setId(idResolution);
 	}
 
 	public Resolution(Short idResolution, String resolution) {
-		super();
 		this.resolution = resolution;
 	}
 

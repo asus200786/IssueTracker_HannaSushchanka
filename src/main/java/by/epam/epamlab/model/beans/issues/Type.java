@@ -11,11 +11,11 @@ public class Type extends AbstractObject {
 	private String type;
 
 	public Type(Short idType) {
-		super();
+		setId(idType);
 	}
 
-	public Type(Short igType, String type) {
-		super();
+	public Type(Short idType, String type) {
+		setId(idType);
 		this.type = type;
 	}
 

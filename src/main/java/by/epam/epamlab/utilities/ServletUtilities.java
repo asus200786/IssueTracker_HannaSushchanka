@@ -119,15 +119,15 @@ public class ServletUtilities {
 				stringBuilder.append("<td>\n").append(issue.getId())
 						.append("</td>\n");
 				stringBuilder.append("<td>\n")
-						.append(issue.getPriorityValues()).append("</td>\n");
+						.append(issue.getPriority()).append("</td>\n");
 				stringBuilder.append("<td>\n")
 						.append(issue.getAssignee().getFirstName()).append(" ")
 						.append(issue.getAssignee().getLastName()).append(" ")
 						.append(issue.getAssignee().getEmailAddress())
 						.append("</td>\n");
-				stringBuilder.append("<td>\n").append(issue.getTypesIssues())
+				stringBuilder.append("<td>\n").append(issue.getType())
 						.append("</td>\n");
-				stringBuilder.append("<td>\n").append(issue.getIssueStatus())
+				stringBuilder.append("<td>\n").append(issue.getStatus())
 						.append("</td>\n");
 				stringBuilder.append("<td>\n").append(issue.getSummary())
 						.append("</td>\n");

@@ -15,11 +15,12 @@ public class BuildProject extends AbstractObject implements Serializable {
 	private long idProject;
 
 	public BuildProject(short idBuildProject) {
-		super();
+		setId(idBuildProject);
 	}
 
-	public BuildProject(short idBuildProject, String buildProject, long idProject) {
-		super();
+	public BuildProject(short idBuildProject, String buildProject,
+			long idProject) {
+		setId(idBuildProject);
 		this.buildProject = buildProject;
 		this.idProject = idProject;
 	}

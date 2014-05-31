@@ -49,6 +49,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 	}
 
 	// get Issue by idIssue
+	@Override
 	public Issue getObjectById(long idIssue) throws ExceptionDAO {
 		connection = null;
 		preparedStatement = null;
@@ -87,6 +88,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		return issue;
 	}
 
+	@Override
 	public List<Issue> getObjectsList() throws ExceptionDAO {
 		Issue issue = null;
 		List<Issue> issues = new ArrayList<Issue>();
@@ -124,6 +126,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		return issues;
 	}
 
+	@Override
 	public List<Issue> getIssueListbyAssignee(User assignee)
 			throws ExceptionDAO {
 		Issue issue = null;
@@ -165,6 +168,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		return issues;
 	}
 
+	@Override
 	public void addIssue(Issue issue) throws ExceptionDAO {
 		connection = null;
 		preparedStatement = null;
@@ -180,19 +184,19 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					issue.getDescription());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_STATUS_PARAMETER_INDEX, issue
-							.getIssueStatus().getId());
+							.getStatus().getId());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_TYPE_PARAMETER_INDEX, issue
-							.getTypesIssues().getId());
+							.getType().getId());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_PRIORITY_PARAMETER_INDEX, issue
-							.getPriorityValues().getId());
+							.getPriority().getId());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_PROJECT_PARAMETER_INDEX, issue
 							.getProject().getId());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_BUILD_PROJECT_PARAMETER_INDEX,
-					issue.getBuildFound().getId());
+					issue.getBuild().getId());
 			if (issue.getAssignee() != null) {
 				preparedStatement.setLong(
 						SQLConstants.ADDING_ISSUE_ASSIGNEE_PARAMETER_INDEX,
@@ -227,6 +231,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		}
 	}
 
+	@Override
 	public void updateIssue(Issue issue) throws ExceptionDAO {
 		connection = null;
 		preparedStatement = null;
@@ -243,8 +248,8 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					issue.getDescription());
 			preparedStatement.setLong(
 					SQLConstants.STATUS_UPDATE_ISSUE_PARAMETER_INDEX, issue
-							.getIssueStatus().getId());
-			if (issue.getResolution() != null) {
+							.getStatus().getId());
+			if (issue.getResolution().getId() != 0) {
 				preparedStatement.setLong(
 						SQLConstants.RESOLUTION_UPDATE_ISSUE_PARAMETER_INDEX,
 						issue.getResolution().getId());
@@ -255,16 +260,16 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			}
 			preparedStatement.setLong(
 					SQLConstants.TYPE_UPDATE_ISSUE_PARAMETER_INDEX, issue
-							.getTypesIssues().getId());
+							.getType().getId());
 			preparedStatement.setLong(
 					SQLConstants.PRIORITY_UPDATE_ISSUE_PARAMETER_INDEX, issue
-							.getPriorityValues().getId());
+							.getPriority().getId());
 			preparedStatement.setLong(
 					SQLConstants.PROJECT_UPDATE_ISSUE_PARAMETER_INDEX, issue
 							.getProject().getId());
 			preparedStatement.setLong(
 					SQLConstants.BUILD_FOUND_UPDATE_ISSUE_PARAMETER_INDEX,
-					issue.getBuildFound().getId());
+					issue.getBuild().getId());
 			if (issue.getAssignee() != null) {
 				preparedStatement.setLong(
 						SQLConstants.ASSIGNEE_UPDATE_ISSUE_PARAMETER_INDEX,

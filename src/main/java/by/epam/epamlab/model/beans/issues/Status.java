@@ -11,7 +11,7 @@ public class Status extends AbstractObject {
 	private String status;
 
 	public Status(short idStatus) {
-		super();
+		setId(idStatus);
 	}
 
 	public Status(short idStatus, String status) {

@@ -101,11 +101,9 @@ public class SQLConstants {
 	public static final int ADDING_ISSUE_CREATE_BY_USER_PARAMETER_INDEX = 9;
 
 	public static final String UPDATE_ISSUE = "UPDATE Issues SET "
-			+ "summaryIssue=?, descriprionIssue=?, status=?,"
-			+ "resolution = (SELECT idResolution FROM Resolutions WHERE resolution=?), "
-			+ "type=(SELECT idType FROM Types WHERE type = ?), "
-			+ "priority = (SELECT idPriority FROM Priorities WHERE priority=?),"
-			+ "project=?, buildFound=?, assignee=?, modify_date = CURDATE(), modified_by=? "
+			+ "summaryIssue=?, descriptionIssue=?, status=?,"
+			+ "resolution =?, type=?, priority = ?,project=?, buildFound=?, assignee=?,"
+			+ "modify_date = CURDATE(), modified_by=? "
 			+ "WHERE idIssue = ?";
 	public static final int SUMMARY_UPDATE_ISSUE_PARAMETER_INDEX = 1;
 	public static final int DESCRIPTION_UPDATE_ISSUE_PARAMETER_INDEX = 2;

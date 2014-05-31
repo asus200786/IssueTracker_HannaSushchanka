@@ -53,12 +53,12 @@
 												</a>
 											</c:otherwise>
 										</c:choose></td>
-									<td><c:out value="${issue.priorityValues.priority}" /></td>
+									<td><c:out value="${issue.priority.priority}" /></td>
 									<td><c:out value="${issue.assignee.firstName}" />
 										&amp;nbsp;<c:out value=" ${issue.assignee.lastName}" />&amp;nbsp;
 										<c:out value="${issue.assignee.emailAddress}" /></td>
-									<td><c:out value="${issue.typesIssues.type}" /></td>
-									<td><c:out value="${issue.issueStatus.status}" /></td>
+									<td><c:out value="${issue.type.type}" /></td>
+									<td><c:out value="${issue.status.status}" /></td>
 									<td><c:out value=" ${issue.summary}" /></td>
 								</tr>
 							</c:forEach>

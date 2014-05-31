@@ -104,22 +104,22 @@ public class IssuesHandler extends DefaultHandler {
 			currentIssue.setDescription(content);
 			break;
 		case STATUS:
-			currentIssue.getIssueStatus().setStatus(content);
+			currentIssue.getStatus().setStatus(content);
 			break;
 		case RESOLUTION:
 			currentIssue.getResolution().setResolution(content);
 			break;
 		case TYPE:
-			currentIssue.getTypesIssues().setType(content);
+			currentIssue.getType().setType(content);
 			break;
 		case PRIORITY:
-			currentIssue.getPriorityValues().setPriority(content);
+			currentIssue.getPriority().setPriority(content);
 			break;
 		case PROJECT:
 			currentIssue.getProject().setNameProject(content);
 			break;
 		case BUILDFOUND:
-			currentIssue.getBuildFound().setBuildProject(content);
+			currentIssue.getBuild().setBuildProject(content);
 			break;
 		case ASSIGNEE:
 			currentIssue.getAssignee();

@@ -28,7 +28,7 @@ public class ConstantsControllers {
 	public static final String TYPE_ISSUE = "typeIssue";
 	public static final String PRIORITY_ISSUE = "priorityIssue";
 	public static final String PROJECT = "projectIssue";
-	public static final String BUILD_PROJECT = "buildFound";
+	public static final String BUILD_PROJECT = "buildFoundIssue";
 	public static final String ASSIGNEE = "assigneeIssue";
 
 	// For authentication.jspf & mail.jspx

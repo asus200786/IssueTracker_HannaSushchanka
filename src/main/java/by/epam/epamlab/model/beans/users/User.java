@@ -17,17 +17,16 @@ public class User extends AbstractObject {
 	private String password;
 
 	public User(long idUser) {
-		super();
+		setId(idUser);
 	}
 
 	public User(long idUser, String login, String password, RolesUser role) {
-		super.setId(idUser);
+		setId(idUser);
 		this.login = login;
 		this.password = password;
 		this.role = role;
 	}
 
-	
 	public User(String login, String firstName, String lastName,
 			String emailAddress, String role, String password) {
 		this.login = login;
@@ -90,7 +89,7 @@ public class User extends AbstractObject {
 	public void setRole(String role) {
 		this.role = RolesUser.valueOf(role);
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}

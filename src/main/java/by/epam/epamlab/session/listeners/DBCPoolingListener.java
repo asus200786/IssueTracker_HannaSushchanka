@@ -45,29 +45,13 @@ public class DBCPoolingListener implements ServletContextListener {
 	private static JdbcConnectionPool pool;
 	private Connection connection;
 
-	private static DBCPoolingListener instance;
-//	private static final String DATA_SOURCE_POOL = "dataSourcePool";
-
 	private static final String DBCP_DESTROYED = "DBCP destroyed.";
 	private static final String DBCP_START = "DBCP start.";
-
-	public DBCPoolingListener() {
-	}
-
-	// Here I doubt it. Is implementing Singleton in the listener probably not
-	// correct? I can not create private constructor DBCPoolingListener().
-	public static DBCPoolingListener getInstance() {
-		if (instance == null) {
-			instance = new DBCPoolingListener();
-		}
-		return instance;
-	}
 
 	/**
 	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
 	 */
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
-		instance = this;
 		ServletContext servletContext = servletContextEvent.getServletContext();
 		loadParameters(servletContext);
 		createUrlNewDataBase(servletContext);
@@ -113,16 +97,6 @@ public class DBCPoolingListener implements ServletContextListener {
 		// servletContext.setAttribute(DATA_SOURCE_POOL, pool);
 	}
 
-//	private void setUpConnection(ServletContext servletContext) {
-//		try {
-//			connection = Connections.getConnection();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			logger.error(ERROR_H2_SQL_CONNECTION, e);
-//		}
-//		// servletContext.setAttribute(ConstantsControllers.CONNECTION,
-//		// connection);
-//	}
 
 	/**
 	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
@@ -132,7 +106,6 @@ public class DBCPoolingListener implements ServletContextListener {
 		closeAllOpenConnections(servletContext);
 		closeConnection(servletContext);
 		disposeConnectionPool(servletContext);
-		instance = null;
 		logger.info(DBCP_DESTROYED);
 	}
 

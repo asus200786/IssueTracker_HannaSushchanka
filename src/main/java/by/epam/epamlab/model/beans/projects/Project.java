@@ -21,13 +21,13 @@ public class Project extends AbstractObject implements Serializable {
 	private List<BuildProject> buildsProject = new ArrayList<BuildProject>();
 
 	public Project(long idProject) {
-		super();
+		setId(idProject);
 	}
 
-	public Project(long idProject, String nameProject, String descriptionProject,
-			User managerProject, BuildProject currentBuildProject) {
-		super();
-		super.setId(idProject);
+	public Project(long idProject, String nameProject,
+			String descriptionProject, User managerProject,
+			BuildProject currentBuildProject) {
+		setId(idProject);
 		this.nameProject = nameProject;
 		this.descriptionProject = descriptionProject;
 		this.managerProject = managerProject;

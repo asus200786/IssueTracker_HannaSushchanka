@@ -6,7 +6,7 @@
 <title>Login Error</title>
 </head>
 <body>
-	<c:url var="url" value="/index.jspx" />
+	<c:url var="url" value="/view/index.jspx" />
 	<h2>Invalid user name or password.</h2>
 
 	<p>
