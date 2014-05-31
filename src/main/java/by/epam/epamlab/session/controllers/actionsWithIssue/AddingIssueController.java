@@ -24,10 +24,7 @@ import by.epam.epamlab.model.factories.DAOFactory;
 import by.epam.epamlab.model.interfaces.IIssueDAO;
 import by.epam.epamlab.session.controllers.AbstractController;
 
-/**
- * Servlet implementation class AddingIssue
- */
-@WebServlet("/AddingIssue")
+@WebServlet("/AddingIssueController")
 public class AddingIssueController extends AbstractController {
 	private static final long serialVersionUID = 201405202113L;
 	Logger logger = LoggerFactory.getLogger(AddingIssueController.class);
@@ -55,46 +52,46 @@ public class AddingIssueController extends AbstractController {
 			jump(ConstantsControllers.ADDING_ISSUE_JSPX,
 					ConstantsControllers.NULL_REQUIRED_FIELDS, request,
 					response);
+		}
 
-			short idPriority;
-			short idType;
-			long idProject;
-			long idAssignee;
-			User createsByUser = (User) request.getSession().getAttribute(
-					ConstantsControllers.USER);
-			long idCreatedByUser = createsByUser.getId();
-			short idBuildProject;
-			short idStatus;
-			try {
-				idPriority = Short.valueOf(priority);
-				idStatus = Short.valueOf(status);
-				idType = Short.valueOf(type);
-				idProject = Long.valueOf(project);
-				idBuildProject = Short.valueOf(buildFound);
-				if (assignee != null) {
-					idAssignee = Long.parseLong(assignee);
-				} else {
-					idAssignee = Constants.EMPTY_LONG;
-				}
-
-				Issue issue = new Issue(new Priority(idPriority), new Type(idType),
-						summary, description, new User(idAssignee), new User(
-								idCreatedByUser), new Project(idProject),
-						new Status(idStatus), new BuildProject(idBuildProject));
-				
-				IIssueDAO issueDAO = DAOFactory.getIssueDAOFromFactory();
-				issueDAO.addIssue(issue);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				logger.error(e.getMessage(), e);
-				jump(ConstantsControllers.ADDING_ISSUE_JSPX,
-						Constants.ERROR_DATA, request, response);
-			} catch (ExceptionDAO e) {
-				e.printStackTrace();
-				logger.error(e.getMessage(), e);
-				jump(ConstantsControllers.ADDING_ISSUE_JSPX,
-						Constants.ERROR_ADDING_ISSUE, request, response);
+		short idPriority;
+		short idType;
+		long idProject;
+		long idAssignee;
+		User createsByUser = (User) request.getSession().getAttribute(
+				ConstantsControllers.USER);
+		long idCreatedByUser = createsByUser.getId();
+		short idBuildProject;
+		short idStatus;
+		try {
+			idPriority = Short.valueOf(priority);
+			idStatus = Short.valueOf(status);
+			idType = Short.valueOf(type);
+			idProject = Long.valueOf(project);
+			idBuildProject = Short.valueOf(buildFound);
+			if (assignee != null) {
+				idAssignee = Long.parseLong(assignee);
+			} else {
+				idAssignee = Constants.EMPTY_LONG;
 			}
+			Issue issue = new Issue(new Priority(idPriority), new Type(idType),
+					summary, description, new User(idAssignee), new User(
+							idCreatedByUser), new Project(idProject),
+					new Status(idStatus), new BuildProject(idBuildProject));
+
+			IIssueDAO issueDAO = DAOFactory.getIssueDAOFromFactory();
+			issueDAO.addIssue(issue);
+			jump(ConstantsControllers.MAIN_JSPX, request, response);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			jump(ConstantsControllers.ADDING_ISSUE_JSPX, Constants.ERROR_DATA,
+					request, response);
+		} catch (ExceptionDAO e) {
+			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			jump(ConstantsControllers.ADDING_ISSUE_JSPX,
+					Constants.ERROR_ADDING_ISSUE, request, response);
 		}
 	}
 }

@@ -84,11 +84,9 @@ public class SQLConstants {
 	// + "FROM Issues, Statuses, Resolutions, Types, Priorities, Buildsproject)"
 	// + " WHERE RowNumber BETWEEN 0 AND 11 ORDER BY RowNumber";
 
-	public static final String ADDING_ISSUE = "INSERT INTO Issues(symmaryIssue, descriptionIssue, status, type,"
+	public static final String ADDING_ISSUE = "INSERT INTO Issues(summaryIssue, descriptionIssue, status, type,"
 			+ "priority, project, buildfound, assignee, create_date, create_by) VALUES "
-			+ "(?, ?, (SELECT idStatus FROM statuses WHERE status =?), "
-			+ "(SELECT idType FROM types WHERE type = ?),(SELECT idPriority FROM "
-			+ "priorities WHERE priority = ?), ?, ?, ?, CURDATE(),?)";
+			+ "(?, ?, ?, ?, ?, ?, ?, ?, CURDATE(),?)";
 
 	public static final int ADDING_ISSUE_SUMMARY_PARAMETER_INDEX = 1;
 	public static final int ADDING_ISSUE_DESCRIPTION_PARAMETER_INDEX = 2;
