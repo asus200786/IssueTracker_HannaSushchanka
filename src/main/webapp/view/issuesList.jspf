@@ -42,9 +42,17 @@
 						<tbody>
 							<c:forEach var="issue" items="${issueList}">
 								<tr>
-									<td><a
-										href="${contextPath}/EditElementsIssueController?editIdIssue=${issue.id}"><c:out
-												value="${issue.id}" /></a></td>
+									<td><c:choose>
+											<c:when test="${user eq 'Guest'}">
+												<c:out value="${issue.id}" />
+											</c:when>
+											<c:otherwise>
+												<a
+													href="${contextPath}/EditElementsIssueController?editIdIssue=${issue.id}">
+													<c:out value="${issue.id}" />
+												</a>
+											</c:otherwise>
+										</c:choose></td>
 									<td><c:out value="${issue.priorityValues.priority}" /></td>
 									<td><c:out value="${issue.assignee.firstName}" />
 										&amp;nbsp;<c:out value=" ${issue.assignee.lastName}" />&amp;nbsp;
