@@ -78,7 +78,6 @@ public class AddingIssueController extends AbstractController {
 					summary, description, new User(idAssignee), new User(
 							idCreatedByUser), new Project(idProject),
 					new Status(idStatus), new BuildProject(idBuildProject));
-
 			IIssueDAO issueDAO = DAOFactory.getIssueDAOFromFactory();
 			issueDAO.addIssue(issue);
 			jump(ConstantsControllers.MAIN_JSPX, request, response);
