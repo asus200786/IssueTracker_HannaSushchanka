@@ -135,7 +135,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 		preparedStatement = null;
 		resultSet = null;
 		try {
-			long assigneeId = assignee.getId();
+			long assigneeId = assignee.getIdUser();
 			connection = Connections.getConnection();
 			preparedStatement = connection
 					.prepareStatement(SQLConstants.SELECT_N_LAST_ADDED_ISSUE_BY_ASSIGNEE);
@@ -184,23 +184,23 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					issue.getDescription());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_STATUS_PARAMETER_INDEX, issue
-							.getStatus().getId());
+							.getStatus().getIdStatus());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_TYPE_PARAMETER_INDEX, issue
-							.getType().getId());
+							.getType().getIdType());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_PRIORITY_PARAMETER_INDEX, issue
-							.getPriority().getId());
+							.getPriority().getIdPriority());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_PROJECT_PARAMETER_INDEX, issue
-							.getProject().getId());
+							.getProject().getIdProject());
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_BUILD_PROJECT_PARAMETER_INDEX,
-					issue.getBuild().getId());
+					issue.getBuild().getIdBuildProject());
 			if (issue.getAssignee() != null) {
 				preparedStatement.setLong(
 						SQLConstants.ADDING_ISSUE_ASSIGNEE_PARAMETER_INDEX,
-						issue.getAssignee().getId());
+						issue.getAssignee().getIdUser());
 			} else {
 				preparedStatement.setNull(
 						SQLConstants.ADDING_ISSUE_ASSIGNEE_PARAMETER_INDEX,
@@ -208,7 +208,7 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			}
 			preparedStatement.setLong(
 					SQLConstants.ADDING_ISSUE_CREATE_BY_USER_PARAMETER_INDEX,
-					issue.getCreatedBy().getId());
+					issue.getCreatedBy().getIdUser());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -248,11 +248,11 @@ public class IssueImplementatorDAO implements IIssueDAO {
 					issue.getDescription());
 			preparedStatement.setLong(
 					SQLConstants.STATUS_UPDATE_ISSUE_PARAMETER_INDEX, issue
-							.getStatus().getId());
-			if (issue.getResolution().getId() != 0) {
+							.getStatus().getIdStatus());
+			if (issue.getResolution().getIdResolution() != 0) {
 				preparedStatement.setLong(
 						SQLConstants.RESOLUTION_UPDATE_ISSUE_PARAMETER_INDEX,
-						issue.getResolution().getId());
+						issue.getResolution().getIdResolution());
 			} else {
 				preparedStatement.setNull(
 						SQLConstants.RESOLUTION_UPDATE_ISSUE_PARAMETER_INDEX,
@@ -260,20 +260,20 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			}
 			preparedStatement.setLong(
 					SQLConstants.TYPE_UPDATE_ISSUE_PARAMETER_INDEX, issue
-							.getType().getId());
+							.getType().getIdType());
 			preparedStatement.setLong(
 					SQLConstants.PRIORITY_UPDATE_ISSUE_PARAMETER_INDEX, issue
-							.getPriority().getId());
+							.getPriority().getIdPriority());
 			preparedStatement.setLong(
 					SQLConstants.PROJECT_UPDATE_ISSUE_PARAMETER_INDEX, issue
-							.getProject().getId());
+							.getProject().getIdProject());
 			preparedStatement.setLong(
 					SQLConstants.BUILD_FOUND_UPDATE_ISSUE_PARAMETER_INDEX,
-					issue.getBuild().getId());
+					issue.getBuild().getIdBuildProject());
 			if (issue.getAssignee() != null) {
 				preparedStatement.setLong(
 						SQLConstants.ASSIGNEE_UPDATE_ISSUE_PARAMETER_INDEX,
-						issue.getAssignee().getId());
+						issue.getAssignee().getIdUser());
 			} else {
 				preparedStatement.setLong(
 						SQLConstants.ASSIGNEE_UPDATE_ISSUE_PARAMETER_INDEX,
@@ -281,9 +281,9 @@ public class IssueImplementatorDAO implements IIssueDAO {
 			}
 			preparedStatement.setLong(
 					SQLConstants.MODIFIED_BY_UPDATE_ISSUE_PARAMETER_INDEX,
-					issue.getModifiedBy().getId());
+					issue.getModifiedBy().getIdUser());
 			preparedStatement.setLong(
-					SQLConstants.IDISSUE_UPDATE_PARAMETER_INDEX, issue.getId());
+					SQLConstants.IDISSUE_UPDATE_PARAMETER_INDEX, issue.getIdIssue());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

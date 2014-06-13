@@ -5,19 +5,27 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.AbstractObject;
 import by.epam.epamlab.model.beans.projects.BuildProject;
 import by.epam.epamlab.model.beans.projects.Project;
 import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.utilities.DateHelper;
 
-public class Issue extends AbstractObject implements Serializable {
+@Entity
+@Table(name = "Issues", catalog = "IssueTrackerSushchanka", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "LOGIN"),
+		@UniqueConstraint(columnNames = "EMAILADDRESS") })
+public class Issue implements Serializable {
 	Logger logger = LoggerFactory.getLogger(Issue.class);
 	private static final long serialVersionUID = 201404250059L;
 
+	private long idIssue;
 	private Priority priority;
 	private Resolution resolution;
 	private Type type;
@@ -33,7 +41,7 @@ public class Issue extends AbstractObject implements Serializable {
 	private BuildProject build;
 
 	private List<Attachment> attachments;
-	private List<CommentIssue> commentsIssue;
+	private List<Comment> commentsIssue;
 
 	public Issue() {
 		super();
@@ -42,9 +50,9 @@ public class Issue extends AbstractObject implements Serializable {
 	public Issue(Priority priority, Type type, String summary,
 			String description, User assignee, User createdBy, Project project,
 			Status status, BuildProject build) {
-		super();
 		this.priority = priority;
 		this.type = type;
+
 		this.summary = summary;
 		this.description = description;
 		this.assignee = assignee;
@@ -57,7 +65,7 @@ public class Issue extends AbstractObject implements Serializable {
 	public Issue(long idIssue, Priority priority, Resolution resolution,
 			Type type, String summary, String description, User assignee,
 			User modifiedBy, Project project, Status status, BuildProject build) {
-		setId(idIssue);
+		setIdIssue(idIssue);
 		this.priority = priority;
 		this.resolution = resolution;
 		this.type = type;
@@ -75,7 +83,7 @@ public class Issue extends AbstractObject implements Serializable {
 			Date modifyDate, User assignee, User createdBy, User modifiedBy,
 			Project project, Status status, BuildProject build) {
 		super();
-		setId(idIssue);
+		setIdIssue(idIssue);
 		this.priority = priority;
 		this.resolution = resolution;
 		this.type = type;
@@ -92,7 +100,15 @@ public class Issue extends AbstractObject implements Serializable {
 	}
 
 	public Issue(long idIssue) {
-		setId(idIssue);
+		setIdIssue(idIssue);
+	}
+
+	public long getIdIssue() {
+		return idIssue;
+	}
+
+	public void setIdIssue(long idIssue) {
+		this.idIssue = idIssue;
 	}
 
 	public Priority getPriority() {
@@ -119,11 +135,6 @@ public class Issue extends AbstractObject implements Serializable {
 		this.type = type;
 	}
 
-	//
-	// public void setTypesIssues(String typesIssues) {
-	// this.typesIssues = Type.valueOf(typesIssues);
-	// }
-
 	public Status getStatus() {
 		return status;
 	}
@@ -147,11 +158,6 @@ public class Issue extends AbstractObject implements Serializable {
 	public void setResolution(Resolution resolution) {
 		this.resolution = resolution;
 	}
-
-	//
-	// public void setResolution(String resolution) {
-	// this.resolution = Resolution.valueOf(resolution);
-	// }
 
 	public String getDescription() {
 		return description;
@@ -225,11 +231,11 @@ public class Issue extends AbstractObject implements Serializable {
 		this.attachments = attachments;
 	}
 
-	public List<CommentIssue> getCommentsIssue() {
+	public List<Comment> getCommentsIssue() {
 		return commentsIssue;
 	}
 
-	public void setCommentsIssue(List<CommentIssue> commentsIssue) {
+	public void setCommentsIssue(List<Comment> commentsIssue) {
 		this.commentsIssue = commentsIssue;
 	}
 

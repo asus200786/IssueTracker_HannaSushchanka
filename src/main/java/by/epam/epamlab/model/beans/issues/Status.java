@@ -1,23 +1,37 @@
 package by.epam.epamlab.model.beans.issues;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.AbstractObject;
-
-public class Status extends AbstractObject {
+public class Status implements Serializable {
 	private static final long serialVersionUID = 201405141525L;
 	Logger logger = LoggerFactory.getLogger(Status.class);
+	
+	private int idStatus;
 	private String status;
 
-	public Status(short idStatus) {
-		setId(idStatus);
+	public Status() {
+		super();
 	}
 
-	public Status(short idStatus, String status) {
+	public Status(int idStatus) {
+		setIdStatus(idStatus);
+	}
+
+	public Status(int idStatus, String status) {
 		super();
-		setId(idStatus);
+		setIdStatus(idStatus);
 		this.status = status;
+	}
+
+	public int getIdStatus() {
+		return idStatus;
+	}
+
+	public void setIdStatus(int idStatus) {
+		this.idStatus = idStatus;
 	}
 
 	public String getStatus() {

@@ -5,24 +5,35 @@ import java.io.Serializable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.AbstractObject;
-
-public class BuildProject extends AbstractObject implements Serializable {
+public class BuildProject implements Serializable {
 	private static final long serialVersionUID = 201405221945L;
 	Logger logger = LoggerFactory.getLogger(BuildProject.class);
 
+	private long idBuildProject;
 	private String buildProject;
 	private long idProject;
 
+	public BuildProject() {
+		super();
+	}
+
 	public BuildProject(short idBuildProject) {
-		setId(idBuildProject);
+		setIdBuildProject(idBuildProject);
 	}
 
 	public BuildProject(short idBuildProject, String buildProject,
 			long idProject) {
-		setId(idBuildProject);
+		setIdBuildProject(idBuildProject);
 		this.buildProject = buildProject;
 		this.idProject = idProject;
+	}
+
+	public long getIdBuildProject() {
+		return idBuildProject;
+	}
+
+	public void setIdBuildProject(long idBuildProject) {
+		this.idBuildProject = idBuildProject;
 	}
 
 	public String getBuildProject() {
@@ -31,14 +42,6 @@ public class BuildProject extends AbstractObject implements Serializable {
 
 	public void setBuildProject(String buildProject) {
 		this.buildProject = buildProject;
-	}
-
-	public long getIdProject() {
-		return idProject;
-	}
-
-	public void setIdProject(long idProject) {
-		this.idProject = idProject;
 	}
 
 	@Override

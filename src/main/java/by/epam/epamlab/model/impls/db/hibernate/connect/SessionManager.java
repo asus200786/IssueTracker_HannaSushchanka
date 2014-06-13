@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.impls.hibernate;
+package by.epam.epamlab.model.impls.db.hibernate.connect;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -8,13 +8,13 @@ import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HibernateUtil {
-	Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
+public class SessionManager {
+	Logger logger = LoggerFactory.getLogger(SessionManager.class);
 
 	private static SessionFactory sessionFactory = buildSessionFactory();
 	private static ServiceRegistry serviceRegistry;
 
-	public static SessionFactory getSessionfactory() {
+	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
@@ -35,6 +35,6 @@ public class HibernateUtil {
 
 	public static void shutdown() {
 		// Close caches and connection pools
-		getSessionfactory().close();
+		getSessionFactory().close();
 	}
 }

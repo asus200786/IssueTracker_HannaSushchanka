@@ -1,14 +1,28 @@
 package by.epam.epamlab.model.beans.users;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.AbstractObject;
-
-public class User extends AbstractObject {
+@Entity
+@Table(name = "users", catalog = "IssueTrackerSushchanka", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "LOGIN"),
+		@UniqueConstraint(columnNames = "EMAILADDRESS") })
+public class User implements Serializable {
 	Logger logger = LoggerFactory.getLogger(User.class);
 	private static final long serialVersionUID = 201404240248L;
 
+	private long idUser;
 	private String login;
 	private String firstName;
 	private String lastName;
@@ -16,12 +30,16 @@ public class User extends AbstractObject {
 	private RolesUser role;
 	private String password;
 
+	public User() {
+		super();
+	}
+
 	public User(long idUser) {
-		setId(idUser);
+		setIdUser(idUser);
 	}
 
 	public User(long idUser, String login, String password, RolesUser role) {
-		setId(idUser);
+		setIdUser(idUser);
 		this.login = login;
 		this.password = password;
 		this.role = role;
@@ -46,6 +64,18 @@ public class User extends AbstractObject {
 
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "IDUSER", unique = true, nullable = false)
+	public long getIdUser() {
+		return idUser;
+	}
+
+	protected void setIdUser(long idUser) {
+		this.idUser = idUser;
+	}
+
+	@Column(name = "LOGIN", unique = true, nullable = false)
 	public String getLogin() {
 		return login;
 	}
@@ -54,6 +84,7 @@ public class User extends AbstractObject {
 		this.login = password;
 	}
 
+	@Column(name = "FIRSTNAME", unique = false, nullable = false)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -62,6 +93,7 @@ public class User extends AbstractObject {
 		this.firstName = firstName;
 	}
 
+	@Column(name = "LASTNAME", unique = false, nullable = false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -70,6 +102,7 @@ public class User extends AbstractObject {
 		this.lastName = lastName;
 	}
 
+	@Column(name = "EMAILADDRESS", unique = true, nullable = false)
 	public String getEmailAddress() {
 		return emailAddress;
 	}
@@ -78,6 +111,7 @@ public class User extends AbstractObject {
 		this.emailAddress = emailAddress;
 	}
 
+	@Column(name = "ROLE", unique = false, nullable = false)
 	public RolesUser getRole() {
 		return role;
 	}
@@ -90,6 +124,7 @@ public class User extends AbstractObject {
 		this.role = RolesUser.valueOf(role);
 	}
 
+	@Column(name = "PASSWORD", unique = false, nullable = false)
 	public String getPassword() {
 		return password;
 	}
@@ -126,7 +161,7 @@ public class User extends AbstractObject {
 
 	@Override
 	public String toString() {
-		return "User [Id=" + super.getId() + "firstName=" + firstName
+		return "User [Id=" + getIdUser() + "firstName=" + firstName
 				+ ", lastName=" + lastName + ", emailAddress=" + emailAddress
 				+ ", role=" + role + ", password=" + password + "]";
 	}

@@ -1,21 +1,35 @@
 package by.epam.epamlab.model.beans.issues;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.AbstractObject;
-
-public class Resolution extends AbstractObject {
+public class Resolution implements Serializable {
 	private static final long serialVersionUID = 201405171645L;
 	Logger logger = LoggerFactory.getLogger(Resolution.class);
+
+	private int idResolution;
 	private String resolution;
 
+	public Resolution() {
+		super();
+	}
+
 	public Resolution(short idResolution) {
-		setId(idResolution);
+		setIdResolution(idResolution);
 	}
 
 	public Resolution(Short idResolution, String resolution) {
 		this.resolution = resolution;
+	}
+
+	public int getIdResolution() {
+		return idResolution;
+	}
+
+	public void setIdResolution(int idResolution) {
+		this.idResolution = idResolution;
 	}
 
 	public String getResolution() {

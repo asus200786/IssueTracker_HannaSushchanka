@@ -1,22 +1,36 @@
 package by.epam.epamlab.model.beans.issues;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.AbstractObject;
-
-public class Type extends AbstractObject {
+public class Type implements Serializable {
 	private static final long serialVersionUID = 201405161548L;
 	Logger logger = LoggerFactory.getLogger(Type.class);
+
+	private int idType;
 	private String type;
 
-	public Type(Short idType) {
-		setId(idType);
+	public Type() {
+		super();
 	}
 
-	public Type(Short idType, String type) {
-		setId(idType);
+	public Type(int idType) {
+		setIdType(idType);
+	}
+
+	public Type(int idType, String type) {
+		setIdType(idType);
 		this.type = type;
+	}
+
+	public int getIdType() {
+		return idType;
+	}
+
+	public void setIdType(int idType) {
+		this.idType = idType;
 	}
 
 	public String getType() {

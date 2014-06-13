@@ -7,13 +7,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.AbstractObject;
 import by.epam.epamlab.model.beans.users.User;
 
-public class Project extends AbstractObject implements Serializable {
+public class Project implements Serializable {
 	private static final long serialVersionUID = 201405202311L;
 	Logger logger = LoggerFactory.getLogger(Project.class);
 
+	private long idProject;
 	private String nameProject;
 	private String descriptionProject;
 	private User managerProject;
@@ -21,17 +21,25 @@ public class Project extends AbstractObject implements Serializable {
 	private List<BuildProject> buildsProject = new ArrayList<BuildProject>();
 
 	public Project(long idProject) {
-		setId(idProject);
+		setIdProject(idProject);
 	}
 
 	public Project(long idProject, String nameProject,
 			String descriptionProject, User managerProject,
 			BuildProject currentBuildProject) {
-		setId(idProject);
+		setIdProject(idProject);
 		this.nameProject = nameProject;
 		this.descriptionProject = descriptionProject;
 		this.managerProject = managerProject;
 		this.currentBuildProject = currentBuildProject;
+	}
+
+	public long getIdProject() {
+		return idProject;
+	}
+
+	public void setIdProject(long idProject) {
+		this.idProject = idProject;
 	}
 
 	public String getNameProject() {

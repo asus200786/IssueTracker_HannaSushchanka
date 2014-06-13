@@ -43,7 +43,7 @@ public class ServletUtilities {
 			stringBuilder
 					.append("<input type=\"password\" name=\"password\" size=\"25\" required=\"required\" class=\"inputPassword\">\n");
 			stringBuilder.append("<input type=\"submit\" value=\"Log In\">\n");
-			
+
 			stringBuilder.append("</form>\n");
 		} else {
 			stringBuilder.append("<div class=\"userMenu\">\n");
@@ -116,10 +116,10 @@ public class ServletUtilities {
 			stringBuilder.append("</thead>\n");
 			for (Issue issue : issuesList) {
 				stringBuilder.append("<tbody><tr>\n");
-				stringBuilder.append("<td>\n").append(issue.getId())
+				stringBuilder.append("<td>\n").append(issue.getIdIssue())
 						.append("</td>\n");
-				stringBuilder.append("<td>\n")
-						.append(issue.getPriority()).append("</td>\n");
+				stringBuilder.append("<td>\n").append(issue.getPriority())
+						.append("</td>\n");
 				stringBuilder.append("<td>\n")
 						.append(issue.getAssignee().getFirstName()).append(" ")
 						.append(issue.getAssignee().getLastName()).append(" ")

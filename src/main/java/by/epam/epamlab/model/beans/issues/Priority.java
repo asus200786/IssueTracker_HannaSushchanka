@@ -1,22 +1,32 @@
 package by.epam.epamlab.model.beans.issues;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.model.beans.AbstractObject;
-
-public class Priority extends AbstractObject {
+public class Priority implements Serializable {
 	private static final long serialVersionUID = 201405192246L;
 	Logger logger = LoggerFactory.getLogger(Priority.class);
+
+	private int idPriority;
 	private String priority;
 
-	public Priority(Short idPriority) {
-		setId(idPriority);
+	public Priority() {
+		super();
 	}
 
 	public Priority(Short idPriority, String priority) {
-		setId(idPriority);
+		setIdPriority(idPriority);
 		this.priority = priority;
+	}
+
+	public int getIdPriority() {
+		return idPriority;
+	}
+
+	protected void setIdPriority(int idPriority) {
+		this.idPriority = idPriority;
 	}
 
 	public String getPriority() {
