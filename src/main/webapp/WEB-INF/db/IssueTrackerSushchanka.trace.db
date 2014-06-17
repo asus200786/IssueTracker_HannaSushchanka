@@ -1797,3 +1797,200 @@ SELECT idUser, firstName, lastName, "
 org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT * FROM USERS WHERE LOGIN = ASUS200786@[*]GMAIL.COM, PASSWORD=5F4DCC3B5AA765D61D8327DEB882CF99 "
 Syntax error in SQL statement "SELECT * FROM USERS WHERE LOGIN = ASUS200786@[*]GMAIL.COM, PASSWORD=5F4DCC3B5AA765D61D8327DEB882CF99 "; SQL statement:
 SELECT * FROM USERS WHERE login = Asus200786@gmail.com, password=5f4dcc3b5aa765d61d8327deb882cf99 [42000-178]
+06-16 16:46:45 jdbc[5]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-178]
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:74)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:684)
+	at org.h2.server.web.WebApp.login(WebApp.java:958)
+	at org.h2.server.web.WebApp.process(WebApp.java:212)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	... 14 more
+06-17 15:00:26 jdbc[5]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-178]
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:74)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:684)
+	at org.h2.server.web.WebApp.login(WebApp.java:958)
+	at org.h2.server.web.WebApp.process(WebApp.java:212)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	... 14 more
+06-17 15:04:41 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "NOT"; SQL statement:
+CREATE TABLE COMMENT (ID_COMMENT INT NOT NULL PRIMARY KEY,  ADDED_BY INT NOT NULL,  ADD_DATE NOT NULL DEFAULT CURDATE(),  COMMENT VARCHAR(255) NOT NULL, ISSUE INT NOT NULL) [50004-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3963)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3826)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5723)
+	at org.h2.command.Parser.parseCreate(Parser.java:4122)
+	at org.h2.command.Parser.parsePrepared(Parser.java:351)
+	at org.h2.command.Parser.parse(Parser.java:306)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.prepareCommand(Parser.java:243)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-17 15:05:23 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Unknown data type: "CURDATE"; SQL statement:
+CREATE TABLE COMMENT (ID_COMMENT INT NOT NULL PRIMARY KEY,  ADDED_BY INT NOT NULL,  ADD_DATE CURDATE() NOT NULL DEFAULT ,  COMMENT VARCHAR(255) NOT NULL, ISSUE INT NOT NULL) [50004-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3963)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3826)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5723)
+	at org.h2.command.Parser.parseCreate(Parser.java:4122)
+	at org.h2.command.Parser.parsePrepared(Parser.java:351)
+	at org.h2.command.Parser.parse(Parser.java:306)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.prepareCommand(Parser.java:243)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:172)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:160)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1391)
+	at org.h2.server.web.WebApp.query(WebApp.java:1064)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1026)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1013)
+	at org.h2.server.web.WebThread.process(WebThread.java:168)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+06-17 15:08:50 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "CREATE TABLE COMMENT (ID_COMMENT INT NOT NULL PRIMARY KEY,  ADDED_BY INT NOT NULL,  ADD_DATE DATE NOT NULL DEFAULT ,[*]  COMMENT VARCHAR(255) NOT NULL, ISSUE INT NOT NULL)"; expected "NOT, EXISTS, INTERSECTS, SELECT, FROM"; SQL statement:
+CREATE TABLE COMMENT (ID_COMMENT INT NOT NULL PRIMARY KEY,  ADDED_BY INT NOT NULL,  ADD_DATE DATE NOT NULL DEFAULT ,  COMMENT VARCHAR(255) NOT NULL, ISSUE INT NOT NULL) [42001-178]
+06-17 15:10:16 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Cannot parse "DATE" constant "20140617"; SQL statement:
+INSERT INTO "PUBLIC"."COMMENT"("ID_COMMENT","ADDED_BY","ADD_DATE","COMMENT","ISSUE")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22007-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueDate.parse(ValueDate.java:71)
+	at org.h2.value.Value.convertTo(Value.java:860)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:158)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:144)
+	at org.h2.result.UpdatableRow.insertRow(UpdatableRow.java:323)
+	at org.h2.jdbc.JdbcResultSet.insertRow(JdbcResultSet.java:2968)
+	at org.h2.server.web.WebApp.editResult(WebApp.java:1086)
+	at org.h2.server.web.WebApp.process(WebApp.java:228)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalArgumentException: 20140617
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:273)
+	at org.h2.value.ValueDate.parse(ValueDate.java:69)
+	... 16 more
+06-17 15:10:16 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Cannot parse "DATE" constant "20140617"; SQL statement:
+INSERT INTO "PUBLIC"."COMMENT"("ID_COMMENT","ADDED_BY","ADD_DATE","COMMENT","ISSUE")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22007-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueDate.parse(ValueDate.java:71)
+	at org.h2.value.Value.convertTo(Value.java:860)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:158)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:144)
+	at org.h2.result.UpdatableRow.insertRow(UpdatableRow.java:323)
+	at org.h2.jdbc.JdbcResultSet.insertRow(JdbcResultSet.java:2968)
+	at org.h2.server.web.WebApp.editResult(WebApp.java:1086)
+	at org.h2.server.web.WebApp.process(WebApp.java:228)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalArgumentException: 20140617
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:273)
+	at org.h2.value.ValueDate.parse(ValueDate.java:69)
+	... 16 more
+06-17 15:11:05 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Cannot parse "DATE" constant "2"; SQL statement:
+INSERT INTO "PUBLIC"."COMMENT"("ID_COMMENT","ADDED_BY","ADD_DATE","COMMENT","ISSUE")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22007-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueDate.parse(ValueDate.java:71)
+	at org.h2.value.Value.convertTo(Value.java:860)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:158)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:144)
+	at org.h2.result.UpdatableRow.insertRow(UpdatableRow.java:323)
+	at org.h2.jdbc.JdbcResultSet.insertRow(JdbcResultSet.java:2968)
+	at org.h2.server.web.WebApp.editResult(WebApp.java:1086)
+	at org.h2.server.web.WebApp.process(WebApp.java:228)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalArgumentException: 2
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:273)
+	at org.h2.value.ValueDate.parse(ValueDate.java:69)
+	... 16 more
+06-17 15:11:05 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Cannot parse "DATE" constant "2"; SQL statement:
+INSERT INTO "PUBLIC"."COMMENT"("ID_COMMENT","ADDED_BY","ADD_DATE","COMMENT","ISSUE")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22007-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueDate.parse(ValueDate.java:71)
+	at org.h2.value.Value.convertTo(Value.java:860)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:158)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:144)
+	at org.h2.result.UpdatableRow.insertRow(UpdatableRow.java:323)
+	at org.h2.jdbc.JdbcResultSet.insertRow(JdbcResultSet.java:2968)
+	at org.h2.server.web.WebApp.editResult(WebApp.java:1086)
+	at org.h2.server.web.WebApp.process(WebApp.java:228)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.IllegalArgumentException: 2
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:273)
+	at org.h2.value.ValueDate.parse(ValueDate.java:69)
+	... 16 more

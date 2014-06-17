@@ -25,9 +25,6 @@ import by.epam.epamlab.model.factories.DAOFactory;
 import by.epam.epamlab.model.interfaces.IIssueDAO;
 import by.epam.epamlab.session.controllers.AbstractController;
 
-/**
- * Servlet implementation class EditIssue
- */
 @WebServlet("/EditIssueController")
 public class EditIssueController extends AbstractController {
 	private static final long serialVersionUID = 201405202113L;
@@ -52,7 +49,7 @@ public class EditIssueController extends AbstractController {
 		String assignee = request.getParameter(ConstantsControllers.ASSIGNEE);
 
 		long idModifiedBy = ((User) request.getSession().getAttribute(
-				ConstantsControllers.USER)).getId();
+				ConstantsControllers.USER)).getIdUser();
 		long assigneeId;
 		long issueId;
 		long projectId;

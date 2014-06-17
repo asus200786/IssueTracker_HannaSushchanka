@@ -195,6 +195,9 @@
 			</form>
 		</c:if>
 	</div>
+	<div class="Attachments">
+		<jsp:directive.include file="/view/attachments.jspf" />
+	</div>
 </body>
 	</html>
 </jsp:root>

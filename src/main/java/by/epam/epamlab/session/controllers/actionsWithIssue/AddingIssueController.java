@@ -60,7 +60,7 @@ public class AddingIssueController extends AbstractController {
 		long idAssignee;
 		User createsByUser = (User) request.getSession().getAttribute(
 				ConstantsControllers.USER);
-		long idCreatedByUser = createsByUser.getId();
+		long idCreatedByUser = createsByUser.getIdUser();
 		short idBuildProject;
 		short idStatus;
 		try {

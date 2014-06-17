@@ -1,11 +1,20 @@
 package by.epam.epamlab.model.beans.issues;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -18,29 +27,67 @@ import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.utilities.DateHelper;
 
 @Entity
-@Table(name = "Issues", catalog = "IssueTrackerSushchanka", uniqueConstraints = {
+@Table(name = "ISSUE", catalog = "IssueTrackerSushchanka", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "LOGIN"),
 		@UniqueConstraint(columnNames = "EMAILADDRESS") })
 public class Issue implements Serializable {
 	Logger logger = LoggerFactory.getLogger(Issue.class);
 	private static final long serialVersionUID = 201404250059L;
 
+	@Id
+	@GeneratedValue(strategy= IDENTITY)
+	@Column (name = "IDISSUE", unique = true, nullable = false)
 	private long idIssue;
+	
+	@Column (name = "PRIORITY", unique = false, nullable = false)
+	@OneToMany (fetch = FetchType.LAZY, mappedBy = "ISSUE")
 	private Priority priority;
+	
+	@Column (name = "RESOLUTION", unique = false, nullable = true)
 	private Resolution resolution;
+	
+	@Column (name = "TYPE", unique = false, nullable = false)
 	private Type type;
+	
+	@Column (name = "SUMMARYISSUE", unique = false, nullable = false)
 	private String summary;
+	
+	@Column (name = "DESCRIPTIONISSUE", unique = false, nullable = false)
 	private String description;
+	
+	@Column (name = "CREATE_DATE", unique = false, nullable = false)
 	private Date createDate;
+	
+	@Column (name = "MODIFY_DATE", unique = false, nullable = false)
 	private Date modifyDate;
+	
+	//all users added in application
+	@Column (name = "ASSIGNEE", unique = false, nullable = true)
 	private User assignee;
+	 
+	@Column (name = "CREATE_BY", unique = false, nullable = false)
+	@ManyToOne
+	@JoinColumn (name = "CREATE_BY")
 	private User createdBy;
+	
+	@Column (name = "MODIFIED_BY", unique = false, nullable = false)
+	@ManyToOne
+	@JoinColumn (name = "MODIFIED_BY")
 	private User modifiedBy;
+	
+	@Column (name = "PROJECT", unique = false, nullable = false)
 	private Project project;
+	
+	@Column (name = "STATUS", unique = false, nullable = false)
 	private Status status;
+	
+	@Column (name = "BUILDFOUND", unique = false, nullable = false)
 	private BuildProject build;
 
+	@Column (name = "", unique = false, nullable = false)
 	private List<Attachment> attachments;
+	
+	@Column (name = "", unique = false, nullable = false)
 	private List<Comment> commentsIssue;
 
 	public Issue() {
