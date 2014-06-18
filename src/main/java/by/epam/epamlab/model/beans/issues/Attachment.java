@@ -7,11 +7,14 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,14 +35,15 @@ public class Attachment implements Serializable {
 	@Column(name = "ADDED_BY", unique = false, nullable = false)
 	private User addedBy;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "ADD_DATE", unique = false, nullable = false)
 	private Date addDate;
 
 	@Column(name = "ATTCHM_NAME", unique = true, nullable = false)
 	private String linkNameAttachment;
 
-	@ManyToOne
-	@JoinColumn(name = "IDISSUE")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "IDISSUE", nullable = false)
 	private Issue issue;
 
 	public Attachment() {
@@ -55,7 +59,7 @@ public class Attachment implements Serializable {
 		return idAttachment;
 	}
 
-	public void setIdAttachment(int idAttachment) {
+	protected void setIdAttachment(int idAttachment) {
 		this.idAttachment = idAttachment;
 	}
 

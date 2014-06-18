@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,8 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,59 +40,69 @@ public class Issue implements Serializable {
 	private static final long serialVersionUID = 201404250059L;
 
 	@Id
-	@GeneratedValue(strategy= IDENTITY)
-	@Column (name = "IDISSUE", unique = true, nullable = false)
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "IDISSUE", unique = true, nullable = false)
 	private long idIssue;
-	
-	@Column (name = "PRIORITY", unique = false, nullable = false)
-	@OneToMany (fetch = FetchType.LAZY, mappedBy = "ISSUE")
+
+	@ManyToOne
+	@JoinColumn(name = "PRIORITY")
 	private Priority priority;
-	
-	@Column (name = "RESOLUTION", unique = false, nullable = true)
+
+	@ManyToOne
+	@JoinColumn(name = "RESOLUTION")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Resolution resolution;
-	
-	@Column (name = "TYPE", unique = false, nullable = false)
+
+	@ManyToOne
+	@JoinColumn(name = "TYPE")
 	private Type type;
-	
-	@Column (name = "SUMMARYISSUE", unique = false, nullable = false)
+
+	@Column(name = "SUMMARYISSUE", unique = false, nullable = false)
 	private String summary;
-	
-	@Column (name = "DESCRIPTIONISSUE", unique = false, nullable = false)
+
+	@Column(name = "DESCRIPTIONISSUE", unique = false, nullable = false)
 	private String description;
-	
-	@Column (name = "CREATE_DATE", unique = false, nullable = false)
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "CREATE_DATE", unique = false, nullable = false)
 	private Date createDate;
-	
-	@Column (name = "MODIFY_DATE", unique = false, nullable = false)
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "MODIFY_DATE", unique = false, nullable = false)
 	private Date modifyDate;
-	
-	//all users added in application
-	@Column (name = "ASSIGNEE", unique = false, nullable = true)
+
+	// all users added in application
+	@ManyToOne
+	@JoinColumn(name = "ASSIGNEE")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private User assignee;
-	 
-	@Column (name = "CREATE_BY", unique = false, nullable = false)
+
 	@ManyToOne
-	@JoinColumn (name = "CREATE_BY")
+	@JoinColumn(name = "CREATE_BY", referencedColumnName = "IDUSER")
 	private User createdBy;
-	
-	@Column (name = "MODIFIED_BY", unique = false, nullable = false)
+
 	@ManyToOne
-	@JoinColumn (name = "MODIFIED_BY")
+	@JoinColumn(name = "MODIFIED_BY", referencedColumnName = "IDUSER")
 	private User modifiedBy;
-	
-	@Column (name = "PROJECT", unique = false, nullable = false)
+
+	@ManyToOne
+	@JoinColumn(name = "PROJECT")
 	private Project project;
-	
-	@Column (name = "STATUS", unique = false, nullable = false)
+
+	@ManyToOne
+	@JoinColumn(name = "STATUS")
 	private Status status;
-	
-	@Column (name = "BUILDFOUND", unique = false, nullable = false)
+
+	@ManyToOne
+	@JoinColumn(name = "BUILDFOUND")
 	private BuildProject build;
 
-	@Column (name = "", unique = false, nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ISSUE", cascade = CascadeType.ALL)
+	@Column(name = "", unique = false, nullable = false)
 	private List<Attachment> attachments;
-	
-	@Column (name = "", unique = false, nullable = false)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ISSUE", cascade = CascadeType.ALL)
+	@Column(name = "", unique = false, nullable = false)
 	private List<Comment> commentsIssue;
 
 	public Issue() {
@@ -154,7 +169,7 @@ public class Issue implements Serializable {
 		return idIssue;
 	}
 
-	public void setIdIssue(long idIssue) {
+	protected void setIdIssue(long idIssue) {
 		this.idIssue = idIssue;
 	}
 

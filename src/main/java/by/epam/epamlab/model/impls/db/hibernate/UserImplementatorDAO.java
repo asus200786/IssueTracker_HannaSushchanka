@@ -35,6 +35,7 @@ public class UserImplementatorDAO implements IUserDAO {
 		Session session = SessionManager.getSessionFactory()
 				.getCurrentSession();
 		session.beginTransaction();
+		@SuppressWarnings("unchecked")
 		List<User> usersList = session.createQuery("FROM Users").list();
 		session.getTransaction().commit();
 		return usersList;

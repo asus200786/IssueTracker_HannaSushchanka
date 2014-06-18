@@ -1994,3 +1994,28 @@ Caused by: java.lang.IllegalArgumentException: 2
 	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:273)
 	at org.h2.value.ValueDate.parse(ValueDate.java:69)
 	... 16 more
+06-18 12:01:42 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "EDIT[*]	SELECT * FROM INFORMATION_SCHEMA.CONSTRAINTS  WHERE TABLE_NAME='PROJECT ' "; expected "EXPLAIN, EXECUTE, {"; SQL statement:
+Edit	SELECT * FROM INFORMATION_SCHEMA.CONSTRAINTS  where table_name='PROJECT ' [42001-178]
+06-18 12:04:40 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "ALTER TABLE PUBLIC.BUILDPROJECT DROP CONSTRAINT PUBLIC.CONSTRAINT_2F FOREIGN[*] KEY(IDPROJECT) "; SQL statement:
+ALTER TABLE PUBLIC.BUILDPROJECT drop CONSTRAINT PUBLIC.CONSTRAINT_2F FOREIGN KEY(IDPROJECT) [42000-178]
+06-18 15:38:51 jdbc[5]: null
+org.h2.message.DbException: The connection was not closed by the application and is garbage collected [90018-178]
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.message.DbException.get(DbException.java:143)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:173)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:118)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:74)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:684)
+	at org.h2.server.web.WebApp.login(WebApp.java:958)
+	at org.h2.server.web.WebApp.process(WebApp.java:212)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.h2.jdbc.JdbcSQLException: The connection was not closed by the application and is garbage collected [90018-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	... 14 more

@@ -8,18 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.epam.epamlab.model.beans.users.User;
+
 @Entity
-@Table (name="Comment")
+@Table(name = "Comment")
 public class Comment implements Serializable {
 	Logger logger = LoggerFactory.getLogger(Comment.class);
 	private static final long serialVersionUID = 20140613L;
 
-	
 	private int idComment;
 	private User addedBy;
 	private Date addDate;
@@ -34,7 +36,7 @@ public class Comment implements Serializable {
 		super();
 		this.idComment = idComment;
 	}
-	
+
 	public int getIdComment() {
 		return idComment;
 	}
@@ -44,7 +46,7 @@ public class Comment implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "ADDED_BY")
+	@JoinColumn(name = "ADDED_BY", referencedColumnName = "IDUSER")
 	public User getAddedBy() {
 		return addedBy;
 	}
@@ -53,7 +55,8 @@ public class Comment implements Serializable {
 		this.addedBy = addedBy;
 	}
 
-	@Column (name = "ADD_DATE")
+	@Temporal(TemporalType.DATE)
+	@Column(name = "ADD_DATE")
 	public Date getAddDate() {
 		return addDate;
 	}
@@ -62,7 +65,7 @@ public class Comment implements Serializable {
 		this.addDate = addDate;
 	}
 
-	@Column (name = "COMMENT")
+	@Column(name = "COMMENT", nullable = false, length = 255)
 	public String getComment() {
 		return comment;
 	}
@@ -72,7 +75,7 @@ public class Comment implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn (name = "IDISSUE")
+	@JoinColumn(name = "ISSUE", referencedColumnName = "IDISSUE")
 	public Issue getIssue() {
 		return issue;
 	}

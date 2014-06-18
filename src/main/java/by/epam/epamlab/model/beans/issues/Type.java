@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Entity
-@Table
+@Table(name = "TYPE", catalog = "IssueTrackerSushchanka")
 public class Type implements Serializable {
 	private static final long serialVersionUID = 201405161548L;
 	Logger logger = LoggerFactory.getLogger(Type.class);
@@ -44,7 +44,7 @@ public class Type implements Serializable {
 		return idType;
 	}
 
-	public void setIdType(int idType) {
+	protected void setIdType(int idType) {
 		this.idType = idType;
 	}
 

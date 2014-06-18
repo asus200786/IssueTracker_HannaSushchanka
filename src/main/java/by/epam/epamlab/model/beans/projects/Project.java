@@ -4,20 +4,48 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.epam.epamlab.model.beans.users.User;
 
+@Entity
+@Table(name = "PROJECT")
 public class Project implements Serializable {
 	private static final long serialVersionUID = 201405202311L;
 	Logger logger = LoggerFactory.getLogger(Project.class);
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "IDPROJECT", nullable = false, unique = true)
 	private long idProject;
+
+	@Column(name = "PROJECTNAME", nullable = false)
 	private String nameProject;
+
+	@Column(name = "DESCRIPTIONPROJECT", nullable = false)
 	private String descriptionProject;
+
+	@ManyToOne
+	@JoinColumn(name = "MANAGERPROJECT", nullable = false)
 	private User managerProject;
+
 	private BuildProject currentBuildProject;
+
+	@OneToMany(mappedBy = "IDPROJECT", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<BuildProject> buildsProject = new ArrayList<BuildProject>();
 
 	public Project(long idProject) {
@@ -38,7 +66,7 @@ public class Project implements Serializable {
 		return idProject;
 	}
 
-	public void setIdProject(long idProject) {
+	protected void setIdProject(long idProject) {
 		this.idProject = idProject;
 	}
 

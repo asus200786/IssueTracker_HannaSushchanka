@@ -2,16 +2,36 @@ package by.epam.epamlab.model.beans.projects;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Entity
+@Table(name = "BUILDPROJECT")
 public class BuildProject implements Serializable {
 	private static final long serialVersionUID = 201405221945L;
 	Logger logger = LoggerFactory.getLogger(BuildProject.class);
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "IDBUILDPROJECT", nullable = false, unique = true)
 	private long idBuildProject;
+
+	@Column(name = "NAMEBUILD", nullable = false)
 	private String buildProject;
-	private long idProject;
+
+	@ManyToOne
+	@JoinColumn(name = "IDPROJECT", nullable = false)
+	private Project project;
 
 	public BuildProject() {
 		super();
@@ -25,14 +45,14 @@ public class BuildProject implements Serializable {
 			long idProject) {
 		setIdBuildProject(idBuildProject);
 		this.buildProject = buildProject;
-		this.idProject = idProject;
+		this.project.setIdProject(idProject);
 	}
 
 	public long getIdBuildProject() {
 		return idBuildProject;
 	}
 
-	public void setIdBuildProject(long idBuildProject) {
+	protected void setIdBuildProject(long idBuildProject) {
 		this.idBuildProject = idBuildProject;
 	}
 
@@ -44,10 +64,17 @@ public class BuildProject implements Serializable {
 		this.buildProject = buildProject;
 	}
 
-	@Override
-	public String toString() {
-		return "BuildProject [buildProject=" + buildProject + ", idProject="
-				+ idProject + "]";
+	public Project getProject() {
+		return project;
 	}
 
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	@Override
+	public String toString() {
+		return "BuildProject [buildProject=" + buildProject + ", project="
+				+ project + "]";
+	}
 }

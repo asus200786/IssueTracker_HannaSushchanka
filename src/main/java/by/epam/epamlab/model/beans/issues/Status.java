@@ -2,14 +2,29 @@ package by.epam.epamlab.model.beans.issues;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Entity
+@Table(name = "STATUS", catalog = "IssueTrackerSushchanka")
 public class Status implements Serializable {
 	private static final long serialVersionUID = 201405141525L;
 	Logger logger = LoggerFactory.getLogger(Status.class);
 	
+	@Id
+	@GeneratedValue (strategy = IDENTITY)
+	@Column (name = "IDSTATUS")
 	private int idStatus;
+	
+	@Column (name = "STATUS")
 	private String status;
 
 	public Status() {
@@ -30,7 +45,7 @@ public class Status implements Serializable {
 		return idStatus;
 	}
 
-	public void setIdStatus(int idStatus) {
+	protected void setIdStatus(int idStatus) {
 		this.idStatus = idStatus;
 	}
 
