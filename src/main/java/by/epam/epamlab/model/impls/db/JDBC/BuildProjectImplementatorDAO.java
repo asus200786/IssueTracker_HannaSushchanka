@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.impls.db;
+package by.epam.epamlab.model.impls.db.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

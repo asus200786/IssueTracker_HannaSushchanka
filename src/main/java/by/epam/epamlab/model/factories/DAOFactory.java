@@ -1,10 +1,10 @@
 package by.epam.epamlab.model.factories;
 
-import by.epam.epamlab.model.impls.db.BuildProjectImplementatorDAO;
-import by.epam.epamlab.model.impls.db.FeatureIssueImplementatorDAO;
-import by.epam.epamlab.model.impls.db.IssueImplementatorDAO;
-import by.epam.epamlab.model.impls.db.ProjectImplementatorDAO;
-import by.epam.epamlab.model.impls.db.UserImplementatorDAO;
+import by.epam.epamlab.model.impls.db.JDBC.BuildProjectImplementatorDAO;
+import by.epam.epamlab.model.impls.db.JDBC.FeatureIssueImplementatorDAO;
+import by.epam.epamlab.model.impls.db.JDBC.IssueImplementatorDAO;
+import by.epam.epamlab.model.impls.db.JDBC.ProjectImplementatorDAO;
+import by.epam.epamlab.model.impls.db.JDBC.UserImplementatorDAO;
 import by.epam.epamlab.model.interfaces.IBuildProjectDAO;
 import by.epam.epamlab.model.interfaces.IFeatureIssueDAO;
 import by.epam.epamlab.model.interfaces.IIssueDAO;

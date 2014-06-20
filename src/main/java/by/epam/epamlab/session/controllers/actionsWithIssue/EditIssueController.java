@@ -83,12 +83,12 @@ public class EditIssueController extends AbstractController {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
-			jump(ConstantsControllers.EDIT_ISSUE_JSP, e.getMessage(), request,
+			jumpError(ConstantsControllers.EDIT_ISSUE_JSP, e.getMessage(), request,
 					response);
 		} catch (ExceptionDAO e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
-			jump(ConstantsControllers.EDIT_ISSUE_JSP, e.getMessage(), request,
+			jumpError(ConstantsControllers.EDIT_ISSUE_JSP, e.getMessage(), request,
 					response);
 		}
 	}

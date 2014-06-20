@@ -3,7 +3,7 @@ package by.epam.epamlab.model.beans.issues;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class Issue implements Serializable {
 	@NotFound(action = NotFoundAction.IGNORE)
 	private Resolution resolution;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TYPE")
 	private Type type;
 

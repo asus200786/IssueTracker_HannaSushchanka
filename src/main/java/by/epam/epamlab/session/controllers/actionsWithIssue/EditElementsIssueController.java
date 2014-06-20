@@ -41,7 +41,7 @@ public class EditElementsIssueController extends AbstractController {
 	@Override
 	protected void performTask(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		try {
 			long idIssue = Long.valueOf(request
 					.getParameter(ConstantsControllers.EDIT_ID_ISSUE));
@@ -60,10 +60,12 @@ public class EditElementsIssueController extends AbstractController {
 			IProjectDAO projectDAO = DAOFactory.getProjectDAOFromFactory();
 			List<Project> projects = projectDAO.getObjectsList();
 			request.setAttribute(ConstantsControllers.PROJECTS_LIST, projects);
-			
-			IBuildProjectDAO buildProjectDAO = DAOFactory.getBuildProjectDAOFromFactory();
+
+			IBuildProjectDAO buildProjectDAO = DAOFactory
+					.getBuildProjectDAOFromFactory();
 			List<BuildProject> buildProjects = buildProjectDAO.getObjectsList();
-			request.setAttribute(ConstantsControllers.BUILD_PROJECT_LIST, buildProjects);
+			request.setAttribute(ConstantsControllers.BUILD_PROJECT_LIST,
+					buildProjects);
 
 			IFeatureIssueDAO featureIssueDAO = DAOFactory
 					.getFeatureIssueDAOFromFactory();
@@ -86,8 +88,8 @@ public class EditElementsIssueController extends AbstractController {
 		} catch (ExceptionDAO e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
-			jump(ConstantsControllers.ISSUES_PAGE_URL, e.getMessage(), request,
-					response);
+			jumpError(ConstantsControllers.ISSUES_PAGE_URL, e.getMessage(),
+					request, response);
 		}
 
 	}

@@ -8,6 +8,8 @@
 	<name>IssueTrackerSushchanka Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
+	<!-- <properties> <spring.version>4.0.5.RELEASE</spring.version> </properties> -->
+
 	<dependencies>
 		<!-- JEE -->
 		<dependency>
@@ -72,24 +74,20 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.5.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.3.5.Final</version>
-			<classifier>sources</classifier>
-		</dependency>
 
 		<!-- Hibernate annotation -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>3.5.6-Final</version>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.5.Final</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>3.2.0.Final</version>
-		</dependency>
+		<!-- <dependency> <groupId>org.hibernate.javax.persistence</groupId> <artifactId>hibernate-jpa-2.0-api</artifactId> 
+			<version>1.0.1.Final</version> </dependency> -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-core</artifactId> 
+			<version>${spring.version}</version> </dependency> <dependency> <groupId>org.springframework</groupId> 
+			<artifactId>spring-context</artifactId> <version>${spring.version}</version> 
+			<scope>runtime</scope> </dependency> -->
+
 	</dependencies>
 
 	<build>

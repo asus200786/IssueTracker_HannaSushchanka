@@ -8,7 +8,10 @@
     <listener-class>by.epam.epamlab.session.listeners.ConstantsListener</listener-class>
   </listener>
   <listener>
-    <listener-class>by.epam.epamlab.session.listeners.DBCPoolingListener</listener-class>
+    <listener-class>by.epam.epamlab.session.listeners.HibernateContextListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>by.epam.epamlab.session.listeners.LanguageContextListener</listener-class>
   </listener>
   <context-param>
     <param-name>db.url</param-name>

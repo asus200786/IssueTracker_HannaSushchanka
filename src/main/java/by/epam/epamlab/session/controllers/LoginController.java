@@ -36,7 +36,8 @@ public class LoginController extends AbstractController {
 		// With incorrect input data the user is returned to the home page
 		if (inputResult != null) {
 			request.setAttribute(ConstantsControllers.MESSAGE, inputResult);
-			jump(ConstantsControllers.ERROR_LOGIN_JSPX, request, response);
+			jumpError(ConstantsControllers.ERROR_LOGIN_JSPX,
+					ConstantsControllers.ERROR_AUTHORIZATION, request, response);
 			return;
 		}
 		try {
@@ -52,7 +53,7 @@ public class LoginController extends AbstractController {
 				jump(ConstantsControllers.MAIN_JSPX, request, response);
 				return;
 			} else {
-				jump(ConstantsControllers.ERROR_LOGIN_JSPX,
+				jumpError(ConstantsControllers.ERROR_LOGIN_JSPX,
 						ConstantsControllers.ERROR_AUTHORIZATION, request,
 						response);
 			}

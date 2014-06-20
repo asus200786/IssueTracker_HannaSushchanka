@@ -49,7 +49,7 @@ public class AddingIssueController extends AbstractController {
 				|| description.equals(Constants.EMPTY_STRING) || status == null
 				|| type == null || priority == null || project == null
 				|| buildFound == null) {
-			jump(ConstantsControllers.ADDING_ISSUE_JSPX,
+			jumpError(ConstantsControllers.ADDING_ISSUE_JSPX,
 					ConstantsControllers.NULL_REQUIRED_FIELDS, request,
 					response);
 		}
@@ -84,12 +84,12 @@ public class AddingIssueController extends AbstractController {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
-			jump(ConstantsControllers.ADDING_ISSUE_JSPX, Constants.ERROR_DATA,
+			jumpError(ConstantsControllers.ADDING_ISSUE_JSPX, Constants.ERROR_DATA,
 					request, response);
 		} catch (ExceptionDAO e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
-			jump(ConstantsControllers.ADDING_ISSUE_JSPX,
+			jumpError(ConstantsControllers.ADDING_ISSUE_JSPX,
 					Constants.ERROR_ADDING_ISSUE, request, response);
 		}
 	}

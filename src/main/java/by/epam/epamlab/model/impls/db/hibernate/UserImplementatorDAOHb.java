@@ -8,20 +8,20 @@ import org.slf4j.LoggerFactory;
 
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.users.User;
-import by.epam.epamlab.model.impls.db.hibernate.connect.SessionManager;
 import by.epam.epamlab.model.interfaces.IUserDAO;
+import by.epam.epamlab.utilities.SessionManager;
 
-public class UserImplementatorDAO implements IUserDAO {
-	Logger logger = LoggerFactory.getLogger(UserImplementatorDAO.class);
-	private static UserImplementatorDAO instance;
+public class UserImplementatorDAOHb implements IUserDAO {
+	Logger logger = LoggerFactory.getLogger(UserImplementatorDAOHb.class);
+	private static UserImplementatorDAOHb instance;
 
-	private UserImplementatorDAO() {
+	private UserImplementatorDAOHb() {
 		super();
 	}
 
-	public synchronized static UserImplementatorDAO getInstance() {
+	public synchronized static UserImplementatorDAOHb getInstance() {
 		if (instance == null) {
-			instance = new UserImplementatorDAO();
+			instance = new UserImplementatorDAOHb();
 		}
 		return instance;
 	}
@@ -37,6 +37,7 @@ public class UserImplementatorDAO implements IUserDAO {
 		session.beginTransaction();
 		@SuppressWarnings("unchecked")
 		List<User> usersList = session.createQuery("FROM Users").list();
+		System.out.println(""+usersList);
 		session.getTransaction().commit();
 		return usersList;
 	}

@@ -81,7 +81,7 @@ public class AddingElementsIssueController extends AbstractController {
 		} catch (ExceptionDAO e) {
 			e.printStackTrace();
 			logger.error(e.getMessage(), e);
-			jump(ConstantsControllers.ADDING_ISSUE_JSPX, e.getMessage(),
+			jumpError(ConstantsControllers.ADDING_ISSUE_JSPX, e.getMessage(),
 					request, response);
 		}
 

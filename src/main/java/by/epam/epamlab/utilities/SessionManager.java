@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.impls.db.hibernate.connect;
+package by.epam.epamlab.utilities;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -11,18 +11,24 @@ import org.slf4j.LoggerFactory;
 public class SessionManager {
 	Logger logger = LoggerFactory.getLogger(SessionManager.class);
 
+	private static final String HSM_ALREADY_INITIALIZED = "Hibernate SessionManager is already initialized";
+
 	private static SessionFactory sessionFactory = buildSessionFactory();
 	private static ServiceRegistry serviceRegistry;
 
-	public static SessionFactory getSessionFactory() {
+	public static synchronized SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 
-	private static SessionFactory buildSessionFactory() {
+	public static synchronized SessionFactory buildSessionFactory() {
+		if (getSessionFactory() != null) {
+			throw new IllegalStateException(HSM_ALREADY_INITIALIZED);
+		}
+
 		// Create the SessionFactory from hibernate.cfg.xml
 		try {
 			Configuration configuration = new Configuration();
-			configuration.configure();
+			configuration.configure("hibernate.cfg.xml");
 			serviceRegistry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties()).build();
 			sessionFactory = configuration.buildSessionFactory(serviceRegistry);
@@ -37,4 +43,5 @@ public class SessionManager {
 		// Close caches and connection pools
 		getSessionFactory().close();
 	}
+
 }

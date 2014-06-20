@@ -54,7 +54,7 @@ public abstract class AbstractController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	protected void jump(String url, String message, HttpServletRequest request,
+	protected void jumpError(String url, String message, HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute(ConstantsControllers.MESSAGE, message);
 		jump(url, request, response);

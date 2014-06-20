@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Entity
-@Table(name = "users", catalog = "IssueTrackerSushchanka", uniqueConstraints = {
+@Table(name = "USER",  uniqueConstraints = {
 		@UniqueConstraint(columnNames = "LOGIN"),
 		@UniqueConstraint(columnNames = "EMAILADDRESS") })
 public class User implements Serializable {
@@ -73,7 +73,7 @@ public class User implements Serializable {
 		return idUser;
 	}
 
-	protected void setIdUser(long idUser) {
+	public void setIdUser(long idUser) {
 		this.idUser = idUser;
 	}
 
