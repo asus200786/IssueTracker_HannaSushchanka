@@ -10,7 +10,7 @@ public class MD5 {
 	private final Logger logger = LoggerFactory.getLogger(MD5.class);
 	
 	private static final String CRYPTOGRAPHY_ERROR = "Cryptography Error.";
-	private static final String MD52 = "md5";
+	private static final String MD52 = "md5";//
 
 	public String getHash(String password) {
 		MessageDigest md5;
