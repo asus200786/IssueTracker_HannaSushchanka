@@ -3,11 +3,9 @@ package by.epam.epamlab.model.beans.issues;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.text.ParseException;
-import java.util.List;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,11 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -32,11 +28,9 @@ import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.utilities.DateHelper;
 
 @Entity
-@Table(name = "ISSUE", catalog = "IssueTrackerSushchanka", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "LOGIN"),
-		@UniqueConstraint(columnNames = "EMAILADDRESS") })
+@Table(name = "ISSUE")
 public class Issue implements Serializable {
-	Logger logger = LoggerFactory.getLogger(Issue.class);
+	static final Logger logger = LoggerFactory.getLogger(Issue.class);
 	private static final long serialVersionUID = 201404250059L;
 
 	@Id
@@ -78,32 +72,33 @@ public class Issue implements Serializable {
 	private User assignee;
 
 	@ManyToOne
-	@JoinColumn(name = "CREATE_BY", referencedColumnName = "IDUSER")
+	@JoinColumn(name = "CREATED_BY")
 	private User createdBy;
 
 	@ManyToOne
-	@JoinColumn(name = "MODIFIED_BY", referencedColumnName = "IDUSER")
+	@JoinColumn(name = "MODIFIED_BY")
 	private User modifiedBy;
 
 	@ManyToOne
-	@JoinColumn(name = "PROJECT")
+	@JoinColumn(name = "IDPROJECT")
 	private Project project;
 
 	@ManyToOne
-	@JoinColumn(name = "STATUS")
+	@JoinColumn(name = "IDSTATUS")
 	private Status status;
 
 	@ManyToOne
-	@JoinColumn(name = "BUILDFOUND")
+	@JoinColumn(name = "IDBUILD")
 	private BuildProject build;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ISSUE", cascade = CascadeType.ALL)
-	@Column(name = "", unique = false, nullable = false)
-	private List<Attachment> attachments;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "ISSUE", cascade = CascadeType.ALL)
-	@Column(name = "", unique = false, nullable = false)
-	private List<Comment> commentsIssue;
+	//
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "Issue", cascade =
+	// CascadeType.ALL)
+	// private List<Attachment> attachments;
+	//
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "Issue", cascade =
+	// CascadeType.ALL)
+	// private List<Comment> commentsIssue;
 
 	public Issue() {
 		super();
@@ -284,33 +279,33 @@ public class Issue implements Serializable {
 	public void setBuild(BuildProject build) {
 		this.build = build;
 	}
-
-	public List<Attachment> getAttachments() {
-		return attachments;
-	}
-
-	public void setAttachments(List<Attachment> attachments) {
-		this.attachments = attachments;
-	}
-
-	public List<Comment> getCommentsIssue() {
-		return commentsIssue;
-	}
-
-	public void setCommentsIssue(List<Comment> commentsIssue) {
-		this.commentsIssue = commentsIssue;
-	}
-
-	@Override
-	public String toString() {
-		return "Issue [priority=" + priority + ", resolution=" + resolution
-				+ ", type=" + type + ", summary=" + summary + ", description="
-				+ description + ", createDate=" + createDate + ", modifyDate="
-				+ modifyDate + ", assignee=" + assignee + ", createdBy="
-				+ createdBy + ", modifiedBy=" + modifiedBy + ", project="
-				+ project + ", status=" + status + ", build=" + build
-				+ ", attachments=" + attachments + ", commentsIssue="
-				+ commentsIssue + "]";
-	}
+	//
+	// public List<Attachment> getAttachments() {
+	// return attachments;
+	// }
+	//
+	// public void setAttachments(List<Attachment> attachments) {
+	// this.attachments = attachments;
+	// }
+	//
+	// public List<Comment> getCommentsIssue() {
+	// return commentsIssue;
+	// }
+	//
+	// public void setCommentsIssue(List<Comment> commentsIssue) {
+	// this.commentsIssue = commentsIssue;
+	// }
+	//
+	// @Override
+	// public String toString() {
+	// return "Issue [priority=" + priority + ", resolution=" + resolution
+	// + ", type=" + type + ", summary=" + summary + ", description="
+	// + description + ", createDate=" + createDate + ", modifyDate="
+	// + modifyDate + ", assignee=" + assignee + ", createdBy="
+	// + createdBy + ", modifiedBy=" + modifiedBy + ", project="
+	// + project + ", status=" + status + ", build=" + build
+	// + ", attachments=" + attachments + ", commentsIssue="
+	// + commentsIssue + "]";
+	// }
 
 }

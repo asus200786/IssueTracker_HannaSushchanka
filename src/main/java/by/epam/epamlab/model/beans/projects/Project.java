@@ -26,7 +26,7 @@ import by.epam.epamlab.model.beans.users.User;
 @Table(name = "PROJECT")
 public class Project implements Serializable {
 	private static final long serialVersionUID = 201405202311L;
-	Logger logger = LoggerFactory.getLogger(Project.class);
+	static final Logger logger = LoggerFactory.getLogger(Project.class);
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -40,12 +40,12 @@ public class Project implements Serializable {
 	private String descriptionProject;
 
 	@ManyToOne
-	@JoinColumn(name = "MANAGERPROJECT", nullable = false)
+	@JoinColumn(name = "MANAGER", nullable = false)
 	private User managerProject;
 
 	private BuildProject currentBuildProject;
 
-	@OneToMany(mappedBy = "IDPROJECT", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<BuildProject> buildsProject = new ArrayList<BuildProject>();
 
 	public Project(long idProject) {
