@@ -17,11 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Entity
-@Table(name = "USER",  uniqueConstraints = {
+@Table(name = "USER", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "LOGIN"),
 		@UniqueConstraint(columnNames = "EMAILADDRESS") })
 public class User implements Serializable {
-	Logger logger = LoggerFactory.getLogger(User.class);
+	static final Logger logger = LoggerFactory.getLogger(User.class);
 	private static final long serialVersionUID = 201404240248L;
 
 	private long idUser;

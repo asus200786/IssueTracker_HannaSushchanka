@@ -11,14 +11,17 @@
 		<property name="hibernate.connection.password" />
 		<property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
 		<property name="hibernate.show_sql">true</property>
-		<!-- <property name="hibernate.hbm2ddl.auto">create</property>  -->
+		<property name="hibernate.hbm2ddl.auto">create</property>
 		<!-- <mapping class="by.epam.epamlab.model.beans.issues.Test" /> -->
-		<!-- <mapping class="by.epam.epamlab.model.beans.issues.Attachment" /> 
-			<mapping class="by.epam.epamlab.model.beans.issues.Comment" /> <mapping class="by.epam.epamlab.model.beans.issues.Issue" 
-			/> <mapping class="by.epam.epamlab.model.beans.issues.Priority" /> <mapping 
-			class="by.epam.epamlab.model.beans.issues.Resolution" /> <mapping class="by.epam.epamlab.model.beans.issues.Status" 
-			/> <mapping class="by.epam.epamlab.model.beans.issues.Type" /> <mapping class="by.epam.epamlab.model.beans.projects.BuildProject" 
-			/> <mapping class="by.epam.epamlab.model.beans.projects.Project" /> -->
+		<mapping class="by.epam.epamlab.model.beans.issues.Attachment" />
+		<mapping class="by.epam.epamlab.model.beans.issues.Comment" />
+		<mapping class="by.epam.epamlab.model.beans.issues.Issue" />
+		<mapping class="by.epam.epamlab.model.beans.issues.Priority" />
+		<mapping class="by.epam.epamlab.model.beans.issues.Resolution" />
+		<mapping class="by.epam.epamlab.model.beans.issues.Status" />
+		<mapping class="by.epam.epamlab.model.beans.issues.Type" />
+		<mapping class="by.epam.epamlab.model.beans.projects.BuildProject" />
+		<mapping class="by.epam.epamlab.model.beans.projects.Project" />
 		<mapping class="by.epam.epamlab.model.beans.users.User" />
 	</session-factory>
 </hibernate-configuration>

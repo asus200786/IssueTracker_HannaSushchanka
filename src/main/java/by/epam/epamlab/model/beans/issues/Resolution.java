@@ -14,10 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Entity
-@Table(name = "RESOLUTION", catalog = "IssueTrackerSushchanka")
+@Table(name = "RESOLUTION")
 public class Resolution implements Serializable {
 	private static final long serialVersionUID = 201405171645L;
-	Logger logger = LoggerFactory.getLogger(Resolution.class);
+	static final Logger logger = LoggerFactory.getLogger(Resolution.class);
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

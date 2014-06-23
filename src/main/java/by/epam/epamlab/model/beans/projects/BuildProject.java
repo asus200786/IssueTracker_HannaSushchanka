@@ -19,11 +19,11 @@ import org.slf4j.LoggerFactory;
 @Table(name = "BUILDPROJECT")
 public class BuildProject implements Serializable {
 	private static final long serialVersionUID = 201405221945L;
-	Logger logger = LoggerFactory.getLogger(BuildProject.class);
+	static final Logger logger = LoggerFactory.getLogger(BuildProject.class);
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "IDBUILDPROJECT", nullable = false, unique = true)
+	@Column(name = "IDBUILD", nullable = false, unique = true)
 	private long idBuildProject;
 
 	@Column(name = "NAMEBUILD", nullable = false)

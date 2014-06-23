@@ -14,17 +14,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Entity
-@Table(name = "STATUS", catalog = "IssueTrackerSushchanka")
+@Table(name = "STATUS")
 public class Status implements Serializable {
 	private static final long serialVersionUID = 201405141525L;
-	Logger logger = LoggerFactory.getLogger(Status.class);
-	
+	static final Logger logger = LoggerFactory.getLogger(Status.class);
+
 	@Id
-	@GeneratedValue (strategy = IDENTITY)
-	@Column (name = "IDSTATUS")
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "IDSTATUS")
 	private int idStatus;
-	
-	@Column (name = "STATUS")
+
+	@Column(name = "STATUS")
 	private String status;
 
 	public Status() {

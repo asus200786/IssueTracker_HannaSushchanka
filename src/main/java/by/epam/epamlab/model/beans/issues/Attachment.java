@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,10 @@ import org.slf4j.LoggerFactory;
 import by.epam.epamlab.model.beans.users.User;
 
 @Entity
-@Table(name = "Attachment", catalog = "IssueTrackerSushchanka")
+@Table(name = "ATTACHMENT")
 public class Attachment implements Serializable {
-	final Logger logger = LoggerFactory.getLogger(Attachment.class);
+	@Transient
+	static final Logger logger = LoggerFactory.getLogger(Attachment.class);
 	private static final long serialVersionUID = 20140613L;
 
 	@Id
