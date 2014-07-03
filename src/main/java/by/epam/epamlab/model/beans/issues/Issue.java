@@ -91,15 +91,6 @@ public class Issue implements Serializable {
 	@JoinColumn(name = "IDBUILD")
 	private BuildProject build;
 
-	//
-	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "Issue", cascade =
-	// CascadeType.ALL)
-	// private List<Attachment> attachments;
-	//
-	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "Issue", cascade =
-	// CascadeType.ALL)
-	// private List<Comment> commentsIssue;
-
 	public Issue() {
 		super();
 	}
@@ -279,33 +270,16 @@ public class Issue implements Serializable {
 	public void setBuild(BuildProject build) {
 		this.build = build;
 	}
-	//
-	// public List<Attachment> getAttachments() {
-	// return attachments;
-	// }
-	//
-	// public void setAttachments(List<Attachment> attachments) {
-	// this.attachments = attachments;
-	// }
-	//
-	// public List<Comment> getCommentsIssue() {
-	// return commentsIssue;
-	// }
-	//
-	// public void setCommentsIssue(List<Comment> commentsIssue) {
-	// this.commentsIssue = commentsIssue;
-	// }
-	//
-	// @Override
-	// public String toString() {
-	// return "Issue [priority=" + priority + ", resolution=" + resolution
-	// + ", type=" + type + ", summary=" + summary + ", description="
-	// + description + ", createDate=" + createDate + ", modifyDate="
-	// + modifyDate + ", assignee=" + assignee + ", createdBy="
-	// + createdBy + ", modifiedBy=" + modifiedBy + ", project="
-	// + project + ", status=" + status + ", build=" + build
-	// + ", attachments=" + attachments + ", commentsIssue="
-	// + commentsIssue + "]";
-	// }
+
+	@Override
+	public String toString() {
+		return "Issue [priority=" + priority + ", resolution=" + resolution
+				+ ", type=" + type + ", summary=" + summary + ", description="
+				+ description + ", createDate=" + createDate + ", modifyDate="
+				+ modifyDate + ", assignee=" + assignee + ", createdBy="
+				+ createdBy + ", modifiedBy=" + modifiedBy + ", project="
+				+ project + ", status=" + status + ", build=" + build
+				+ "]";
+	}
 
 }
