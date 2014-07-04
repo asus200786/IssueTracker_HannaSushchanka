@@ -9,6 +9,4 @@ import by.epam.epamlab.model.interfaces.IObjectDAO;
 public interface IIssueDAOHb extends IObjectDAO<Issue> {
 
 	public List<Issue> issuesByIdAssignee(long idUser) throws ExceptionDAO;
-
-	public boolean saveOrUpdateIssue(Issue issue) throws ExceptionDAO;
 }

@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.issues.Issue;
 import by.epam.epamlab.model.interfaces.hb.IIssueDAOHb;
-import by.epam.epamlab.utilities.SessionManager;
 
-public class IssueImplementatorDAOHb implements IIssueDAOHb {
+public class IssueImplementatorDAOHb extends AbstractImplementator implements
+		IIssueDAOHb {
 	Logger logger = LoggerFactory.getLogger(IssueImplementatorDAOHb.class);
 	private static IssueImplementatorDAOHb instance;
 
@@ -65,8 +65,9 @@ public class IssueImplementatorDAOHb implements IIssueDAOHb {
 			session.beginTransaction();
 			issues = session.createQuery("FROM Issue").list();
 			session.getTransaction().commit();
-		} catch (Exception e) {
+		} catch (HibernateException e) {
 			rollbackTransaction();
+			throw new ExceptionDAO(e);
 		}
 		closeSession();
 		return issues;
@@ -95,11 +96,11 @@ public class IssueImplementatorDAOHb implements IIssueDAOHb {
 	}
 
 	@Override
-	public boolean saveOrUpdateIssue(Issue issue) throws ExceptionDAO {
+	public boolean saveOrUpdateObject(Issue issue) throws ExceptionDAO {
 		System.out.println("Adding or Editting issue's.");
 		logger.info("Adding or Editting issue's.");
 		boolean isTrueAction = false;
-		openSession(); 
+		openSession();
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(issue);
@@ -113,34 +114,6 @@ public class IssueImplementatorDAOHb implements IIssueDAOHb {
 		}
 		closeSession();
 		return isTrueAction;
-	}
-
-	private Session openSession() throws ExceptionDAO {
-		try {
-			session = SessionManager.getSessionFactory().getCurrentSession();
-		} catch (HibernateException e) {
-			logger.debug("Error is in opening session", e);
-			throw new ExceptionDAO("Error is in opening session", e);
-		}
-		return session;
-	}
-
-	private void closeSession() throws ExceptionDAO {
-		try {
-			session.close();
-		} catch (HibernateException e) {
-			logger.debug("Error is in closing session", e);
-			throw new ExceptionDAO("Error is in closing session", e);
-		}
-	}
-
-	private void rollbackTransaction() throws ExceptionDAO {
-		try {
-			session.getTransaction().rollback();
-		} catch (HibernateException e) {
-			logger.debug("Error is in rollback transaction's", e);
-			throw new ExceptionDAO("Error is in rollback transaction's", e);
-		}
 	}
 
 }

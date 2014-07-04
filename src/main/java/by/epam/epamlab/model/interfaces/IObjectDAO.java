@@ -8,4 +8,6 @@ public interface IObjectDAO<E> {
 	public E getObjectById(long idObject) throws ExceptionDAO;
 
 	List<E> getObjectsList() throws ExceptionDAO;
+
+	public boolean saveOrUpdateObject(E e) throws ExceptionDAO;
 }

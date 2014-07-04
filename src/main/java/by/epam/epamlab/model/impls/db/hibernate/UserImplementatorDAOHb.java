@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.users.User;
 import by.epam.epamlab.model.interfaces.hb.IUserDAOHb;
-import by.epam.epamlab.utilities.SessionManager;
 
-public class UserImplementatorDAOHb implements IUserDAOHb {
+public class UserImplementatorDAOHb extends AbstractImplementator implements
+		IUserDAOHb {
 	Logger logger = LoggerFactory.getLogger(UserImplementatorDAOHb.class);
 	private static UserImplementatorDAOHb instance;
 
@@ -43,8 +43,9 @@ public class UserImplementatorDAOHb implements IUserDAOHb {
 			session.beginTransaction();
 			users = session.createQuery("FROM User").list();
 			session.getTransaction().commit();
-		} catch (Exception e) {
+		} catch (HibernateException e) {
 			rollbackTransaction();
+			throw new ExceptionDAO(e);
 		}
 		closeSession();
 		return users;
@@ -72,11 +73,8 @@ public class UserImplementatorDAOHb implements IUserDAOHb {
 		return user;
 	}
 
-	// TODO addUser() + editUserInfo(){editUser&editUserPassword} =
-	// session.saveOrUpdate(user)
-
 	@Override
-	public boolean addUser(User user) throws ExceptionDAO {
+	public boolean saveOrUpdateObject(User user) throws ExceptionDAO {
 		System.out.println("Adding a new user.");
 		logger.info("Adding a new user.");
 		boolean isAddedUser = false;
@@ -84,48 +82,18 @@ public class UserImplementatorDAOHb implements IUserDAOHb {
 		session = openSession();
 		try {
 			session.beginTransaction();
-			session.save(user);
+			session.saveOrUpdate(user);
 			session.getTransaction().commit();
 			isAddedUser = true;
 		} catch (HibernateException e) {
 			rollbackTransaction();
-			System.out.println("Error in adding new user");
-			throw new ExceptionDAO("Error in adding new user", e);
+			System.out.println("Error is in Adding or Editting user's info."
+					+ e);
+			throw new ExceptionDAO(
+					"Error is in Adding or Editting issue's info.", e);
 		}
 		closeSession();
 		return isAddedUser;
-	}
-
-	public boolean editUserInfo(User user) throws ExceptionDAO {
-		System.out.println("Adding a new user.");
-		logger.info("Adding a new user.");
-		boolean isAddedUser = false;
-
-		session = openSession();
-		try {
-			session.beginTransaction();
-			session.update(user);
-			session.getTransaction().commit();
-			isAddedUser = true;
-		} catch (HibernateException e) {
-			rollbackTransaction();
-			System.out.println("Error in editting user info.");
-			throw new ExceptionDAO("Error in editting user info.", e);
-		}
-		closeSession();
-		return isAddedUser;
-	}
-
-	@Override
-	public boolean editUser(User user) throws ExceptionDAO {
-		logger.info("Editting user info.");
-		return editUserInfo(user);
-	}
-
-	@Override
-	public boolean editUserPassword(User user) throws ExceptionDAO {
-		logger.info("Editting user's password.");
-		return editUserInfo(user);
 	}
 
 	@Override
@@ -149,31 +117,4 @@ public class UserImplementatorDAOHb implements IUserDAOHb {
 		return user;
 	}
 
-	private Session openSession() throws ExceptionDAO {
-		try {
-			session = SessionManager.getSessionFactory().getCurrentSession();
-		} catch (HibernateException e) {
-			logger.debug("Error is in opening session", e);
-			throw new ExceptionDAO("Error is in opening session", e);
-		}
-		return session;
-	}
-
-	private void closeSession() throws ExceptionDAO {
-		try {
-			session.close();
-		} catch (HibernateException e) {
-			logger.debug("Error is in closing session", e);
-			throw new ExceptionDAO("Error is in closing session", e);
-		}
-	}
-
-	private void rollbackTransaction() throws ExceptionDAO {
-		try {
-			session.getTransaction().rollback();
-		} catch (HibernateException e) {
-			logger.debug("Error is in rollback transaction's", e);
-			throw new ExceptionDAO("Error is in rollback transaction's", e);
-		}
-	}
 }
