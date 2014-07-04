@@ -35,12 +35,12 @@ public class UserListServlet extends AbstractController {
 		try {
 			Query query = session.createQuery("from User");
 			@SuppressWarnings("unchecked")
-			List<User> users = (List<User>)query.list();
+			List<User> users = query.list();
 			System.out.println(users);
 			request.setAttribute("users", users);
 		} finally {
 			session.close();
 		}
-		jump("/view/userList.jspx", request, response);
+		jump("/userList.jspx", request, response);
 	}
 }

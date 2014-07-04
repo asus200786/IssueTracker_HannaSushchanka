@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -57,11 +59,11 @@ public class Issue implements Serializable {
 	@Column(name = "DESCRIPTIONISSUE", unique = false, nullable = false)
 	private String description;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATE", unique = false, nullable = false)
 	private Date createDate;
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "MODIFY_DATE", unique = false, nullable = false)
 	private Date modifyDate;
 
@@ -218,9 +220,9 @@ public class Issue implements Serializable {
 	public Date getCreateDate() {
 		return createDate;
 	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
+	@PrePersist
+	public void setCreateDate() {
+		createDate = modifyDate = new Date();
 	}
 
 	public void setCreateDate(String createDate) throws ParseException {
@@ -230,9 +232,9 @@ public class Issue implements Serializable {
 	public Date getModifyDate() {
 		return modifyDate;
 	}
-
-	public void setModifyDate(Date modifyDate) {
-		this.modifyDate = modifyDate;
+	@PreUpdate
+	public void setModifyDate() {
+		modifyDate = new Date();
 	}
 
 	public void setModifyDate(String modifyDate) throws ParseException {

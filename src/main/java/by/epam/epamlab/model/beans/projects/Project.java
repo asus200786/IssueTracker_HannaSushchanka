@@ -1,21 +1,16 @@
 package by.epam.epamlab.model.beans.projects;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import static javax.persistence.GenerationType.IDENTITY;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,24 +38,24 @@ public class Project implements Serializable {
 	@JoinColumn(name = "MANAGER", nullable = false)
 	private User managerProject;
 
-	private BuildProject currentBuildProject;
-
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<BuildProject> buildsProject = new ArrayList<BuildProject>();
+//	private BuildProject currentBuildProject;
+//
+//	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	private List<BuildProject> buildsProject;
 
 	public Project(long idProject) {
 		setIdProject(idProject);
 	}
 
-	public Project(long idProject, String nameProject,
-			String descriptionProject, User managerProject,
-			BuildProject currentBuildProject) {
-		setIdProject(idProject);
-		this.nameProject = nameProject;
-		this.descriptionProject = descriptionProject;
-		this.managerProject = managerProject;
-		this.currentBuildProject = currentBuildProject;
-	}
+//	public Project(long idProject, String nameProject,
+//			String descriptionProject, User managerProject,
+//			BuildProject currentBuildProject) {
+//		setIdProject(idProject);
+//		this.nameProject = nameProject;
+//		this.descriptionProject = descriptionProject;
+//		this.managerProject = managerProject;
+//		this.currentBuildProject = currentBuildProject;
+//	}
 
 	public long getIdProject() {
 		return idProject;
@@ -94,28 +89,29 @@ public class Project implements Serializable {
 		this.managerProject = managerProject;
 	}
 
-	public BuildProject getCurrentBuildProject() {
-		return currentBuildProject;
-	}
-
-	public void setCurrentBuildProject(BuildProject currentBuildProject) {
-		this.currentBuildProject = currentBuildProject;
-	}
-
-	public List<BuildProject> getBuildsProject() {
-		return buildsProject;
-	}
-
-	public void setBuildsProject(List<BuildProject> buildsProject) {
-		this.buildsProject = buildsProject;
-	}
+//	public BuildProject getCurrentBuildProject() {
+//		return currentBuildProject;
+//	}
+//
+//	public void setCurrentBuildProject(BuildProject currentBuildProject) {
+//		this.currentBuildProject = currentBuildProject;
+//	}
+//
+//	public List<BuildProject> getBuildsProject() {
+//		return buildsProject;
+//	}
+//
+//	public void setBuildsProject(List<BuildProject> buildsProject) {
+//		this.buildsProject = buildsProject;
+//	}
 
 	@Override
 	public String toString() {
 		return "Project [nameProject=" + nameProject + ", descriptionProject="
-				+ descriptionProject + ", managerProject=" + managerProject
-				+ ", currentBuildProject=" + currentBuildProject
-				+ ", buildsProject=" + buildsProject + "]";
+				+ descriptionProject + ", managerProject=" + managerProject +
+		//		+ ", currentBuildProject=" + currentBuildProject
+			//	+ ", buildsProject=" + buildsProject +
+				"]";
 	}
 
 }

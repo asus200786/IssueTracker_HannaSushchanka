@@ -8,7 +8,7 @@
 <title>Add issue</title>
 </head>
 <body>
-	<jsp:directive.include file="/view/authentication.jspf" />
+	<jsp:directive.include file="${contextPath}/authentication.jspf" />
 	<header>
 		<h2>Adding Issue.</h2>
 	</header>

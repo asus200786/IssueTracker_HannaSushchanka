@@ -9,7 +9,7 @@
 <title>Edit Issue</title>
 </head>
 <body>
-	<jsp:directive.include file="/view/authentication.jspf" />
+	<jsp:directive.include file="${contextPath}/authentication.jspf" />
 	<div class="rowTable">
 		<c:if test="${not empty issue}">
 			<form action="${contextPath}/EditIssueController" method="post">
@@ -196,7 +196,7 @@
 		</c:if>
 	</div>
 	<div class="Attachments">
-		<jsp:directive.include file="/view/attachments.jspf" />
+		<jsp:directive.include file="${contextPath}/attachments.jspf" />
 	</div>
 </body>
 	</html>
