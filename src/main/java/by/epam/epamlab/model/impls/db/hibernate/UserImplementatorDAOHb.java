@@ -41,7 +41,7 @@ public class UserImplementatorDAOHb implements IUserDAOHb {
 		openSession();
 		try {
 			session.beginTransaction();
-			users = session.createQuery("FROM Users").list();
+			users = session.createQuery("FROM User").list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			rollbackTransaction();
@@ -60,7 +60,7 @@ public class UserImplementatorDAOHb implements IUserDAOHb {
 		try {
 			session.beginTransaction();
 			user = (User) session
-					.createQuery("FROM User" + "WHERE user.idUser = ?")
+					.createQuery("FROM User WHERE user.idUser = ?")
 					.setLong(0, idObject).uniqueResult();
 			session.getTransaction().commit();
 		} catch (HibernateException e) {
