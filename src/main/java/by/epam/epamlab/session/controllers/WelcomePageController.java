@@ -12,18 +12,17 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import by.epam.epamlab.constants.ConstantsControllers;
-import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.issues.Issue;
 import by.epam.epamlab.model.beans.users.User;
-import by.epam.epamlab.model.factories.DAOFactory;
-import by.epam.epamlab.model.interfaces.IIssueDAO;
 
 /**
  * Servlet implementation class LoginFormController
  */
 @WebServlet("/WelcomePageController")
+@Controller
 public class WelcomePageController extends AbstractController {
 	private static final long serialVersionUID = 201404262125L;
 	final Logger logger = LoggerFactory.getLogger(WelcomePageController.class);
@@ -39,19 +38,19 @@ public class WelcomePageController extends AbstractController {
 		// .headerWithTitle(ConstantsControllers.WELCOME_PAGE_TITLE));
 		User user = (User) session.getAttribute(ConstantsControllers.USER);
 		// out.println(ServletUtilities.userMenuFragment(user));
-		try {
-			IIssueDAO iIssueDAO = DAOFactory.getIssueDAOFromFactory();
+//		try {
+//			IIssueDAO iIssueDAO = DAOFactory.getIssueDAOFromFactory();
 			List<Issue> issueList = new ArrayList<Issue>();
-			if (user == null) {
-				issueList = iIssueDAO.getObjectsList();
-			} else {
-				issueList = iIssueDAO.getIssueListbyAssignee(user);
-			}
+//			if (user == null) {
+//				issueList = iIssueDAO.getObjectsList();
+//			} else {
+//				issueList = iIssueDAO.getIssueListbyAssignee(user);
+//			}
 			session.setAttribute(ConstantsControllers.ISSUES_LIST, issueList);
 			jump(ConstantsControllers.MAIN_JSPX, request, response);
-		} catch (ExceptionDAO e) {
-			e.printStackTrace();
-			logger.error(EXCEPTION_WELCOME_PAGE_CONTROLLER);
-		}
+//		} catch (ExceptionDAO e) {
+//			e.printStackTrace();
+//			logger.error(EXCEPTION_WELCOME_PAGE_CONTROLLER);
+//		}
 	}
 }

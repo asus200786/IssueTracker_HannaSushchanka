@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import by.epam.epamlab.constants.Constants;
 import by.epam.epamlab.constants.ConstantsControllers;
@@ -22,6 +23,7 @@ import by.epam.epamlab.model.interfaces.IUserDAO;
  * Servlet implementation class LoginController
  */
 @WebServlet("/LoginController")
+@Controller
 public class LoginController extends AbstractController {
 	private static final long serialVersionUID = 201404252031L;
 	final Logger logger = LoggerFactory.getLogger(LoginController.class);

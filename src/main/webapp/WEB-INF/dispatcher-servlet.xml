@@ -10,20 +10,28 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<context:component-scan base-package="org.springbyexample.web.servlet.mvc" />
+	<context:component-scan base-package="by.epam.epamlab.model" />
+	<context:component-scan base-package="by.epam.epamlab.session" />
 
 	<mvc:annotation-driven />
 
+	<mvc:resources location="/resources/**" mapping="/resources/" />
+
 	<mvc:view-controller path="/index.jspx" />
 
-	<bean id="tilesConfigurer"
-		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
-		p:definitions="/WEB-INF/tiles-defs/templates.xml" />
-		
-	<bean id="tilesViewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
-		p:viewClass="org.springbyexample.web.servlet.view.tiles2.DynamicTilesView"
-		p:prefix="/WEB-INF/jsp/" p:suffix=".jspx" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp*" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" />
+	<!-- <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer" 
+		p:definitions="/WEB-INF/tiles-defs/templates.xml" /> <bean id="tilesViewResolver" 
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:viewClass="org.springbyexample.web.servlet.view.tiles2.DynamicTilesView" 
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp*" /> -->
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource"
@@ -40,4 +48,3 @@
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
 
 </beans>
-         
