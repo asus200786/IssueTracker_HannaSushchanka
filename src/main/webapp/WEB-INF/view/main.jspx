@@ -19,7 +19,7 @@
 					<c:out value="${constantsControllers.WELCOME_MESSAGE_JSPX}" />
 				</h1>
 			</header>
-			<c:if test="${empty issueList}">
+			<c:if test="${empty issues}">
 				<jsp:forward page="/WelcomePageController" />
 			</c:if>
 			<jsp:directive.include
