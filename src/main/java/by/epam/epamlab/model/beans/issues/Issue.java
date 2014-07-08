@@ -16,8 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -59,12 +57,12 @@ public class Issue implements Serializable {
 	@Column(name = "DESCRIPTIONISSUE", unique = false, nullable = false)
 	private String description;
 
-	@Temporal(TemporalType.TIMESTAMP)
+//	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATE", unique = false, nullable = false)
 	private Date createDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "MODIFY_DATE", unique = false, nullable = false)
+//	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "MODIFY_DATE", unique = false)
 	private Date modifyDate;
 
 	// all users added in application

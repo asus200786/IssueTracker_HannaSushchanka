@@ -1,49 +1,50 @@
 package by.epam.epamlab.session.controllers;
 
-import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-/**
- * Servlet implementation class MainController
- */
-@WebServlet("/MainController")
-public class MainController extends AbstractController {
+import by.epam.epamlab.constants.ConstantsControllers;
+import by.epam.epamlab.constants.ConstantsForSpring;
+import by.epam.epamlab.exceptions.ExceptionDAO;
+import by.epam.epamlab.model.beans.issues.Issue;
+import by.epam.epamlab.model.beans.users.RolesUser;
+import by.epam.epamlab.model.impls.db.hibernateSpring.IssueDAOImpl;
+import by.epam.epamlab.model.interfaces.hibernateSpring.IIssueDAO;
+
+@Controller
+@RequestMapping(value = "/MainController")
+public class MainController {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see AbstractController#AbstractController()
-     */
-    public MainController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private static final int COUNT_LAST_ADDED_ISSUES = 10;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	IIssueDAO issueDAO;
+
+	public MainController() {
+		super();
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	@Autowired
+	public void setIssueImpl(IssueDAOImpl issueDAO) {
+		this.issueDAO = issueDAO;
 	}
 
-	@Override
-	protected void performTask(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-	}
+	public String mainPage(ModelMap modelMap) {
+		String role = RolesUser.GUEST.toString();
 
+		try {
+			List<Issue> issues = issueDAO
+					.getLastAddedIssues(COUNT_LAST_ADDED_ISSUES);
+			modelMap.addAttribute(ConstantsControllers.ROLE, role);
+			modelMap.addAttribute(ConstantsControllers.ISSUES, issues);
+			return ConstantsForSpring.MAIN_PAGE;
+		} catch (ExceptionDAO e) {
+			e.printStackTrace();
+			return ConstantsForSpring.ERROR_PAGE;
+		}
+
+	}
 }

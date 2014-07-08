@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.interfaces.hb;
+package by.epam.epamlab.model.interfaces.hibernateSpring;
 
 import java.util.List;
 

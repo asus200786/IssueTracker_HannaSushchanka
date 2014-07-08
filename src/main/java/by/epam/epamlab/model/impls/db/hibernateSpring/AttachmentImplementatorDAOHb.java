@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.impls.db.hibernate;
+package by.epam.epamlab.model.impls.db.hibernateSpring;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,65 +9,66 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import by.epam.epamlab.exceptions.ExceptionDAO;
-import by.epam.epamlab.model.beans.issues.Comment;
-import by.epam.epamlab.model.interfaces.hb.ICommentDAOHb;
+import by.epam.epamlab.model.beans.issues.Attachment;
+import by.epam.epamlab.model.interfaces.hibernateSpring.IAttachmentDAOHb;
 
-public class CommentImplementatorDAOHb extends AbstractImplementator implements
-		ICommentDAOHb {
+public class AttachmentImplementatorDAOHb extends AbstractImplementator
+		implements IAttachmentDAOHb {
 
 	static final Logger logger = LoggerFactory
-			.getLogger(CommentImplementatorDAOHb.class);
-	private static CommentImplementatorDAOHb instance;
+			.getLogger(AttachmentImplementatorDAOHb.class);
+	private static AttachmentImplementatorDAOHb instance;
 
 	private Session session;
 
-	private CommentImplementatorDAOHb() {
+	private AttachmentImplementatorDAOHb() {
 		super();
 	}
 
-	public synchronized static CommentImplementatorDAOHb getInstance() {
+	public synchronized static AttachmentImplementatorDAOHb getInstance() {
 		if (instance == null) {
-			instance = new CommentImplementatorDAOHb();
+			instance = new AttachmentImplementatorDAOHb();
 		}
 		return instance;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Comment> getExistCommentsByIssueId(long idIssue)
+	public List<Attachment> getExistCommentsByIssueId(long idIssue)
 			throws ExceptionDAO {
 		System.out.println("Getting all existing issues.");
 		logger.info("Getting all existing issues.");
 
-		List<Comment> comments = new ArrayList<Comment>();
+		List<Attachment> attachments = new ArrayList<Attachment>();
 
 		openSession();
 		try {
 			session.beginTransaction();
-			comments = session.createQuery("FROM Comment").list();
+			attachments = session.createQuery("FROM Attachment").list();
 			session.getTransaction().commit();
 		} catch (HibernateException e) {
 			rollbackTransaction();
+			logger.info("Error in getting attachment list.");
 			throw new ExceptionDAO(e);
 		}
 		closeSession();
-		return comments;
+		return attachments;
 	}
 
 	@Override
-	public boolean addComment(Comment comment) throws ExceptionDAO {
+	public boolean addComment(Attachment attachment) throws ExceptionDAO {
 		boolean isAdded = false;
 		openSession();
 		try {
 			session.beginTransaction();
-			session.save(comment);
+			session.save(attachment);
 			session.getTransaction().commit();
 			isAdded = true;
 		} catch (HibernateException e) {
 			rollbackTransaction();
-			System.out.println("Error is in Adding comment's." + e);
+			System.out.println("Error is in Adding attachment's." + e);
 			logger.info("Error is in Adding  comment's." + e);
-			throw new ExceptionDAO("Error is in Adding comment's.", e);
+			throw new ExceptionDAO("Error is in Adding attachment's.", e);
 		}
 		closeSession();
 		return isAdded;

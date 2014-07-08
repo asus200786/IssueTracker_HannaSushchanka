@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.interfaces.hb;
+package by.epam.epamlab.model.interfaces.hibernateSpring;
 
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.users.User;

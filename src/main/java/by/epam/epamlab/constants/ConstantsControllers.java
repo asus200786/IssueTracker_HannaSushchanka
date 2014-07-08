@@ -6,6 +6,7 @@ public class ConstantsControllers {
 	public static final String MESSAGE = "message";
 	public static final String USER = "user";
 	public static final String EMAIL_ADDRESS = "emailAddress";
+	public static final String ROLE = "role";
 	public static final String LOGIN = "j_username";
 	public static final String PASSWORD = "j_password";
 	public static final String FILENAME = "filename";
@@ -260,6 +261,8 @@ public class ConstantsControllers {
 	public static final String CONTEXT_PATH = "contextPath";
 	public static final String EDIT_ID_ISSUE = "editIdIssue";
 	public static final String BUILD_PROJECT_LIST = "buildProjects";
+	public static final String ISSUES = "issues";
+	
 	
 
 }

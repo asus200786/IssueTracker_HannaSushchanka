@@ -3,7 +3,6 @@ package by.epam.epamlab.session.controllers;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,7 +21,7 @@ import by.epam.epamlab.model.interfaces.IUserDAO;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/LoginController")
+
 @Controller
 public class LoginController extends AbstractController {
 	private static final long serialVersionUID = 201404252031L;

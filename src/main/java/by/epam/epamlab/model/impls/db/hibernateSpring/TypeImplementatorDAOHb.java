@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.impls.db.hibernate;
+package by.epam.epamlab.model.impls.db.hibernateSpring;
 
 import java.util.ArrayList;
 import java.util.List;

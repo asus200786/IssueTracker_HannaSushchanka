@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.impls.db.hibernate;
+package by.epam.epamlab.model.impls.db.hibernateSpring;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

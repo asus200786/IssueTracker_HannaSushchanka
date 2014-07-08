@@ -1,4 +1,4 @@
-package by.epam.epamlab.model.impls.db.hibernate;
+package by.epam.epamlab.model.impls.db.hibernateSpring;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import by.epam.epamlab.exceptions.ExceptionDAO;
 import by.epam.epamlab.model.beans.users.User;
-import by.epam.epamlab.model.interfaces.hb.IUserDAOHb;
+import by.epam.epamlab.model.interfaces.hibernateSpring.IUserDAOHb;
 
 public class UserImplementatorDAOHb extends AbstractImplementator implements
 		IUserDAOHb {
