@@ -20,22 +20,22 @@ import by.epam.epamlab.model.interfaces.hibernateSpring.IIssueDAO;
 @Repository
 public class IssueDAOImpl implements IIssueDAO {
 
-	Logger logger = LoggerFactory.getLogger(IssueDAOImpl.class);
-	private static IssueDAOImpl instance;
-
+	private static final Logger logger = LoggerFactory.getLogger(IssueDAOImpl.class);
+	// private static IssueDAOImpl instance;
+	//
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	private IssueDAOImpl() {
+	
+	public IssueDAOImpl() {
 		super();
 	}
 
-	public synchronized static IssueDAOImpl getInstance() {
-		if (instance == null) {
-			instance = new IssueDAOImpl();
-		}
-		return instance;
-	}
+//	public synchronized static IssueDAOImpl getInstance() {
+//		if (instance == null) {
+//			instance = new IssueDAOImpl();
+//		}
+//		return instance;
+//	}
 
 	@Transactional
 	@Override

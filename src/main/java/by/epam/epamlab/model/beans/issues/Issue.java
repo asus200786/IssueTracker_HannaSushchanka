@@ -13,8 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
@@ -57,11 +55,11 @@ public class Issue implements Serializable {
 	@Column(name = "DESCRIPTIONISSUE", unique = false, nullable = false)
 	private String description;
 
-//	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATE", unique = false, nullable = false)
 	private Date createDate;
 
-//	@Temporal(TemporalType.TIMESTAMP)
+	// @Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "MODIFY_DATE", unique = false)
 	private Date modifyDate;
 
@@ -218,21 +216,24 @@ public class Issue implements Serializable {
 	public Date getCreateDate() {
 		return createDate;
 	}
-	@PrePersist
-	public void setCreateDate() {
-		createDate = modifyDate = new Date();
+
+	// @PrePersist
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
-	public void setCreateDate(String createDate) throws ParseException {
-		this.createDate = DateHelper.parseDate(createDate);
-	}
+	//
+	// public void setCreateDate(String createDate) throws ParseException {
+	// this.createDate = DateHelper.parseDate(createDate);
+	// }
 
 	public Date getModifyDate() {
 		return modifyDate;
 	}
-	@PreUpdate
-	public void setModifyDate() {
-		modifyDate = new Date();
+
+	// @PreUpdate
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 
 	public void setModifyDate(String modifyDate) throws ParseException {
@@ -278,8 +279,7 @@ public class Issue implements Serializable {
 				+ description + ", createDate=" + createDate + ", modifyDate="
 				+ modifyDate + ", assignee=" + assignee + ", createdBy="
 				+ createdBy + ", modifiedBy=" + modifiedBy + ", project="
-				+ project + ", status=" + status + ", build=" + build
-				+ "]";
+				+ project + ", status=" + status + ", build=" + build + "]";
 	}
 
 }

@@ -38,24 +38,29 @@ public class Project implements Serializable {
 	@JoinColumn(name = "MANAGER", nullable = false)
 	private User managerProject;
 
-//	private BuildProject currentBuildProject;
-//
-//	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	private List<BuildProject> buildsProject;
+	// private BuildProject currentBuildProject;
+	//
+	// @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch =
+	// FetchType.EAGER)
+	// private List<BuildProject> buildsProject;
+
+	public Project() {
+		super();
+	}
 
 	public Project(long idProject) {
 		setIdProject(idProject);
 	}
 
-//	public Project(long idProject, String nameProject,
-//			String descriptionProject, User managerProject,
-//			BuildProject currentBuildProject) {
-//		setIdProject(idProject);
-//		this.nameProject = nameProject;
-//		this.descriptionProject = descriptionProject;
-//		this.managerProject = managerProject;
-//		this.currentBuildProject = currentBuildProject;
-//	}
+	// public Project(long idProject, String nameProject,
+	// String descriptionProject, User managerProject,
+	// BuildProject currentBuildProject) {
+	// setIdProject(idProject);
+	// this.nameProject = nameProject;
+	// this.descriptionProject = descriptionProject;
+	// this.managerProject = managerProject;
+	// this.currentBuildProject = currentBuildProject;
+	// }
 
 	public long getIdProject() {
 		return idProject;
@@ -89,28 +94,28 @@ public class Project implements Serializable {
 		this.managerProject = managerProject;
 	}
 
-//	public BuildProject getCurrentBuildProject() {
-//		return currentBuildProject;
-//	}
-//
-//	public void setCurrentBuildProject(BuildProject currentBuildProject) {
-//		this.currentBuildProject = currentBuildProject;
-//	}
-//
-//	public List<BuildProject> getBuildsProject() {
-//		return buildsProject;
-//	}
-//
-//	public void setBuildsProject(List<BuildProject> buildsProject) {
-//		this.buildsProject = buildsProject;
-//	}
+	// public BuildProject getCurrentBuildProject() {
+	// return currentBuildProject;
+	// }
+	//
+	// public void setCurrentBuildProject(BuildProject currentBuildProject) {
+	// this.currentBuildProject = currentBuildProject;
+	// }
+	//
+	// public List<BuildProject> getBuildsProject() {
+	// return buildsProject;
+	// }
+	//
+	// public void setBuildsProject(List<BuildProject> buildsProject) {
+	// this.buildsProject = buildsProject;
+	// }
 
 	@Override
 	public String toString() {
 		return "Project [nameProject=" + nameProject + ", descriptionProject="
 				+ descriptionProject + ", managerProject=" + managerProject +
-		//		+ ", currentBuildProject=" + currentBuildProject
-			//	+ ", buildsProject=" + buildsProject +
+				// + ", currentBuildProject=" + currentBuildProject
+				// + ", buildsProject=" + buildsProject +
 				"]";
 	}
 

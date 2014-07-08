@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import by.epam.epamlab.utilities.SessionManager;
+//import by.epam.epamlab.utilities.SessionManager;
 
 /**
  * Application Lifecycle Listener implementation class HibernateContextListener
@@ -30,18 +30,18 @@ public class HibernateContextListener implements ServletContextListener {
 	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
 	 */
 	public void contextInitialized(ServletContextEvent sce) {
-		SessionManager.getSessionFactory();
-		logger.info(HSM_INITIALIZED);
+//		SessionManager.getSessionFactory();
+//		logger.info(HSM_INITIALIZED);
 	}
 
 	/**
 	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
 	 */
 	public void contextDestroyed(ServletContextEvent sce) {
-		if (SessionManager.getSessionFactory() != null) {
-			SessionManager.shutdown();
-		}
-		logger.info(HSM_DESTROYED);
+//		if (SessionManager.getSessionFactory() != null) {
+//			SessionManager.shutdown();
+//		}
+//		logger.info(HSM_DESTROYED);
 	}
 
 }

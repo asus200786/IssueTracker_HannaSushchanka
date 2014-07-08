@@ -16,22 +16,21 @@ import by.epam.epamlab.model.impls.db.hibernateSpring.IssueDAOImpl;
 import by.epam.epamlab.model.interfaces.hibernateSpring.IIssueDAO;
 
 @Controller
-@RequestMapping(value = "/MainController")
 public class MainController {
-	private static final long serialVersionUID = 1L;
 	private static final int COUNT_LAST_ADDED_ISSUES = 10;
-
-	IIssueDAO issueDAO;
+//	@Autowired
+	private IIssueDAO issueDAO;
 
 	public MainController() {
 		super();
 	}
 
 	@Autowired
-	public void setIssueImpl(IssueDAOImpl issueDAO) {
-		this.issueDAO = issueDAO;
-	}
+	 private void setIssueImpl(IIssueDAO issueDAO) {
+	 this.issueDAO = issueDAO;
+	 }
 
+	@RequestMapping(value = "/MainController")
 	public String mainPage(ModelMap modelMap) {
 		String role = RolesUser.GUEST.toString();
 
@@ -45,6 +44,5 @@ public class MainController {
 			e.printStackTrace();
 			return ConstantsForSpring.ERROR_PAGE;
 		}
-
 	}
 }
